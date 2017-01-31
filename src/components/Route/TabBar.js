@@ -28,16 +28,16 @@ import {mainColor, containingColor, lightMainColor, lightContainingColor} from '
 // import { BlurView} from 'react-native-blur';
 
 // {/*<View style={styles.line}/>*/}
-import {
-    navbar_1,
-    navbar_1_on,
-    navbar_2,
-    navbar_2_on,
-    navbar_3,
-    navbar_3_on,
-    navbar_4,
-    navbar_4_on
-} from '../../../source'
+// import {
+//     navbar_1,
+//     navbar_1_on,
+//     navbar_2,
+//     navbar_2_on,
+//     navbar_3,
+//     navbar_3_on,
+//     navbar_4,
+//     navbar_4_on
+// } from '../../../source'
 export default class TabBar extends Component {
 
     render() {
@@ -70,8 +70,8 @@ export default class TabBar extends Component {
         //   // image = selectImage;
         //
         // }
-        const unSelectBarImage = [navbar_1,navbar_2,navbar_3,navbar_4]
-        const selectBarImage = [navbar_1_on,navbar_2_on,navbar_3_on,navbar_4_on]
+        // const unSelectBarImage = [navbar_1,navbar_2,navbar_3,navbar_4]
+        // const selectBarImage = [navbar_1_on,navbar_2_on,navbar_3_on,navbar_4_on]
         const color = this.props.index === index ? mainColor : "rgba(0,0,0,0.3)"
         // let {image, title} = this.iconForTab(tab, this.props.index === index);
         return (
@@ -82,7 +82,7 @@ export default class TabBar extends Component {
                 onPress={()=>{
           //this.refs[title].bounceIn(1000);
           this.props.onNavigate(index)}}>
-                <Image source={this.props.index !== index?unSelectBarImage[index]:selectBarImage[index]}/>
+                <Image source={this.props.index !== index?selectImage:unSelectImage}/>
                     <Text style={[styles.text,{color}]}>
                         {title}
                     </Text>

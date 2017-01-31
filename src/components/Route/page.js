@@ -15,48 +15,11 @@ import Feedback from '../../pages/Setting/Feedback'
 import AlterPwd from '../../pages/PersonInfo/AlterPwd'
 import NickName from '../../pages/PersonInfo/NickName'
 
-import Buy from '../../pages/JiuBuy/Buy'
-import Order from '../../pages/JiuBuy/Order'
-import RedPocket from '../../pages/JiuBuy/RedPocket'
-import Search from '../../pages/JiuBuy/Search'
-import BuyList from '../../pages/JiuBuy/BuyList'
-import RedPocketDetail  from '../../pages/JiuBuy/RedPocketDetail'
-import RedPockList  from '../../pages/JiuBuy/RedPockList'
-import RedPocketInfo from '../../pages/JiuBuy/RedPocketInfo'
-import ChangePhone from '../../pages/Setting/ChangePhone'
-import Service from '../../pages/JiuBuy/Service'
-import About from '../../pages/Setting/About'
-import Bill from '../../pages/JiuBuy/Bill'
-import RedPocketRecord from '../../pages/JiuBuy/RedPocketRecord'
-import Invite from '../../pages/JiuBuy/Invite'
-import SpecialBuy from '../../pages/JiuBuy/SpecialBuy'
-import AdvanceAlipay from '../../pages/JiuBuy/AdvanceAlipay'
-import AdvanceRecord from '../../pages/JiuBuy/AdvanceRecord'
-import AdvanceWay from '../../pages/JiuBuy/AdvanceWay'
-import Product from '../../pages/JiuBuy/Product'
+
 import WidgetForm from '../../components/WidgetForm/WidgetForm'
 export  const PageMap =
 {
   WidgetForm,
-  Product,
-  AdvanceWay,
-  AdvanceRecord,
-  AdvanceAlipay,
-  Bill,
-  RedPocketRecord,
-  Invite,
-  SpecialBuy,
-  About,
-  Service,
-  ChangePhone,
-  RedPocketInfo,
-  RedPockList,
-  RedPocketDetail,
-  BuyList,
-  Search,
-  Buy,
-  Order,
-  RedPocket,
   "WebView"             : BaseWebView,
   'TabView'             : TabView,
 

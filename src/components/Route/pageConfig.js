@@ -10,7 +10,7 @@
 
 export const pageConfig = {
     'TabView': {
-        title: '巧惠团', hideBackBtn: true, gestureResponseDistance: 0.0001,
+        title: 'RNStartKit', hideBackBtn: true, gestureResponseDistance: 0.0001,
     },
     'LoginView': {
         title: '登录', hideNavBar: true, gestureResponseDistance: 0.0001,
@@ -47,24 +47,6 @@ export const pageConfig = {
     'iRate': {title: '评价'},
     'introDetail': {title: '回复'},
     'About': {title: '关于我们'},
-    'Buy': {title: '巧惠团',hideNavBar: false},
-    'RedPocket': {title: '红包',hideNavBar: true,gestureResponseDistance: 100},
-    'Order': {title: '订单',hideNavBar: false,gestureResponseDistance: 100},
-    'Search':{title: '查询'},
-    'BuyList':{},
-    'RedPocketDetail':{title: '红包详情'},
-    'RedPockList':{title: '抢红包'},
-    'RedPocketInfo':{title: '签到抽奖'},
-    'ChangePhone':{title:'修改手机'},
-    'Service':{title:'客服中心'},
-    'Bill':{title:'账单'},
-    'Invite':{title:'邀请'},
-    'RedPocketRecord':{title:'红包'},
-    'SpecialBuy':{title:'返现购'},
-    'AdvanceAlipay':{title:'绑定支付宝'},
-    'AdvanceRecord':{title:'提现记录'},
-    'AdvanceWay':{title:'提现方式'},
-    'Product':{title:'商品详情'},
 }
 
 export function config(key: string): Object {

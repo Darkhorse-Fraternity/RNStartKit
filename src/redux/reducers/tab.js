@@ -24,16 +24,7 @@ import {
 const unLoginTabs = [
 
         {
-            key: 'Buy', name: 'logo-freebsd-devil', title: '抢购'
-        },
-        {
-            key: 'RedPocket', name: 'logo-freebsd-devil', title: '红包'
-        },
-        {
-            key: 'Order', name: 'logo-freebsd-devil', title: '订单'
-        },
-        {
-            key: 'PersonCenter', name: 'ios-happy', title: '我的'
+            key: 'WidgetForm', name: 'logo-freebsd-devil', title: '首页'
         },
     ]
 
