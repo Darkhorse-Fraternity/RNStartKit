@@ -1,3 +1,3 @@
 # RNStartKit
 
-# uer redux、leancloud
+# use redux、leancloud
