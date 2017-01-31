@@ -1,4 +1,4 @@
-package com.jiubuy;
+package com.rnstartkit;
 
 import android.os.Bundle;
 import android.os.Handler;

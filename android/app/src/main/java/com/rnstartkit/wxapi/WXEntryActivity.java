@@ -1,4 +1,4 @@
-package com.jiubuy.wxapi;
+package com.rnstartkit.wxapi;
 
 /**
  * Created by lintong on 2016/11/11.

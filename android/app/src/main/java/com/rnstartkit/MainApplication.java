@@ -1,4 +1,4 @@
-package com.jiubuy;
+package com.rnstartkit;
 
 import android.app.Application;
 
