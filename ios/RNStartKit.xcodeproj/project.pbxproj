@@ -478,7 +478,6 @@
 				00E356F21AD99517003FC87E /* RNStartKitTests.m */,
 				00E356F01AD99517003FC87E /* Supporting Files */,
 			);
-			name = RNStartKitTests;
 			path = RNStartKitTests;
 			sourceTree = "<group>";
 		};
