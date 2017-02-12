@@ -9,8 +9,11 @@ import React, {Component} from 'react'
 import { Provider } from 'react-redux'
 import {AppRegistry} from 'react-native';
 import configureStore from './redux/configureStore'
-import Main from './pages/Main'
-import Route from './pages'
+import Route from './components/Route'
+import {preConfig} from './redux/config'
+
+//启动初始配置
+configureStore.dispatch(preConfig())
 // const createStoreWithMiddleware = applyMiddleware(thunk)(createStore)
 // const store = configureStore()
 export default class App extends Component {
@@ -19,7 +22,7 @@ export default class App extends Component {
 		return (
 			<Provider store={configureStore}>
 				{/*{Route(store)}*/}
-				<Main/>
+				<Route/>
 			</Provider>
 		)
 	}
