@@ -72,33 +72,6 @@ class Main extends Component {
     componentDidMount()
   {
 
-
-      const timer = Date.now();
-      RCTDeviceEventEmitter.addListener("logout", (obj)=> {
-          //需要等动画结束再回调否则可能有问题。
-          self.props.logOut();
-          const timer2 = Date.now();
-          // console.log('111111--');
-          // console.log(timer2 - timer);
-          // if (timer2 - timer >= 5000) {
-          //     InteractionManager.runAfterInteractions(()=> {
-          //         self.props.logOut();
-          //     });
-          // } else {
-          //     //进入页面瞬间被退会有白屏现在，估计是动画的问题。
-          //     //这边做了延迟加载。并且只执行一次。
-          //     if (openKey) {
-          //         openKey = false;
-          //         this.logoutTimer = setTimeout(()=> {
-          //             self.props.logOut();
-          //         }, 1000);
-          //     }
-          //
-          // }
-
-      });
-
-
       //  this._update();
       this._backAnroid();
       //监听，远程推送。
