@@ -77,7 +77,7 @@ function _listSucceed(data:Object,page:number = 0,key:string):Object {
     if(data.length < pageSize){
         loadStatu = LIST_LOAD_NO_MORE
     }
-    if(page == 0 && data.count == 0){
+    if(page == 0 && data.length == 0){
         loadStatu = LIST_NO_DATA
     }
     return {
