@@ -86,6 +86,7 @@ export function renderNavImageButton(image:number, position:string, onPress :Fun
     let disabled = props.scene.route.rightButtonDisabled;
     let isLoad = props.scene.route.rightButtonIsLoad;
     const style = position == 'left'?styles.leftButton:styles.rightButton
+    const tintColor = {tintColor:props.scene.route.tintColor||'#8c8c85'}
     return(
         <WBButton
             // ref='nav_right_button'
@@ -95,7 +96,7 @@ export function renderNavImageButton(image:number, position:string, onPress :Fun
             styleDisabled={{color:lightContainingColor}}
             containerStyle= {style}
             disabled ={disabled}>
-          <Image  source={image} style={styles.image}/>
+          <Image  source={image} style={[styles.image,tintColor]}/>
         </WBButton>
     )
   }
@@ -146,6 +147,6 @@ const styles = StyleSheet.create({
   image:{
     width:20,
     height:20,
-    tintColor:'red',
+    tintColor:'rgb(100,100,100)'
   }
 });

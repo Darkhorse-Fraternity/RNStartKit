@@ -5,62 +5,63 @@ import React, {Component} from 'react';
 
 
 import ReactNative, {
-  View,
-  Text,
-  Image,
-  Platform,
-  StyleSheet,
-  TouchableOpacity,
-  NavigationExperimental
+    View,
+    Text,
+    Image,
+    Platform,
+    StatusBar,
+    StyleSheet,
+    TouchableOpacity,
+    NavigationExperimental
 } from 'react-native';
 
 
 const {
-  Header: NavigationHeader,
+    Header: NavigationHeader,
 } = NavigationExperimental;
 
 import type {
-  NavigationSceneRenderer,
-  NavigationSceneRendererProps
+    NavigationSceneRenderer,
+    NavigationSceneRendererProps
 } from 'NavigationTypeDefinition';
 //import NavigationManager from './NavigationManager';
-import {mainColor,containingColor,lightMainColor,lightContainingColor} from '../../configure';
+import {mainColor, containingColor, lightMainColor, lightContainingColor} from '../../configure';
 
 import {navigatePop} from '../../redux/actions/nav'
 export default class NavBar extends Component {
 
-  constructor(props:Object) {
+  constructor(props: Object) {
     super(props);
   }
 
 
-  _backEvent = ()=>{
-    this.props.onNavigate({type:'back'});
+  _backEvent = ()=> {
+    this.props.onNavigate({type: 'back'});
   };
 
   //加载返回按钮
-  _renderBackButton = (hide:bool)=>{
+  _renderBackButton = (hide: bool)=> {
     if (hide) {
       return ()=>null;
-    }else {
-      return (props:Object)=>(
-        // onPress={props.onNavigateBack}
-        <TouchableOpacity style={styles.buttonContainer} onPress={this._backEvent.bind(this)}>
-          {/*<Image style={styles.button}
-              resizeMode = 'contain'
+    } else {
+      return (props: Object)=>(
+          // onPress={props.onNavigateBack}
+          <TouchableOpacity style={styles.buttonContainer} onPress={this._backEvent.bind(this)}>
+            {/*<Image style={styles.button}
+             resizeMode = 'contain'
              source={require('../../source/img/xy_arrow/xy_arrow.png')} />*/}
-             <View style={styles.arrowView}/>
-        </TouchableOpacity>
+            <View style={[styles.arrowView,{borderColor:props.scene.route.tintColor||'#8c8c85'}]}/>
+          </TouchableOpacity>
       );
     }
   };
 
   //加载右边按钮
-  _renderRightButton= ()=>{
+  _renderRightButton = ()=> {
     return ()=>(
-      <TouchableOpacity style={styles.buttonContainer} onPress={() => alert("right")}>
-        <Text>right</Text>
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.buttonContainer} onPress={() => alert("right")}>
+          <Text>right</Text>
+        </TouchableOpacity>
     )
   };
 
@@ -72,43 +73,58 @@ export default class NavBar extends Component {
     // const
     // console.log('title:',title);
     // console.log("props",JSON.stringify(props));
+
     if (title && title.length) {
       return (
-        <NavigationHeader.Title textStyle={styles.navigationHeaderTitle}>
-          {title}
-        </NavigationHeader.Title>
+          <NavigationHeader.Title textStyle={[styles.navigationHeaderTitle,
+        {color:props.scene.route.tintColor||'black'}]}>
+            {title}
+          </NavigationHeader.Title>
       );
-    }else{
+    } else {
       return null;
     }
 
   }
 
-
+  barStyleStatu: string = 'default'
   render() {
     const {scene} = this.props;
+
+    if (this.props.scene.route.tintColor == 'white' || scene.route.hideNavBar
+        && this.barStyleStatu != 'light-content') {
+
+      Platform.OS == 'ios' && StatusBar.setBarStyle('light-content', false);
+      this.barStyleStatu = 'light-content'
+
+    } else if (this.barStyleStatu != 'default') {
+      Platform.OS == 'ios' && StatusBar.setBarStyle('default', false);
+      this.barStyleStatu = 'default'
+    }
+
     if (scene.route.hideNavBar) {
       return null;
     }
+
     const hideBackBtn = scene.route.hideBackBtn;
     let renderRightComponent = scene.route.renderRightComponent ?
-                              scene.route.renderRightComponent : ()=>null;
-    let renderLeftComponent = scene.route.renderLeftComponent ||  this._renderBackButton(scene.index === 0 || hideBackBtn);
+        scene.route.renderRightComponent : ()=>null;
+    let renderLeftComponent = scene.route.renderLeftComponent ||
+        this._renderBackButton(scene.index === 0 || hideBackBtn);
     // renderRightComponent = this._renderRightButton();
     // console.log('scene.route.renderRightComponent', renderRightComponent);
     return (
         <NavigationHeader
-        {...this.props}
-        //ref={header=>NavigationManager.navigationHeader=header}
-        renderTitleComponent={this._renderTitleComponent}
-        style={styles.navigationHeader}
-        renderRightComponent={renderRightComponent}
-        renderLeftComponent={renderLeftComponent}
-        onNavigateBack={this._backEvent}
-      />
+            {...this.props}
+            //ref={header=>NavigationManager.navigationHeader=header}
+            renderTitleComponent={this._renderTitleComponent}
+            style={[styles.navigationHeader,{backgroundColor:scene.route.barColor||'white'}]}
+            renderRightComponent={renderRightComponent}
+            renderLeftComponent={renderLeftComponent}
+            onNavigateBack={this._backEvent}
+        />
     );
   }
-
 
 
 }
@@ -117,13 +133,13 @@ export default class NavBar extends Component {
 const styles = StyleSheet.create({
   navigationHeader: {
     backgroundColor: 'white',
-    height:Platform.OS === 'ios' ? 64 : 48,
-    // borderBottomWidth:0,
+    height: Platform.OS === 'ios' ? 64 : 48,
+    borderBottomWidth: 0,
   },
   navigationHeaderTitle: {
     color: 'black',
     textAlign: 'center',
-    fontSize:13,
+    fontSize: 17,
   },
 
   buttonContainer: {
@@ -131,19 +147,19 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    width:100,
+    width: 100,
   },
   arrowView: {
-      borderBottomWidth: StyleSheet.hairlineWidth * 2,
-      borderRightWidth: StyleSheet.hairlineWidth * 2,
-      borderColor: '#8c8c85',
-      transform: [{rotate: '135deg'}],
-      marginLeft: 15,
-      width: 10,
-      height: 10,
+    borderBottomWidth: StyleSheet.hairlineWidth * 2,
+    borderRightWidth: StyleSheet.hairlineWidth * 2,
+    borderColor: '#8c8c85',
+    transform: [{rotate: '135deg'}],
+    marginLeft: 15,
+    width: 10,
+    height: 10,
   },
   button: {
-    marginLeft:15,
-    marginVertical:Platform.OS === 'ios' ? 14 : 16,
+    marginLeft: 15,
+    marginVertical: Platform.OS === 'ios' ? 14 : 16,
   }
 });

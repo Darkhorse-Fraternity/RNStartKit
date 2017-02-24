@@ -15,6 +15,7 @@ import ReactNative, {
     Text,
     View,
     InteractionManager,
+    Platform
 } from 'react-native';
 import {mainColor, containingColor, lightMainColor, lightContainingColor} from '../../configure'
 import TabBar from './TabBar'
@@ -47,24 +48,42 @@ class TabView extends Component {
         // this.timer && clearTimeout(this.timer)
     }
 
+    componentWillReceiveProps(nextProps) {
+        const tabState = nextProps.state;
+
+        if (this.props.state.index != tabState.index) {
+            this.props.refreshNav(tabState.tabs[tabState.index].key);
+        }
+    }
+
+
     //  index==i?0:-SCREEN_WIDTH
+    lazyMark = []
     _sceneMap(state: Object) {
         const index = state.index;
         const tabs = state.tabs;
         var scenes = [];
+        const height = Platform.OS == 'ios' ? 50 : 70
+
+
+
         return tabs.map((tab, i) => {
             let pageKey = tab.key.split('-')[0];
             let MyComponent = PageMap[pageKey];
+            //做一个lazy Load
+            if(!this.lazyMark[i]){
+                this.lazyMark[i] = index==i
+            }
 
-            // console.log(pageKey,MyComponent);
             return (
                 <View key={tab.key} style={{position:'absolute',
-         width:SCREEN_WIDTH,
-         height:SCREEN_HEIGHT-50,
-         top:0,
-         left:0,
-         zIndex:index==i?1:0}}>
-                    <MyComponent style={{backgroundColor:'rgb(250,250,250)'}}/>
+                        width:SCREEN_WIDTH,
+                        height:SCREEN_HEIGHT-height,
+                        top:0,
+                        left:0,
+                        zIndex:index==i?1:0}}>
+                    {(index==i ||this.lazyMark[i] ) &&
+                    (<MyComponent style={{backgroundColor:'rgb(250,250,250)'}}/>)}
                 </View>
             )
 
@@ -79,7 +98,7 @@ class TabView extends Component {
                 tabs={tabState.tabs}
                 index={tabState.index}
                 onNavigate={(index)=>{
-            this.props.refreshNav(tabState.tabs[index].key);
+
             this.props.switch(index)}}
             />
         );
