@@ -9,7 +9,7 @@ target 'RNStartKit' do
     #定义dayibase的版本。
 #    dayi_Version = "0.3.0"
 ##    dayi_market_Version = "0.3.0"
-#pod "dayi/Base", :git => "git@test2.dayi.im:yl/dayi.git", :tag => dayi_Version
+#    pod "ServerLog", :git => "https://github.com/Darkhorse-Fraternity/TestLog.git",:configurations => ['Debug']
 #pod "dayi/Util", :git => "git@test2.dayi.im:yl/dayi.git", :tag => dayi_Version
 #pod "dayi/DYPhoto", :git => "git@test.dayi.im:yl/dayi.git", :tag => dayi_Version
 #pod "DayiMarket/QiniuUpload", :git => "git@test.dayi.im:fl/dayiMarket.git", :tag => dayi_market_Version
