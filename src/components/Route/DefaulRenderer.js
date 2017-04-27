@@ -50,9 +50,9 @@ export default class DefaultRenderer extends Component {
     onNavigate: PropTypes.func.isRequired,
   };
 
-  static childContextTypes = {
-    navigationState: PropTypes.any,
-  };
+  // static childContextTypes = {
+  //   navigationState: PropTypes.any,
+  // };
 
 
 
