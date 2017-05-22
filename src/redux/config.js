@@ -14,11 +14,10 @@ import React, {
     UIManager,
     ToastAndroid,
     StatusBar,
-    BackAndroid
+    BackHandler
 } from 'react-native';
 import {loginSucceed} from './actions/login'
-import {tabSwitch} from './actions/tab'
-import {navigatePush} from './actions/nav'
+
 import pushConfig from '../configure/push'
 export const PRE_CONFIG_STATU = 'PRE_CONFIG_STATU'
 import  store from './configureStore'
@@ -66,7 +65,7 @@ function _preConfig() {
 let lastBackPressed: number = 0;
 
 function _backAnroid (getState) {
-    BackAndroid.addEventListener('hardwareBackPress', ()=> {
+    BackHandler.addEventListener('hardwareBackPress', ()=> {
         const state = getState().route.navigationState
         const index = state.index;
         console.log('index:', index);

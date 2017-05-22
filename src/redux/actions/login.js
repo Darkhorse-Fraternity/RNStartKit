@@ -8,13 +8,7 @@
 import {request} from '../../request';
 import {requestLogin, requestUsersByMobilePhone,getUserByID} from '../../request/leanCloud';
 import {saveAccount,saveUserData, loadAccount, clearUserData} from '../../util/XGlobal'
-import {
-    navigatePush,
-    navigatePop,
-    navigateClearMiddleScene,
-    navigatePopToIndex,
-    navigateReplaceIndex
-} from './nav'
+
 
 import {setLeanCloudSession} from '../../configure'
 // *** Action Types ***
@@ -84,7 +78,7 @@ export function login(state:Object):Function {
             if (response.statu) {
                 //加入sessionToken
                 dispatch(_loginSucceed(response));
-                dispatch(navigatePush('TabView'));
+                // dispatch(navigatePush('TabView'));
             } else {
                 dispatch(_loginFailed(response));
             }

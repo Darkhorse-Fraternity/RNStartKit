@@ -18,7 +18,8 @@ const Brief = Item.Brief;
 import {
     View,
     TextInput,
-    StyleSheet
+    StyleSheet,
+    ScrollView
 } from 'react-native'
 
 
@@ -43,7 +44,7 @@ export default class WidgetForm extends Component {
         } = this.props;
         // console.log('test:', Picker);
         return (
-            <View>
+            <ScrollView>
                 <Field
                     name="id"
                     style={styles.textInputStyle}
@@ -83,16 +84,14 @@ export default class WidgetForm extends Component {
                         </List.Item>
                     </DatePicker>
                 </List>
-            </View>
+            </ScrollView>
         );
     }
 }
 
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
+
     textInputStyle: {
         height: 40,
         width: 200,
