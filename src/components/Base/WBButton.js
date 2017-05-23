@@ -6,6 +6,7 @@ import ReactNative, {
   StyleSheet,
   View,
   ActivityIndicator,
+    ViewPropTypes
 } from 'react-native';
 // import Spinner from 'react-native-gifted-spinner';
 
@@ -36,7 +37,7 @@ export default class WBButton extends Component {
 
    static propTypes = {
       ...Button.PropTypes,
-      containerStyleDisabled:View.propTypes.style,
+      containerStyleDisabled:ViewPropTypes.style,
       isLoad:PropTypes.bool,
       // children:PropTypes.Object
    };

@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
 });
 
 const LoginScreen = ({ navigation }) => (
+
   <View style={styles.container}>
     <Text style={styles.welcome}>
       Screen A
@@ -24,7 +25,7 @@ const LoginScreen = ({ navigation }) => (
       This is great
     </Text>
     <Button
-      onPress={() => navigation.dispatch({ type: 'Login' })}
+      onPress={() => navigation.navigate('Login')}
       title="Log in"
     />
   </View>

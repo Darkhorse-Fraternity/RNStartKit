@@ -16,12 +16,11 @@ import {
 } from 'react-native'
 
 
-import {pixel,Toast,checkPhoneNum} from '../../util';
+import {pixel,checkPhoneNum} from '../../util';
 import {mainColor,backViewColor, textInputTextColor, placeholderTextColor} from '../../configure';
 import WBButton,{BCButton} from '../../components/Base/WBButton';
 
 import {connect} from 'react-redux'
-import { navigatePush } from '../../redux/actions/nav'
 import {login,accountTextChange,passwordTextChange,loadAccountAction} from '../../redux/actions/login'
 
 
@@ -158,6 +157,7 @@ import {login,accountTextChange,passwordTextChange,loadAccountAction} from '../.
 
 
     const { state,passwordChange,accountChange} = this.props;
+    const {navigation} = this.props
 
     return (
         <View
@@ -233,7 +233,7 @@ import {login,accountTextChange,passwordTextChange,loadAccountAction} from '../.
            </BCButton>
 
            <WBButton
-             onPress={()=>this.props.push('RegPhone')}
+             onPress={()=>navigation.navigate('RegPhone')}
              style={{color:mainColor}}
              containerStyle= {[styles.creactbutton,{marginTop:10}]}
              >
@@ -241,7 +241,7 @@ import {login,accountTextChange,passwordTextChange,loadAccountAction} from '../.
           </WBButton>
           <TouchableOpacity
 
-            onPress={()=>this.props.push('FindPwd')}
+            onPress={()=>navigation.navigate('FindPwd')}
             style={styles.mbutton}
             >
            <Text style={styles.buttonTextColor}> {'>  忘记密码  <'} </Text>
@@ -349,9 +349,7 @@ const mapDispatchToProps = (dispatch) => {
       // dispatch(navigatePush('TabView'));
 		},
 
-    push:(state) => {
-      dispatch(navigatePush(state))
-    },
+
 
     accountChange:(text) =>{
       dispatch(accountTextChange(text))

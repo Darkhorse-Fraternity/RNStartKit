@@ -7,6 +7,7 @@ import list from './list'
 import share from './share'
 import req from './req'
 import widgets from './widgets'
+import nav from './nav'
 export {
     widgets,
     req,
@@ -14,4 +15,5 @@ export {
     util,
     list,
     share,
+    nav
 };

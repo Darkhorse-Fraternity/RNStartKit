@@ -6,7 +6,7 @@ import ReactNative, {
   StyleSheet,
   View,
   Animated,
-
+    ViewPropTypes
 } from 'react-native';
 
 import {mainColor,containingColor,lightMainColor,lightContainingColor} from '../../configure';
@@ -39,7 +39,7 @@ export default class AnimationButton extends Component {
 
    static propTypes = {
       ...Button.PropTypes,
-      containerStyleDisabled:View.propTypes.style,
+      containerStyleDisabled:ViewPropTypes.style,
       isLoad:PropTypes.bool,
       // children:PropTypes.Object
    };

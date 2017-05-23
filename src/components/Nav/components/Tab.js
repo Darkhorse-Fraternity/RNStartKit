@@ -20,7 +20,7 @@ import {
 } from 'react-navigation';
 import MainScreen from './MainScreen'
 import WidgetForm from '../../WidgetForm/WidgetForm'
-
+import Settings from '../../../pages/Setting'
 const CustomTabBar = ({ navigation }) => {
     const { routes } = navigation.state;
     return (
@@ -68,7 +68,7 @@ const CustomTabRouter = TabRouter(
             path: 'notifications',
         },
         Settings: {
-            screen: MainScreen,
+            screen: Settings,
             path: 'settings',
         },
     },

@@ -8,8 +8,8 @@
 import {request} from '../../request';
 import {requestLogin, requestUsersByMobilePhone,getUserByID} from '../../request/leanCloud';
 import {saveAccount,saveUserData, loadAccount, clearUserData} from '../../util/XGlobal'
-
-
+import {navigation} from '../nav'
+import { NavigationActions } from 'react-navigation';
 import {setLeanCloudSession} from '../../configure'
 // *** Action Types ***
 export const ACCOUNT_CHANGE = 'ACCOUNTTEXT_CHANGE'
@@ -68,22 +68,25 @@ export function login(state:Object):Function {
     // loginRequest.params.user_name = state.accountText;
     // loginRequest.params.password = state.passwordText;
 
-    const parame = requestLogin(state.accountText, state.passwordText);
-
+    // const parame = requestLogin(state.accountText, state.passwordText);
+    //
     return dispatch => {
-        dispatch(_loginRequest());
-
-        return request(parame, (response)=> {
-
-            if (response.statu) {
-                //加入sessionToken
-                dispatch(_loginSucceed(response));
-                // dispatch(navigatePush('TabView'));
-            } else {
-                dispatch(_loginFailed(response));
-            }
-        });
+        dispatch(NavigationActions.back())
+        // navigation().goBack()
+        // dispatch(_loginRequest());
+        //
+        // return request(parame, (response)=> {
+        //
+        //     if (response.statu) {
+        //         //加入sessionToken
+        //         dispatch(_loginSucceed(response));
+        //         // dispatch(navigatePush('TabView'));
+        //     } else {
+        //         dispatch(_loginFailed(response));
+        //     }
+        // });
     }
+
 }
 
 
@@ -93,20 +96,23 @@ export function login(state:Object):Function {
  * @return {[type]}              [description]
  */
 export function register(state:Object):Function {
-
-    const params = requestUsersByMobilePhone(state.phone, state.ymCode,
-        state.setPwd);
+    //
+    // const params = requestUsersByMobilePhone(state.phone, state.ymCode,
+    //     state.setPwd);
 
     return dispatch => {
-        dispatch(_loginRequest());
-        request(params, function (response) {
-            if (response.statu) {
-                dispatch(_loginSucceed(response));
-                dispatch(navigatePop());
-            } else {
-                dispatch(_loginFailed(response));
-            }
-        });
+        // dispatch(_loginRequest());
+        // dispatch(NavigationActions.reset())
+        dispatch(NavigationActions.back())
+        dispatch(NavigationActions.back())
+        // request(params, function (response) {
+        //     if (response.statu) {
+        //         dispatch(_loginSucceed(response));
+        //         dispatch(navigatePop());
+        //     } else {
+        //         dispatch(_loginFailed(response));
+        //     }
+        // });
     }
 }
 

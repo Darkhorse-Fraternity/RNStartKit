@@ -16,7 +16,6 @@ import {
 import {Toast} from '../../util'
 import {blackFontColor, backViewColor, mainColor} from '../../configure';
 import {connect} from 'react-redux'
-import {navigatePush} from '../../redux/actions/nav'
 import {logout} from '../../redux/actions/login'
 import {dataStorage} from '../../redux/actions/util'
 import DeviceInfo from 'react-native-device-info'
@@ -210,7 +209,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         push: (key)=> {
-            dispatch(navigatePush(key))
+            // dispatch(navigatePush(key))
         },
         logout: ()=> {
 
@@ -232,7 +231,7 @@ const mapDispatchToProps = (dispatch) => {
         noti: (value)=> {
             global.storage.save({
                 key: 'Noti',  //注意:请不要在key中使用_下划线符号!
-                rawData: value,
+                data: value,
             });
             dispatch(dataStorage(cKey, value))
         }

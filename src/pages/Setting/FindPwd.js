@@ -202,7 +202,7 @@ class FindPwd extends Component {
         return (
             <View style={styles.container}>
                 <ScrollView
-                    keyboardShouldPersistTaps={true}
+                    keyboardShouldPersistTaps="always"
                     keyboardDismissMode='on-drag'>
 
                     <View style={[styles.rowStyle,{marginTop:29/2}]}>

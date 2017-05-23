@@ -164,7 +164,7 @@ class RegPhone extends Component {
         return (
             <ScrollView
                 style={styles.container}
-                keyboardShouldPersistTaps={true}
+                keyboardShouldPersistTaps="always"
                 keyboardDismissMode='on-drag'>
 
                 <View style={styles.rowMainStyle}>

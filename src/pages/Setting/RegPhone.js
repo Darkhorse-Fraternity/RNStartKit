@@ -21,7 +21,7 @@ import {request} from '../../request'
 import {requestSmsCode} from '../../request/leanCloud'
 import {deepFontColor, backViewColor, blackFontColor, mainColor} from '../../configure'
 import {connect} from 'react-redux'
-import {navigateReplaceIndex, navigatePush} from '../../redux/actions/nav'
+// import {navigateReplaceIndex, navigatePush} from '../../redux/actions/nav'
 import {register} from '../../redux/actions/login'
 import {checkPhoneNum, Toast} from '../../util'
 
@@ -91,7 +91,7 @@ class RegPhone extends Component {
     _gowebView = ()=> {
 
 
-        this.props.pushWebView({key: 'WebView', title: '微著网络服务协议', url: webUrl});
+        // this.props.pushWebView({key: 'WebView', title: '微著网络服务协议', url: webUrl});
     };
 
     _goRegist() {
@@ -164,7 +164,7 @@ class RegPhone extends Component {
         return (
             <ScrollView
                 style={styles.container}
-                keyboardShouldPersistTaps={true}
+                keyboardShouldPersistTaps="always"
                 keyboardDismissMode='on-drag'>
 
                 {this._renderRowMain('手机号:', '请填入手机号码',
@@ -310,13 +310,13 @@ const mapDispatchToProps = (dispatch) => {
     return {
         push: ()=> {
             //index 为空 则为当前index
-            dispatch(navigateReplaceIndex('TabView'));
+            // dispatch(navigateReplaceIndex('TabView'));
         },
         mRegister: (state)=> {
             dispatch(register(state));
         },
         pushWebView: (params)=> {
-            dispatch(navigatePush(params));
+            // dispatch(navigatePush(params));
         }
 
     }
