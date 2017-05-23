@@ -11,6 +11,7 @@ import {
     Text,
     TouchableOpacity,
     View,
+    Image,
 } from 'react-native';
 import {
     createNavigator,
@@ -21,19 +22,25 @@ import {
 import MainScreen from './MainScreen'
 import WidgetForm from '../../WidgetForm/WidgetForm'
 import Settings from '../../../pages/Setting'
+import {placeholder} from '../../../../source/'
 const CustomTabBar = ({ navigation }) => {
     const { routes } = navigation.state;
+
     return (
         <View style={styles.tabContainer}>
-            {routes.map(route => (
-                <TouchableOpacity
+            {routes.map((route,index) => {
+                const focused = index === navigation.state.index;
+                let icon = tabiCon[route.routeName]
+                icon = focused?icon.activeImage:icon.inActiveImage
+                return (<TouchableOpacity
                     onPress={() => navigation.navigate(route.routeName)}
                     style={styles.tab}
                     key={route.routeName}
                 >
-                    <Text>{route.routeName}</Text>
+                    <Image style={{width:20,height:20}} source={icon}/>
+                    <Text style={{color:focused?"red":'black'}}>{route.routeName}</Text>
                 </TouchableOpacity>
-            ))}
+            )})}
         </View>
     );
 };
@@ -56,6 +63,20 @@ const CustomTabView = ({ router, navigation }) => {
     );
 };
 
+const tabiCon = {
+    Home: {
+        activeImage:placeholder,
+        inActiveImage:placeholder
+    },
+    Notifications: {
+        activeImage:placeholder,
+        inActiveImage:placeholder
+    },
+    Settings: {
+        activeImage:placeholder,
+        inActiveImage:placeholder
+    },
+}
 
 const CustomTabRouter = TabRouter(
     {
@@ -99,9 +120,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         margin: 4,
-        borderWidth: 1,
-        borderColor: '#ddd',
-        borderRadius: 4,
     },
 });
 
