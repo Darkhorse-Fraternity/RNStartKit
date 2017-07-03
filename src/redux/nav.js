@@ -7,10 +7,10 @@ export function push(key) {
     navigation.navigate(key)
 }
 
-export function pop(key) {
+export function pop() {
     const state = store.getState()
     const  navigation= addNavigationHelpers({dispatch: store.dispatch, state: state.nav })
-    navigation.pop(key)
+    navigation.goBack()
     // store.dispatch(nav.navigatePop(key))
 }
 export function navigation() {

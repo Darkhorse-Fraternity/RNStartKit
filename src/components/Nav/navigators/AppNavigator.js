@@ -1,30 +1,41 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { addNavigationHelpers, StackNavigator } from 'react-navigation';
+import {connect} from 'react-redux';
+import {addNavigationHelpers, StackNavigator} from 'react-navigation';
 
-import LoginView from '../../../pages/Setting/LoginView';
-import MainScreen from '../components/MainScreen';
-import RegPhone from '../../../pages/Setting/RegPhone'
-import Tab from '../components/Tab'
+
+import {route} from '../../../pages'
+import BaseWebView from  '../../Base/BaseWebView.js'
 export const AppNavigator = StackNavigator({
-  Tab:{ screen :Tab,},
-  Main: { screen: MainScreen },
-  Login: { screen: LoginView },
-  RegPhone:{screen:RegPhone},
+    ...route,
+    WebView: {screen: BaseWebView,},
+}, {
+    navigationOptions: {
+        headerStyle:{
+            backgroundColor:'white',
+            //headerBackTitle:' '
+        },
+        headerTintColor:'#0093cb',
+        headerTitleStyle:{
+            color: 'black',
+            alignItems:'center',
+        },
+        headerBackTitle:'     ',
+
+    },
 });
 
-const AppWithNavigationState = ({ dispatch, nav }) => (
-  <AppNavigator navigation={addNavigationHelpers({ dispatch, state: nav })} />
+const AppWithNavigationState = ({dispatch, nav}) => (
+    <AppNavigator navigation={addNavigationHelpers({ dispatch, state: nav })}/>
 );
 
 AppWithNavigationState.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  nav: PropTypes.object.isRequired,
+    dispatch: PropTypes.func.isRequired,
+    nav: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => ({
-  nav: state.nav,
+    nav: state.nav,
 });
 
 export default connect(mapStateToProps)(AppWithNavigationState);

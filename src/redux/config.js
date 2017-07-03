@@ -5,7 +5,7 @@
  */
 'use strict'
 
-import {loadUserData} from '../util/XGlobal'
+import {loadUserData,loadAccount} from '../util/XGlobal'
 // import jsCheckUpdate from '../../util/checkUpdate'
 // import {lockToPortrait} from 'react-native-orientation'
 // import umeng from '../util/umeng'
@@ -14,13 +14,15 @@ import React, {
     UIManager,
     ToastAndroid,
     StatusBar,
-    BackHandler
+    BackAndroid,
+    BackHandler,
+    NetInfo
 } from 'react-native';
 import {loginSucceed} from './actions/login'
-
+// import {navigatePush} from './actions/nav'
 import pushConfig from '../configure/push'
+import {dataStorage} from '../redux/actions/util'
 export const PRE_CONFIG_STATU = 'PRE_CONFIG_STATU'
-import  store from './configureStore'
 
 
 import {pop} from './nav'
@@ -33,7 +35,7 @@ import {pop} from './nav'
  */
 function _preConfig() {
 
-
+    // StatusBar.backgroundColor = 'white'
     //加载是否是第一次进入。
     // loadFirstJoin()
 
@@ -55,7 +57,7 @@ function _preConfig() {
 
     // Platform.OS=='ios'&& StatusBar.setBarStyle('light-content', true);
 
-    //pushConfig()
+    pushConfig()
 
 
 
@@ -65,12 +67,12 @@ function _preConfig() {
 let lastBackPressed: number = 0;
 
 function _backAnroid (getState) {
+    const BackHandler =  BackHandler || BackAndroid
     BackHandler.addEventListener('hardwareBackPress', ()=> {
-        const state = getState().route.navigationState
+        const state = getState().nav;
         const index = state.index;
-        console.log('index:', index);
         //idnex 前两个分别是登录和tabview
-        if (index > 1) {
+        if (index > 0) {
             pop();
             return true;
         }
@@ -86,13 +88,23 @@ function _backAnroid (getState) {
     });
 }
 
+function _isConnected(dispatch) {
+    NetInfo.isConnected.addEventListener(
+        'NetInfo_IsConnected',
+        (isConnected)=>{
+           // console.log('isConnected:', isConnected);
+            dispatch(dataStorage('isConnected',isConnected))
+        }
+    );
+}
 
 
 export function preConfig():Function {
     _preConfig();
-    return (dispatch,getState) =>{
-        _backAnroid(getState)
 
+    return (dispatch,getState) =>{
+        Platform.OS != 'ios' && _backAnroid(getState)
+        _isConnected(dispatch)
         // dispatch(tabSwitch(0))
         //dispatch(navigatePush({key:'Home',applyAnimation:false}))
         loadUserData().then((response)=>{
@@ -103,6 +115,7 @@ export function preConfig():Function {
         }).catch((error)=>{
             console.log('loadUserDataError:',error.message)
         });
+
     }
 
 }

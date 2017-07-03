@@ -16,7 +16,7 @@ import ReactNative, {
 } from 'react-native';
 import ExceptionView, {ExceptionType} from '../ExceptionView';
 import {connect} from 'react-redux';
-import { navigatePush } from '../../redux/actions/nav';
+// import { navigatePush } from '../../redux/actions/nav';
 import {mainColor, backViewColor} from '../../configure';
 
 const delay = () => new Promise((resolve) => InteractionManager.runAfterInteractions(resolve));
@@ -213,7 +213,7 @@ const styles = StyleSheet.create({
 const mapDispatchToProps = (dispatch) => {
 	return {
     push:(key)=>{
-        dispatch(navigatePush(key))
+        // dispatch(navigatePush(key))
     },
 	}
 }

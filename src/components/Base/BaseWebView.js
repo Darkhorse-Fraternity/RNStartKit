@@ -1,6 +1,6 @@
 /* @flow */
 'use strict';
-import React, {Component,PropTypes} from 'react';
+import React, {Component, PropTypes} from 'react';
 import ReactNative, {
     StyleSheet,
     Text,
@@ -13,28 +13,27 @@ import ReactNative, {
     Linking
 } from 'react-native';
 
-import {navbarHeight,screenHeight} from '../../util';
-// import {httpHeader} from '../../configure';
-// import {userManager} from '../../util/XGlobal';
+import {navbarHeight, screenHeight} from '../../util';
+
 import ExceptionView, {ExceptionType} from '../ExceptionView';
 import {connect} from 'react-redux';
-import { navigatePush, navigatePop, navigateRefresh } from '../../redux/actions/nav';
-// import Alipay from 'react-native-payment-alipay';
 
-const UIManager = require('UIManager');
+
+
+
 const WEBVIEW_REF = 'webview';
-
+import {NavigaNavigation} from 'react-navigation';
 // const noWifi = require('../../../source/img/xy_nowifi/xy_nowifi.png');
 class BaseWebView extends Component {
 
-    constructor(props:Object){
+    constructor(props: Object) {
         super(props);
         this.state = {
-            status:"No Page Loaded",
-            backButtonEnabled:false,
-            forwardButtonEnabled:false,
+            status: "No Page Loaded",
+            backButtonEnabled: false,
+            forwardButtonEnabled: false,
             loading: true,
-            scalesPageToFit:true,
+            scalesPageToFit: true,
         };
     }
 
@@ -50,56 +49,89 @@ class BaseWebView extends Component {
         url: PropTypes.string,
     };
 
-    canGoBack:boolean = false;
-    backEventHandle() {
-        if (this.canGoBack) {
-            this.refs[WEBVIEW_REF].goBack();
-        }else {
-            this.props.pop();
-        }
-    }
 
-    renderLeftComponent() {
-        return (
-            // onPress={props.onNavigateBack}
-            <TouchableOpacity style={styles.buttonContainer} onPress={this.backEventHandle.bind(this)}>
-                <View style={styles.arrowView}/>
-            </TouchableOpacity>
-        );
-    }
+    static navigationOptions = props => {
+        const {navigation} = props;
+        const {state} = navigation;
+        const {params} = state;
+        return {
+            title: params && params.title || '加载中。。',
+            headerLeft: (
+                <TouchableOpacity style={styles.buttonContainer} onPress={()=>{
+                    if(params.canGoBack){
+                        params.webView && params.webView.goBack()
+                    }else {
+                       navigation.goBack()
+                    }
+                }}>
+                    <View style={styles.arrowView}/>
+                </TouchableOpacity>)
+        }
+    };
+
+
+    // canGoBack: boolean = false;
+
+    // backEventHandle() {
+    //     if (this.canGoBack) {
+    //         this.refs[WEBVIEW_REF].goBack();
+    //     } else {
+    //         this.props.pop();
+    //     }
+    // }
+    //
+    // renderLeftComponent() {
+    //     return (
+    //         // onPress={props.onNavigateBack}
+    //         <TouchableOpacity style={styles.buttonContainer} onPress={this.backEventHandle.bind(this)}>
+    //             <View style={styles.arrowView}/>
+    //         </TouchableOpacity>
+    //     );
+    // }
 
     componentDidMount() {
-        this.props.refresh({renderLeftComponent:this.renderLeftComponent.bind(this)});
+        // this.props.refresh({renderLeftComponent:this.renderLeftComponent.bind(this)});
+        this.props.navigation.setParams({webView: this.refs[WEBVIEW_REF]})
     }
 
-    _onNavigationStateChange(state:Object){
+    _onNavigationStateChange(state: Object) {
         // console.log('state:',state);
-        if(state.title && state.title.length){
-            this.props.refresh({title:state.title});
+        if (state.title && state.title.length) {
+            // this.props.refresh({title:state.title});
+            this.props.navigation.setParams({title: state.title})
         }
-        this.canGoBack = state.canGoBack;
+        // this.canGoBack = state.canGoBack;
+        // console.log('state:', state);
+        this.props.navigation.setParams({canGoBack: state.canGoBack})
     }
 
-    _onError(error:Object){
-        console.log("webError:",error);
+    _onError(error: Object) {
+        console.log("webError:", error);
     }
-    _onLoadStart(event){
+
+    _onLoadStart(event) {
         console.log("onloadStart:", event.nativeEvent);
     }
-    _onLoad(){
+
+    _onLoad() {
 
     }
-    _renderError(){
+
+    _renderError() {
         return (
             // <ExceptionView exceptionType={ExceptionType.NetError} image={noWifi}/>
-            <ExceptionView style={{height:screenHeight}} exceptionType={ExceptionType.NetError} />
+            <ExceptionView style={{height:screenHeight}} exceptionType={ExceptionType.NetError}/>
         );
     }
-    _renderLoading(){
+
+    _renderLoading(props,e) {
+        console.log('test:',props,e);
+    
         return (
             <ExceptionView style={{height:screenHeight}} exceptionType={ExceptionType.Loading}/>
         );
     }
+
     // let jsCode = `
     //         document.querySelector('#myContent').style.backgroundColor = 'red';
     //     `;
@@ -110,18 +142,19 @@ class BaseWebView extends Component {
      * @param  {[type]} event [description]
      * @return {[type]}       [description]
      */
-     _onShouldStartLoadWithRequest(event:Object) {
-      //Implement any custom loading logic here, don't forget to return!
-      console.log("onShouldStartLoadWithRequest:", event.url);
-        if(event.url.startsWith('http://') || event.url.startsWith('https://')) {
+    _onShouldStartLoadWithRequest(event: Object) {
+        //Implement any custom loading logic here, don't forget to return!
+        console.log("onShouldStartLoadWithRequest:", event.url);
+        if (event.url.startsWith('http://') || event.url.startsWith('https://')) {
+            // this.props.navigation.setParams({canGoBack: true})
             return true;
-        }else{
+        } else {
             Linking.canOpenURL(event.url)
                 .then(supported => {
-                    if(supported){
+                    if (supported) {
                         return Linking.openURL(url);
                         // return false;
-                    }else{
+                    } else {
                         return false;
                     }
                 }).catch(err => {
@@ -129,11 +162,12 @@ class BaseWebView extends Component {
             })
         }
 
-      return false;
+        return false;
     }
 
     render() {
-        //  console.log(this.props.scene);
+        // console.log(this.props);
+        const params = this.props.navigation.state.params
         // console.log(this.props.scene .route.url);
         //  var header = Object.assign({}, httpHeader,{token:userManager.userData.user_token || ""})
         return (
@@ -142,8 +176,8 @@ class BaseWebView extends Component {
                     ref={WEBVIEW_REF}
                     automaticallyAdjustContentInsets={false}
                     style={styles.webView}
-                    source={{uri: this.props.scene.route.url}}
-                    // javaScriptEnabled={false}
+                    source={{uri:params && params.uri || ''}}
+                    javaScriptEnabled={true}
                     domStorageEnabled={true}
                     decelerationRate="normal"
                     onShouldStartLoadWithRequest={this._onShouldStartLoadWithRequest.bind(this)}
@@ -172,29 +206,29 @@ const styles = StyleSheet.create({
         backgroundColor: '#fbfbfb',
     },
     webView: {
-        flex:1,
+        flex: 1,
         backgroundColor: '#fbfbfb',
-        marginTop:navbarHeight,
+        marginTop: navbarHeight,
     },
     buttonContainer: {
         flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'flex-start',
-        width:100,
+        width: 100,
     },
     button: {
         margin: Platform.OS === 'ios' ? 14 : 16,
         //resizeMode: 'contain'
     },
     arrowView: {
-        borderBottomWidth: StyleSheet.hairlineWidth * 2,
-        borderRightWidth: StyleSheet.hairlineWidth * 2,
-        borderColor: '#8c8c85',
+        borderBottomWidth: StyleSheet.hairlineWidth * 5,
+        borderRightWidth: StyleSheet.hairlineWidth * 5,
+        borderColor: '#0093cb',
         transform: [{rotate: '135deg'}],
         marginLeft: 15,
-        width: 10,
-        height: 10,
+        width: 13,
+        height: 13,
     },
 });
 
@@ -212,15 +246,17 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        push:(key)=>{
-            dispatch(navigatePush(key))
+        push: (key)=> {
+            // dispatch(navigatePush(key))
+            dispatch(NavigationActions.navigate(key))
         },
-        pop:(state)=>{
-            dispatch(navigatePop(state))
+        pop: (state)=> {
+            // dispatch(navigatePop(state))
+            dispatch(NavigationActions.back())
         },
-        refresh:(route)=>{
-            dispatch(navigateRefresh(route))
-        }
+        // refresh:(route)=>{
+        //     // dispatch(navigateRefresh(route))
+        // }
     }
 }
 

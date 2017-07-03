@@ -13,8 +13,23 @@ import * as WeChat from 'react-native-wechat';
 import * as QQAPI from 'react-native-qq';
 
 
-WeChat.registerApp('wx5417c31ce54aaef2')
-export function shareToWechat(type: string): Function {
+WeChat.registerApp('wx36c691847cf43305')
+
+export function shareTo(type: string,param:object):Function {
+
+    if(type ==SHARE_TO_TIMELINE || type == SHARE_TO_SESSION){
+        shareToWechat(type,param)
+    }else if(type ==SHARE_TO_QQ || type == Share_TO_ZONE) {
+        shareToQQ(type,param)
+    }else if(type == SHARE_TO_SINA) {
+        shareToWeibo(param)
+    }
+
+
+}
+
+
+export function shareToWechat(type: string,param:object): Function {
 
     let Method = WeChat.shareToTimeline;
     if (type == SHARE_TO_SESSION) Method = WeChat.shareToSession
@@ -23,13 +38,14 @@ export function shareToWechat(type: string): Function {
         try {
             let result = await Method({
                 type: 'news',
-                title: 'web image',
-                webpageUrl: 'www.baidu.com',
-                description: 'share web image to time line',
+                title: param.title||'web image',
+                webpageUrl: param.webpageUrl||'www.baidu.com',
+                description: param.description||'share web image to time line',
                 mediaTagName: 'email signature',
                 messageAction: undefined,
                 messageExt: undefined,
-                imageUrl: 'http://www.ncloud.hk/email-signature-262x100.png'
+                imageUrl: param.imageUrl||'http://www.ncloud.hk/email-signature-262x100.png',
+                thumbImage:param.thumbImage||'http://www.ncloud.hk/email-signature-262x100.png'
             });
             console.log('share text message to time line successful:', result);
             return dispatch(()=> {
@@ -43,7 +59,7 @@ export function shareToWechat(type: string): Function {
 
 }
 
-export function shareToQQ(type:string):Function{
+export function shareToQQ(type:string,param:object):Function{
     let Method = QQAPI.shareToQQ;
     if(type == Share_TO_ZONE)  Method = QQAPI.shareToQzone
 
@@ -51,10 +67,10 @@ export function shareToQQ(type:string):Function{
         try {
             let result = await Method({
                 type: 'news',
-                title: '分享标题',
-                description: '描述',
-                webpageUrl: '网页地址',
-                imageUrl: '远程图片地址',
+                title: param.title||'分享标题',
+                description:  param.description||'描述',
+                webpageUrl: param.webpageUrl||'网页地址',
+                imageUrl: param.imageUrl||param.thumbImage||'http://www.ncloud.hk/email-signature-262x100.png',
             });
             console.log('share text message to time line successful:', result);
             return dispatch(()=> {
@@ -66,7 +82,7 @@ export function shareToQQ(type:string):Function{
     }
 }
 
-export  function shareToWeibo() :Function{
+export  function shareToWeibo(param:object) :Function{
     return async    (dispatch)=> {
         try {
             let result = await WeiboAPI.share({

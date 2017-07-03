@@ -83,7 +83,7 @@ export default class BaseListView extends Component {
         || this.props.loadStatu === LIST_LOAD_NO_MORE
         || !this.shouldShowloadMore) {
         return;
-      }
+      }z
       this.props.loadMore && this.props.loadMore();
     };
 

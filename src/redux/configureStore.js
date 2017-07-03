@@ -13,23 +13,9 @@ import * as immutable from 'immutable';
 import {reducer as form} from 'redux-form';
 
 
-const initialAuthState = { isLoggedIn: false };
-
-function auth(state = initialAuthState, action) {
-    switch (action.type) {
-        case 'Login':
-            return { ...state, isLoggedIn: true };
-        case 'Logout':
-            return { ...state, isLoggedIn: false };
-        default:
-            return state;
-    }
-}
-
  const reducer = combineReducers({
      ...reducers,
-     form,
-     auth
+     form
  });
 
 

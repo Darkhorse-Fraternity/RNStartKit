@@ -53,11 +53,7 @@ export default function loginState(state:immutable.Map<string,any> = initialLogi
                 ...action,
                 isLogin:true,
             });
-        case LOGOUT:
 
-            return Object.assign({}, state, {
-                ...action
-            });
 
         case UPDATE_USERDATA:{
 

@@ -1,4 +1,5 @@
-import React, {Component,PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import {
   StyleSheet,
   Text,
@@ -50,14 +51,20 @@ export default class CourseTabBar extends Component {
       bottom: 0,
     };
 
-    const left = this.props.scrollValue.interpolate({
+    const translateX = this.props.scrollValue.interpolate({
       inputRange: [0, 1, ], outputRange: [tabWidth/2,  tabWidth/2*5],
     });
 
     return (
       <View style={[styles.tabs, {backgroundColor: this.props.backgroundColor || 'white', }, this.props.style, ]}>
         {this.props.tabs.map((tab, i) => this.renderTabOption(tab, i))}
-        <Animated.View style={[tabUnderlineStyle, { left, }, ]} />
+        <Animated.View style={[tabUnderlineStyle,
+          {
+              transform: [
+                { translateX },
+              ]
+            },
+         ]} />
       </View>
     );
   }
