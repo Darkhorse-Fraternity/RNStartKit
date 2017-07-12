@@ -23,7 +23,7 @@ import {loginSucceed} from './actions/login'
 import pushConfig from '../configure/push'
 import {dataStorage} from '../redux/actions/util'
 export const PRE_CONFIG_STATU = 'PRE_CONFIG_STATU'
-
+import { NavigationActions } from 'react-navigation';
 
 import {pop} from './nav'
 
@@ -110,8 +110,8 @@ export function preConfig():Function {
         loadUserData().then((response)=>{
             dispatch(loginSucceed(response))
             // console.log('test:',response)
+            dispatch(NavigationActions.navigate({ routeName: 'Home'}))
             dispatch(__preConfigResult())
-
         }).catch((error)=>{
             console.log('loadUserDataError:',error.message)
         });

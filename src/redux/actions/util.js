@@ -9,7 +9,6 @@
  * 工具类，
  */
 
-import {getPictureParams, updateUserInfo} from '../../request/qzapi'
 import {req} from './req'
 export const LOAD_AVATAR = 'LOAD_AVATAR'
 export const UPLOAD_IMAGES = 'UPLOAD_IMAGES'

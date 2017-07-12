@@ -18,11 +18,13 @@ export const LIST_FAILED = 'LIST_FAILED'
 export const LIST_SUCCEED = 'LIST_SUCCEEDT'
 export const LIST_SELECT = 'LIST_SELECT'
 export const LIST_DELETE = 'LIST_DELETE'
+export const LIST_ADD = 'LIST_ADD'
 import {Toast} from '../../util'
 const pageSize = 20;
 import {logout} from './login'
 // import {limitSearch} from '../../../../DBike/src/request/leanCloud'
 import {send} from '../../request'
+import {addEntities} from '../module/normalizr'
 /**
  * 保证加载的时候，同个请求不窜行。
  */
@@ -41,15 +43,15 @@ export function listReq(key: string = '', params: Object, more: bool = false, da
         const page = !more ? 0 : getState().list.getIn([key, 'page']) + 1;
         const load = getState().list.getIn([key, 'loadStatu'])
         if (load != LIST_LOAD_DATA && load != LIST_LOAD_MORE) {//not serial
-            params.params[pageKey] = page + '';
+            // params.params[pageKey] = page + '';
             dispatch(_listStart(page !== 0, load == undefined, key));//当page 不为0 的时候则表示不是加载多页。
             req(params).then(response => {
-                if (response[RESCODE] === SUCCODE) {
                     const data = cleanData(key, response, {dataMap,'normalizr':true})
+                    if(!data){
+                        console.log( key,'数据为空');
+                        return dispatch(_listFailed(key));
+                    }
                     dispatch(_listSucceed(data, page, key));
-                } else {
-                    dispatch(_listFailed(key));
-                }
             }).catch((e) => {
                 console.log('error:', e.message)
                 Toast.show(e.message)
@@ -154,5 +156,20 @@ export function clear(key:string,rowID:string){
         type: LIST_DELETE,
         rowID,
         key
+    }
+}
+
+export function add(key,data) {
+    return {
+        type:LIST_ADD,
+        key,
+        data
+    }
+}
+
+export function addNormalizrEntity(key,data) : Function{
+    return (dispatch)=>{
+        dispatch(addEntities({[key]:{[data.objectId]:data}}))
+        dispatch(add(key,data.objectId))
     }
 }

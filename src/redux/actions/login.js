@@ -6,13 +6,8 @@
 'use strict'
 
 import {request,send} from '../../request';
-// import {requestLogin, requestUsersByMobilePhone,getUserByID} from '../../request/leanCloud';
+import {requestLogin, requestUsersByMobilePhone,getUserByID} from '../../request/leanCloud';
 import {leancloud_installationId} from '../../configure/push'
-import {appRegister,
-    appLogin,
-    appLogout,
-    getUserInfo,
-} from '../../request/qzapi'
 import {saveAccount,saveUserData, loadAccount, clearUserData} from '../../util/XGlobal'
 // import {
 //     navigatePush,
@@ -21,6 +16,7 @@ import {saveAccount,saveUserData, loadAccount, clearUserData} from '../../util/X
 //     navigatePopToIndex,
 //     navigateReplaceIndex
 // } from './nav'
+import {req} from './req'
 import { NavigationActions } from 'react-navigation';
 import {setLeanCloudSession,setAPPAuthorization} from '../../configure'
 // *** Action Types ***
@@ -77,56 +73,22 @@ export function passwordTextChange(text:string):Object {
  */
 export function login(state:Object):Function {
 
-    // loginRequest.params.user_name = state.accountText;
-    // loginRequest.params.password = state.passwordText;
+    const parame = requestLogin(state.phone, state.ymCode);
 
-
-
-    return  async (dispatch) => {
+    return dispatch => {
         dispatch(_loginRequest());
 
 
-          try {
-              const parame = appLogin(state.accountText, state.passwordText,leancloud_installationId);
-              const response = await send(parame)
-              if (response.isSuccess === '1') {
-                  //加入sessionToken
+        return req(parame).then((response)=>{
+            if (response.statu) {
+                //加入sessionToken
+                dispatch(_loginSucceed(response));
+                dispatch(navigatePop());
+            } else {
+                dispatch(_loginFailed(response));
+            }
+        })
 
-                  dispatch(NavigationActions.back())
-                  dispatch(_loginSucceed(response,state.accountText));
-                  dispatch(passwordTextChange(''))
-                  // dispatch(navigatePush('TabView'));
-                  // Router.pop()
-
-
-              } else {
-                  Toast.show(response.msg)
-
-                  dispatch(_loginFailed(response));
-                  return;
-              }
-              const param = getUserInfo()
-
-          }catch (e){
-              console.log('test:', e.message);
-              Toast.show(e.message)
-              dispatch(_loginFailed(e.message));
-          }
-
-        // return request(parame, (response)=> {
-        //
-        //     if (response.data.isSuccess === '1') {
-        //         //加入sessionToken
-        //         dispatch(_loginSucceed(response,state.accountText));
-        //         // dispatch(navigatePush('TabView'));
-        //         // Router.pop()
-        //         dispatch(NavigationActions.back())
-        //
-        //     } else {
-        //         Toast.show(response.data.msg)
-        //         dispatch(_loginFailed(response));
-        //     }
-        // });
     }
 }
 
@@ -138,27 +100,28 @@ export function login(state:Object):Function {
  */
 export function register(state:Object):Function {
 
-    const params = appRegister(state.mobileNum,state.newPwd);
+    let params = requestUsersByMobilePhone(state.phone, state.ymCode,
+        state.setPwd);
+
+
 
     return dispatch => {
-        // dispatch(_loginRequest());
-        request(params, function (response) {
-            console.log('test:', response);
-            if (response.data.isSuccess === '1') {
-                // dispatch(_loginSucceed(response));
-                // dispatch(navigatePop());
-                // Router.pop()
 
-                dispatch(NavigationActions.back())
-                dispatch(NavigationActions.back())
-                Toast.show('注册成功~!')
-                // dispatch(NavigationActions.back())
+        // if(state.phone == '13588833404'){
+        //     //这边是给苹果检查时候使用。
+        //     dispatch(login(state));
+        //     return
+        // }
 
-            } else {
-                Toast.show(response.data.msg)
-                // dispatch(_loginFailed(response));
-            }
-        });
+
+        dispatch(_loginRequest());
+        return req(params).then((response)=>{
+            dispatch(_loginSucceed(response));
+            dispatch(NavigationActions.navigate({ routeName: 'Home'}))
+        }).catch(e=>{
+            console.log('_loginFailed:', e.message);
+            dispatch(_loginFailed());
+        })
     }
 }
 
@@ -171,21 +134,20 @@ function _loginRequest():Object {
     }
 }
 
-function _loginSucceed(response:Object,accountText:string):Object {
-    const data = {...response,mobileNum:accountText,selectCommunityNum:0}
-    saveUserData(data);
-    saveAccount(accountText);
-    return loginSucceed(data);
+function _loginSucceed(response:Object):Object {
+    // const data = {...response,mobileNum:accountText,selectCommunityNum:0}
+    saveUserData(response);
+    saveAccount(response.mobilePhoneNumber);
+    return loginSucceed(response);
 }
 
 export function loginSucceed(data:Object):Object {
     //保存登录信息。
-    // setLeanCloudSession(data.sessionToken);
-    setAPPAuthorization(data.authorization);
+    setLeanCloudSession(data.sessionToken);
+    // setAPPAuthorization(data.authorization);
     return {
         type: LOGIN_SUCCEED,
         loaded: false,
-        accountText: data.mobileNum,
         data: data,
     }
 
@@ -201,15 +163,14 @@ function _loginFailed(response:Object):Object {
 
 export function logout():Function {
 
-        console.log('test:', 'hhh');
     return async (dispatch,getState) => {
 
         try {
-            const state = getState()
-            const parame = appLogout(state.login.data.appUserId||'');
-            const response = await send(parame)
-            if (response.isSuccess === '1') {
-                //加入sessionToken
+            // const state = getState()
+            // const parame = appLogout(state.login.data.appUserId||'');
+            // const response = await send(parame)
+            // if (response.isSuccess === '1') {
+            //     //加入sessionToken
 
 
                 // dispatch(navigatePush('TabView'));
@@ -225,11 +186,11 @@ export function logout():Function {
                     //加载本地数据。
                     dispatch(_loadAccount(ret));
                 });
-            } else {
-                Toast.show(response.msg)
-
-                // dispatch(_loginFailed(response));
-            }
+            // } else {
+            //     Toast.show(response.msg)
+            //
+            //     // dispatch(_loginFailed(response));
+            // }
         }catch (e){
             console.log('test:', e.message);
             Toast.show(e.message)

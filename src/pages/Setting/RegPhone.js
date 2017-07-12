@@ -14,16 +14,14 @@ import  {
     NativeModules
 } from 'react-native'
 import {OS} from '../../util/';
-
+import {checkPhoneNum, Toast} from '../../util'
 import {BCButton} from '../../components/Base/WBButton'
 import Button from 'react-native-button'
 import {request} from '../../request'
 import {requestSmsCode} from '../../request/leanCloud'
 import {deepFontColor, backViewColor, blackFontColor, mainColor} from '../../configure'
 import {connect} from 'react-redux'
-// import {navigateReplaceIndex, navigatePush} from '../../redux/actions/nav'
 import {register} from '../../redux/actions/login'
-import {checkPhoneNum, Toast} from '../../util'
 
 const webUrl = 'https://static.dayi.im/static/fudaojun/rule.html?version=20160603182000';
 class RegPhone extends Component {
@@ -32,8 +30,8 @@ class RegPhone extends Component {
         this.state = {
             time: 60,
             codeName: '',
-            phone: "", //号码
-            ymCode: "", //验证码
+            phone: __DEV__?'13588833404':"", //号码
+            ymCode: __DEV__?'881743':"", //验证码
             isTap: false,
             timeLoad: false,
         };
@@ -48,6 +46,15 @@ class RegPhone extends Component {
         timeLoad:bool,
     };
 
+
+    static navigationOptions = props => {
+        // const {navigation} = props;
+        // const {state} = navigation;
+        // const {params} = state;
+        return {
+            title:'登录'
+        }
+    };
 
     requestHandle: Object;
     id: number = 0;
@@ -76,6 +83,7 @@ class RegPhone extends Component {
     }
 
 
+
     time() {
         if (this.state.time == 0) {
             clearInterval(this.id);
@@ -91,7 +99,7 @@ class RegPhone extends Component {
     _gowebView = ()=> {
 
 
-        // this.props.pushWebView({key: 'WebView', title: '微著网络服务协议', url: webUrl});
+        this.props.pushWebView({key: 'WebView', title: '微著网络服务协议', url: webUrl});
     };
 
     _goRegist() {
@@ -111,13 +119,19 @@ class RegPhone extends Component {
         }
 
         this.props.mRegister(this.state);
-
+        this.setState({ymCode:''})
     }
 
 
     componentWillUnmount() {
         this.id && clearInterval(this.id);
         this.requestHandle && this.requestHandle.next();
+    }
+
+    componentWillReceiveProps(Props:Object) {
+        if(Props.userData.mobilePhoneNumber != this.props.userData.mobilePhoneNumber){
+            this.setState({phone:Props.userData.mobilePhoneNumber})
+        }
     }
 
 
@@ -132,13 +146,14 @@ class RegPhone extends Component {
 
     _renderRowMain(title: string, placeholder: string, onChangeText: Function,
                    boardType: PropTypes.oneOf = 'default', autoFocus: bool = false, maxLength: number = 16,
-                   ref: string) {
+                   ref: string,defaultValue:string) {
 
         return (
             <View style={styles.rowMainStyle}>
                 <Text style={styles.textStyle}>{title}</Text>
                 <TextInput
                     ref={ref}
+                    defaultValue={defaultValue}
                     placeholderTextColor="rgba(180,180,180,1)"
                     selectionColor={mainColor}
                     returnKeyType='next'
@@ -152,6 +167,7 @@ class RegPhone extends Component {
                     enablesReturnKeyAutomatically={true}
                     onSubmitEditing={() =>this.focusNextField(ref)}
                     onChangeText={onChangeText}/>
+
             </View>
         )
     }
@@ -164,50 +180,51 @@ class RegPhone extends Component {
         return (
             <ScrollView
                 style={styles.container}
-                keyboardShouldPersistTaps="always"
+                keyboardShouldPersistTaps={"always"}
                 keyboardDismissMode='on-drag'>
 
-                {this._renderRowMain('手机号:', '请填入手机号码',
-                    (text) => this.setState({phone: text}), 'numeric', true, 11, "1"
-                )}
-
-                <View style={{flexDirection:'row'}}>
-                    {this._renderRowMain('验证码:', '输入您收到的验证码',
-                        (text) => {
-                            this.setState({ymCode: text})
-                        },
-                        'numeric'
-                        , false, 6, "2"
+                <View style={styles.top}>
+                    {this._renderRowMain('手机号:', '请填入手机号',
+                        (text) => this.setState({phone: text}), 'numeric', true, 11, "1",this.state.phone
                     )}
-
-                    <BCButton containerStyle={styles.buttonContainerStyle}
-                              disabled={!codeEnable}
-                              loaded={this.state.timeLoad}
-                        //styleDisabled={{fontWeight:'normal'}}
-                              onPress={this._onClickCode.bind(this)}
-                              style={{fontWeight:'400',fontSize:14}}
-                    >
-                        {this.state.time == 60 || this.state.time == 0 ? '获取验证码' :
-                        this.state.time.toString() + '秒'}
-                    </BCButton>
+                    <View style={styles.line}/>
+                    <View style={{flexDirection:'row'}}>
+                        {this._renderRowMain('验证码:', '请输入验证码',
+                            (text) => {
+                                this.setState({ymCode: text})
+                            },
+                            'numeric'
+                            , false, 6, "2",this.state.ymCode
+                        )}
+                        <View style={styles.valLine}/>
+                        <BCButton containerStyle={styles.buttonContainerStyle}
+                                  disabled={!codeEnable}
+                                  loaded={this.state.timeLoad}
+                            //styleDisabled={{fontWeight:'normal'}}
+                                  onPress={this._onClickCode.bind(this)}
+                                  style={{fontWeight:'400',fontSize:14,color:mainColor}}
+                        >
+                            {this.state.time == 60 || this.state.time == 0 ? '获取验证码' :
+                            this.state.time.toString() + '秒'}
+                        </BCButton>
+                    </View>
                 </View>
-
 
                 <BCButton
                     disabled={!flag}
-                    isLoad={this.props.state.loaded}
+                    isLoad={this.props.userData.loaded}
                     onPress={this._goRegist.bind(this)}
                     containerStyle={styles.buttonContainerStyle2}>
-                    开始
+                    下一步
                 </BCButton>
-                <View style={styles.bottom}>
-                    <Text style={styles.protocolPre}>点击开始,即表示已阅读并同意</Text>
-                    <Button
-                        onPress={this._gowebView}
-                        style={styles.protocolSuf}>
-                        《diff使用条款》
-                    </Button>
-                </View>
+                {/*<View style={styles.bottom}>*/}
+                {/*<Text style={styles.protocolPre}>点击开始,即表示已阅读并同意</Text>*/}
+                {/*<Button*/}
+                {/*onPress={this._gowebView}*/}
+                {/*style={styles.protocolSuf}>*/}
+                {/*《diff使用条款》*/}
+                {/*</Button>*/}
+                {/*</View>*/}
             </ScrollView>
         );
     }
@@ -217,30 +234,27 @@ class RegPhone extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'white',
+        backgroundColor: '#F5FCFF',
         paddingTop: 20,
     },
 
 
     rowMainStyle: {
-
         flex: 1,
         height: 40,
-        marginTop: 10,
-        backgroundColor: 'rgba(200,200,200,0.1)',
+        //marginTop: 10,
+        backgroundColor: 'white',
         paddingHorizontal: 15,
         flexDirection: 'row',
         alignItems: 'center',
-        marginHorizontal: 15,
+        // marginHorizontal: 15,
     },
     buttonContainerStyle: {
-        marginRight: 15,
-        marginLeft: -5,
+        //marginRight: 15,
         height: 40,
-        marginTop: 10,
         paddingHorizontal: 15,
         alignSelf: 'center',
-
+        backgroundColor: 'white',
         justifyContent: 'center',
     },
     textStyle: {
@@ -294,6 +308,19 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    top: {
+        backgroundColor: 'white',
+    },
+    line: {
+        height: StyleSheet.hairlineWidth,
+        marginLeft: 15,
+        backgroundColor: '#ebebeb'
+    },
+    valLine:{
+        width:StyleSheet.hairlineWidth,
+        backgroundColor: '#ebebeb',
+        marginVertical:8,
     }
 })
 
@@ -302,7 +329,7 @@ const mapStateToProps = (state) => {
     //从login reduce 中获取state的初始值。
     //console.log('state:',state);
     return {
-        state: state.login,
+        userData: state.login,
     }
 }
 
@@ -310,7 +337,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         push: ()=> {
             //index 为空 则为当前index
-            // dispatch(navigateReplaceIndex('TabView'));
+            dispatch(navigateReplaceIndex('TabView'));
         },
         mRegister: (state)=> {
             dispatch(register(state));

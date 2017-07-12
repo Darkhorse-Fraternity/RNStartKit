@@ -13,7 +13,8 @@ import {
     LIST_FAILED,
     LIST_SUCCEED,
     LIST_SELECT,
-    LIST_DELETE
+    LIST_DELETE,
+    LIST_ADD
 } from '../actions/list'
 import * as immutable from 'immutable';
 
@@ -61,6 +62,17 @@ export default function listState(state: immutable.Map<string,any> = initialStat
             // console.log(action.key, action.rowID);
             // console.log('test:', state);
             return state.deleteIn([action.key,'listData',action.rowID])
+        }
+        case LIST_ADD:{
+            return   state.updateIn([action.key],(oldObj)=>{
+                const oldData = oldObj.get("listData") || {}
+                const listData = {
+                    loadStatu:oldObj.get("loadStatu"),
+                    page:oldObj.get("page"),
+                    listData:[action.data,...oldData],//做排序去重
+                }
+                return immutable.fromJS(listData)
+            })
         }
 
         default:

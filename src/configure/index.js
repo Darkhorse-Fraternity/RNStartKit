@@ -4,8 +4,8 @@
 
 import {LeanCloud_APP_ID,LeanCloud_APP_KEY} from './leancloud'
 const defaultHost = !__DEV__ ?
-    /*release*/   'qht.qizhan100.com/api' :
-    /*debug*/     'qht.qizhan100.com/api'
+    /*release*/   'api.leancloud.cn/1.1' :
+    /*debug*/     'api.leancloud.cn/1.1'
     //'task.dayi.im'
 
 //
@@ -36,8 +36,8 @@ function httpHeaders(needSession:bool):Object{
 
    let header = {
      "Content-Type": "application/json",
-     // "X-LC-Key": LeanCloud_APP_KEY,
-     // "X-LC-Id": LeanCloud_APP_ID,
+     "X-LC-Key": LeanCloud_APP_KEY,
+     "X-LC-Id": LeanCloud_APP_ID,
    }
 
    if(needSession){
@@ -56,8 +56,8 @@ const tag = 1;
 
 //主题色彩
 const themeColorConfig = {
-    mainColor: '#f26355', //主色彩，用于navbar 按钮颜色等、
-    backViewColor: '#f7f5f6',
+    mainColor: '#009af8', //主色彩，用于navbar 按钮颜色等、
+    backViewColor: '#F5FCFF',
     lightMainColor: '#c18379', //主色彩，用于navbar 按钮颜色等、
     containingColor: '#ffffff', //内含主色彩
     lightContainingColor: '#d2d6d6', //内含主色彩

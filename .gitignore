@@ -55,5 +55,4 @@ fastlane/screenshots
 .update
 *.apk
 
-src/configure/leancloud.js
 

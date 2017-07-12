@@ -29,7 +29,7 @@ export function saveUserData(data:Object){
     //   {"isLogin":userManager.isLogin,"isFromStorage":false});
     global.storage.save({
         key: Save_UserData_Key,  //注意:请不要在key中使用_下划线符号!
-        rawData: data,
+        data: data,
     });
 }
 
@@ -37,7 +37,7 @@ export function saveFirstTime()
 {
     global.storage.save({
         key: Save_FirstTime_Key,  //注意:请不要在key中使用_下划线符号!
-        rawData: false,
+        data: false,
     });
 }
 export function loadFirstJoin(){
@@ -81,7 +81,7 @@ export function loadUserData():Promise<Object>{
 export function saveAccount(account:string){
     global.storage.save({
         key: Save_Account_Key,  //注意:请不要在key中使用_下划线符号!
-        rawData: account,
+        data: account,
     });
 }
 

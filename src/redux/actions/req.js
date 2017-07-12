@@ -17,17 +17,17 @@ import {addEntities} from '../module/normalizr'
 export const RESCODE = 'isSuccess'
 export const SUCCODE = '1'
 export const MSG = 'msg'
-export const DATA = 'data'
+export const DATA = 'results'
 
 export function reqS(params) {
     // const state = store.getState()
     // const isConnected = state.util.get('isConnected')
     // if(!isConnected) return
     return send(params).then(response => {
-        if (response[RESCODE] === "2" || response[RESCODE] === "3") {
-            console.log('response[RESCODE]:', response[RESCODE]);
-            store.dispatch(logout())
-        }
+        // if (response[RESCODE] === "2" || response[RESCODE] === "3") {
+        //     console.log('response[RESCODE]:', response[RESCODE]);
+        //     store.dispatch(logout())
+        // }
         return response
     })
 }
@@ -35,8 +35,8 @@ export function reqS(params) {
 //加入msg
 export function reqM(params) {
     return reqS(params).then(response => {
-        response[RESCODE] !== SUCCODE && console.log('Error:', response);
-        response[RESCODE] !== SUCCODE && Toast.show(response.msg)
+        // response[RESCODE] !== SUCCODE && console.log('Error:', response);
+        // response[RESCODE] !== SUCCODE && Toast.show(response.msg)
         return response
     })
 }
@@ -46,15 +46,15 @@ export function normalizr(key, data) {
 }
 
 export function cleanData(key, response, option) {
-    let data = response[DATA] ? response[DATA] : response
+    // let data = response[DATA] ? response[DATA] : response
+    let data = response
     data = !option.dataMap ? data : option.dataMap(data) || data
-
 
     if (option.normalizr && data) {
         data = normalizr(key, data)
         const dispatch = store.dispatch
-        dispatch(addEntities(data.entities))
-        return data.result[key]
+        data && data.entities&&  dispatch(addEntities(data.entities))
+        return data.result[DATA]
     }
     return data;
 }
@@ -69,16 +69,13 @@ export function req(params: Object, key: string, option: Object = {}) {
     const dispatch = store.dispatch
     dispatch(requestStart(key))
     return reqM(params).then(response => {
-        if (response[RESCODE] === SUCCODE) {
             const data = cleanData(key, response, option)
             dispatch(requestSucceed(key, data))
-        } else {
-            dispatch(requestFailed(key, response[MSG]))
-        }
-        return response
+              return response
     }).catch(e => {
         console.log('message:', e.message);
-        // Toast.show(e.message)
+        Toast.show(e.message)
+        dispatch(requestFailed(key, e.message))
     })
 
 

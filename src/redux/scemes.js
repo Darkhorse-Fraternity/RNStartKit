@@ -1,21 +1,28 @@
-import  * as keys  from './reqKeys'
+import  {registerListKeys}  from './reqKeys'
 import {schema} from 'normalizr';
 
+const code = 'results'
 
-// const notice = new schema.Entity(keys.NOTICE);
-// const noticeList = new schema.Object({[keys.NOTICELIST]: new schema.Array(notice)});
-
-
+function auto(key) {
+    const item = new schema.Entity(key,{},{ idAttribute: 'objectId' });
+    const list = new schema.Object({[code]: new schema.Array(item)});
+    return list
+}
+function autoKeys(keys) {
+    const schemas = {}
+    keys.forEach( key =>{
+        schemas[key] = auto(key)
+    })
+    return schemas
+}
 
 //请求识别的key对应的sceme
 export const schemas = {
-    // [keys.NOTICELIST]: noticeList,
-
+    ...autoKeys(registerListKeys),
 }
 
 
 //从normalizr 数据库中取得、存入对应值的key
 export const listDefouteKey = {
-    // [keys.NOTICELIST]: keys.NOTICE,
 
 }
