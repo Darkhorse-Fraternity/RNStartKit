@@ -3,7 +3,7 @@
  * @flow
  */
 'use strict';
-import {limitSearch,classDelete,classCreatNewOne} from '../../request/leanCloud';
+import {limitSearch,classDelete,classCreatNewOne, classUpdate} from '../../request/leanCloud';
 import {req} from'../actions/req'
 import {listReq} from '../actions/list'
 export function add(params: Object, key: string, option: Object = {}) {
@@ -12,6 +12,11 @@ export function add(params: Object, key: string, option: Object = {}) {
     return req(lParams,key,option)
 }
 
+export function update(objectId: string,params: Object, key: string, option: Object = {}) {
+    const lParams = classUpdate(key,objectId,params)
+    return req(lParams,key,option)
+
+}
 
 export function remove(objectId: string, key: string, option: Object = {}) {
 
@@ -19,11 +24,11 @@ export function remove(objectId: string, key: string, option: Object = {}) {
     return req(lParams,key,option)
 }
 
-export function search(more:bool,params: Object, key: string, pageSize:number = 40,dataMap: Function) {
+export function search(more:bool,params: Object, key: string,option: Object,pageSize:number = 40) {
 
     return (dispatch, getState) => {
         const page = !more ? 0 : getState().list.getIn([key, 'page']) + 1;
         const lParams = limitSearch(key, page, pageSize, params)
-        return dispatch(listReq(key, lParams,more, dataMap))
+        return dispatch(listReq(key, lParams,more, option))
     }
 }

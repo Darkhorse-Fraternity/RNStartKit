@@ -254,7 +254,7 @@ export function classUpdate(className:string,objectId:string,params:Object):Obje
 export function classDelete(className:string,objectId:string,params:Object):Object{
   return {
     path:'/classes/'+ className + '/' + objectId,
-    method:methodType.put,
+    method:methodType.delete,
     params,
   }
 }

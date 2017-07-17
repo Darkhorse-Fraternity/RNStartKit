@@ -38,24 +38,25 @@ import {
 
 const pageKey = 'pageIndex'
 
-export function listReq(key: string = '', params: Object, more: bool = false, dataMap: Function) {
+export function listReq(key: string = '', params: Object, more: bool = false, option: Object = {}) {
     return (dispatch, getState) => {
+        const listKey  = option.sKey ||key
         const page = !more ? 0 : getState().list.getIn([key, 'page']) + 1;
         const load = getState().list.getIn([key, 'loadStatu'])
         if (load != LIST_LOAD_DATA && load != LIST_LOAD_MORE) {//not serial
             // params.params[pageKey] = page + '';
             dispatch(_listStart(page !== 0, load == undefined, key));//当page 不为0 的时候则表示不是加载多页。
             req(params).then(response => {
-                    const data = cleanData(key, response, {dataMap,'normalizr':true})
+                    const data = cleanData(key, response, {...option,'normalizr':true})
                     if(!data){
                         console.log( key,'数据为空');
-                        return dispatch(_listFailed(key));
+                        return dispatch(_listFailed(listKey));
                     }
-                    dispatch(_listSucceed(data, page, key));
+                    dispatch(_listSucceed(data, page, listKey));
             }).catch((e) => {
                 console.log('error:', e.message)
                 Toast.show(e.message)
-                dispatch(_listFailed(key));
+                dispatch(_listFailed(listKey));
             })
 
         }

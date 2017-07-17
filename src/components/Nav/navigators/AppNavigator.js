@@ -10,6 +10,7 @@ export const AppNavigator = StackNavigator({
     ...route,
     WebView: {screen: BaseWebView,},
 }, {
+    // initialRouteName:'Home',
     navigationOptions: {
         headerStyle:{
             backgroundColor:'#F5FCFF',

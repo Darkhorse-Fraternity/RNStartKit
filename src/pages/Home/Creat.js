@@ -34,6 +34,7 @@ import {selfUser} from '../../request/LCModle'
             const user = state.login.data;
             const param = {
                 title,
+                cycle:0,
                 ...selfUser(),
             }
 

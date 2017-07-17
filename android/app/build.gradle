@@ -88,9 +88,11 @@ repositories {
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    buildToolsVersion "23.0.3"
 
     defaultConfig {
+        renderscriptTargetApi 23
+        renderscriptSupportModeEnabled true
         applicationId "com.rnstartkit"
         minSdkVersion 16
         targetSdkVersion 22
@@ -149,6 +151,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-blur')
     compile project(':react-native-wechat')
     compile project(':react-native-qq')
     compile project(':react-native-leancloud-push')

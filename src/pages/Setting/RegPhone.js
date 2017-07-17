@@ -157,7 +157,7 @@ class RegPhone extends Component {
                     placeholderTextColor="rgba(180,180,180,1)"
                     selectionColor={mainColor}
                     returnKeyType='next'
-                    autoFocus={autoFocus}
+                    //autoFocus={autoFocus}
                     maxLength={maxLength}
                     keyboardType={boardType}
                     style={styles.textInputStyle}

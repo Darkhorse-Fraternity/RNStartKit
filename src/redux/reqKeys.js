@@ -1,7 +1,7 @@
 
 export const ICARD = 'iCard'
-
-
+export const IDONE = 'iDone'
+export const IRECORD = 'iRecord'
 //设置初始值
 
 export const registerReqKeys = [
@@ -11,7 +11,9 @@ export const registerReqKeys = [
 
 
 export const registerListKeys = [
-    ICARD
+    ICARD,
+    IDONE,
+    IRECORD
 ]
 
 export const registerNormalizrKeys = registerListKeys

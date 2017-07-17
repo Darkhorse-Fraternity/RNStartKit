@@ -177,7 +177,6 @@ export function logout():Function {
                 // Router.pop()
                 clearUserData();
                 dispatch(logout2());//先退出
-                console.log('test:', 'sssss');
                 dispatch(NavigationActions.navigate({ routeName: 'Login'}))
 
 

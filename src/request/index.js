@@ -167,22 +167,32 @@ function send({
         // console.log('response.headers:', response.headers);
 
         const responseData = status != 204 ? response.json() : {}
-        if (status >= 200 && status < 300) {
+        if (response.ok) {
             if (cacheOptimize != cacheType.noCache && responseData.retcode === tag) {
                 cache.set(cacheKey, responseData);
             }
             return responseData;
         } else {
+
             let message = ''
             if (responseData.code) {
-                message = __DEV__ ? "HttpCode:" + status + ",code:" + responseData.code + ",error:" + responseData.error
+                message = __DEV__ ? "HttpCode:" + status + ",code:" + responseData.code +
+                ",error:" + responseData.error
                     : responseData.error;
+                const error = new Error(message);
+                failCallback(error, urlpath, params);
+                throw error
             } else {
-                message = "HttpCode:" + status + ",reason:" + JSON.stringify(responseData)
+                responseData.then(res=>{
+                    message = "HttpCode:" + status +  + ',code:'+res.code + ',error:'+res.error
+                    const error = new Error(message);
+                    failCallback(error, urlpath, params);
+                    throw error
+                })
+
+
             }
-            const error = new Error(message);
-            failCallback(error, urlpath, params);
-            throw error
+
         }
     })
     // .catch(function(err:Error){

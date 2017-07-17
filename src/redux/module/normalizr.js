@@ -5,8 +5,8 @@
 'use strict';
 
 import * as immutable from 'immutable';
-
-
+import {normalize} from 'normalizr';
+import {schemas} from '../scemes'
 import {registerNormalizrKeys} from '../reqKeys'
 const registerKeys = (keys = [])=>{
     const newKyes = {}
@@ -19,6 +19,16 @@ const registerKeys = (keys = [])=>{
 const initialState = immutable.fromJS( {...registerKeys(registerNormalizrKeys)});
 
 export const ADD_NORMALIZR = 'ADD_NORMALIZR'
+
+
+
+export function addNormalizrEntity(key,data) {
+     const nData =  normalize(data, schemas[key])
+    return {
+        type: ADD_NORMALIZR,
+        payload: nData,
+    }
+}
 
 export function addEntities(data: Object): Object {
     return {

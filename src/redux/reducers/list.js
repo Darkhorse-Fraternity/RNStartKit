@@ -69,7 +69,7 @@ export default function listState(state: immutable.Map<string,any> = initialStat
                 const listData = {
                     loadStatu:oldObj.get("loadStatu"),
                     page:oldObj.get("page"),
-                    listData:[action.data,...oldData],//做排序去重
+                    listData:[...new Set([action.data,...oldData])],//做排序去重
                 }
                 return immutable.fromJS(listData)
             })
