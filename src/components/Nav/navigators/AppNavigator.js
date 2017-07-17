@@ -17,7 +17,7 @@ export const AppNavigator = StackNavigator({
             shadowColor:'#F5FCFF'
             //headerBackTitle:' '
         },
-        headerTintColor:'#0093cb',
+        headerTintColor:'black',
         headerTitleStyle:{
             color: 'black',
             alignItems:'center',
