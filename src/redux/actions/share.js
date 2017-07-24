@@ -10,7 +10,7 @@ export const SHARE_TO_QQ = 'SHARE_TO_QQ'
 export const Share_TO_ZONE = 'Share_TO_ZONE'
 export const SHARE_TO_SINA = 'SHARE_TO_SINA'
 import * as WeChat from 'react-native-wechat';
-import * as QQAPI from 'react-native-qq';
+// import * as QQAPI from 'react-native-qq';
 
 
 WeChat.registerApp('wx36c691847cf43305')

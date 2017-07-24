@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -23,7 +22,6 @@
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		1EE361316080440E93CA570B /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 16815CB8C8B24DFDB0DBFA28 /* libRNVectorIcons.a */; };
-		2C0FBC9E84BC49A28592C1E0 /* libRCTQQAPI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B33F8BA4045C4A09A8E1CDED /* libRCTQQAPI.a */; };
 		41EE95D575E14C79BCE3B581 /* libRCTWeChat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D5A78FFFBE64862911175F2 /* libRCTWeChat.a */; };
 		4614FC31FCD348E9AC731080 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F015BAB208C4C81AE45397E /* Zocial.ttf */; };
 		483C1E3AEF474364B1F0391D /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 391D9D7617FC41D286881D39 /* Entypo.ttf */; };
@@ -36,7 +34,6 @@
 		B11BDEC8C0DF4A5B9BBB840E /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6046A53161CD4BB78F8E775B /* SimpleLineIcons.ttf */; };
 		C762FD746F93AA3B36AE96CF /* libPods-RNStartKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 80C22219815181E16F163146 /* libPods-RNStartKit.a */; };
 		CC0242A51DF69FAB0045A14A /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC02428F1DF69F4C0045A14A /* libRCTAnimation.a */; };
-		CC3E39A41E2622490019B85F /* libRCTQQAPI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC3E39801E260A200019B85F /* libRCTQQAPI.a */; };
 		CC3E39A61E2622570019B85F /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CC3E39A51E2622570019B85F /* libiconv.tbd */; };
 		CC3E39A81E2622610019B85F /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CC3E39A71E2622610019B85F /* libsqlite3.tbd */; };
 		CC3E39AA1E2622690019B85F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CC3E39A91E2622690019B85F /* libz.tbd */; };
@@ -155,13 +152,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = 2D2A28201D9B03D100D4039D;
 			remoteInfo = "RCTAnimation-tvOS";
-		};
-		CC3E397F1E260A200019B85F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 944E0F951D6D4F85A8230C17 /* RCTQQAPI.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 9139321C1C232D310085E3BA;
-			remoteInfo = RCTQQAPI;
 		};
 		CC3E39A21E260A200019B85F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -372,9 +362,7 @@
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		858A1DA5B94F48AA98B5A47F /* libRNDeviceInfo.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNDeviceInfo.a; sourceTree = "<group>"; };
 		8D5A78FFFBE64862911175F2 /* libRCTWeChat.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTWeChat.a; sourceTree = "<group>"; };
-		944E0F951D6D4F85A8230C17 /* RCTQQAPI.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTQQAPI.xcodeproj; path = "../node_modules/react-native-qq/ios/RCTQQAPI.xcodeproj"; sourceTree = "<group>"; };
 		97BCDBA17C724339888AF233 /* RCTWeChat.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTWeChat.xcodeproj; path = "../node_modules/react-native-wechat/ios/RCTWeChat.xcodeproj"; sourceTree = "<group>"; };
-		B33F8BA4045C4A09A8E1CDED /* libRCTQQAPI.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTQQAPI.a; sourceTree = "<group>"; };
 		C5795D33A59FFF7734212F5B /* Pods-RNStartKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNStartKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RNStartKit/Pods-RNStartKit.debug.xcconfig"; sourceTree = "<group>"; };
 		CC0242881DF69F4C0045A14A /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		CC3E39A51E2622570019B85F /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
@@ -448,7 +436,6 @@
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
-				CC3E39A41E2622490019B85F /* libRCTQQAPI.a in Frameworks */,
 				B083C8D2978F494C9DD36A04 /* libRNDeviceInfo.a in Frameworks */,
 				D71CAA7614784130A59C55F9 /* libRNImagePicker.a in Frameworks */,
 				1EE361316080440E93CA570B /* libRNVectorIcons.a in Frameworks */,
@@ -643,7 +630,6 @@
 				433AC5FDE62D4707BC6C215D /* RNDeviceInfo.xcodeproj */,
 				FE3142187D364EDDA87EED18 /* RNImagePicker.xcodeproj */,
 				0E7269983BAB4CB7AA00ED41 /* RNVectorIcons.xcodeproj */,
-				944E0F951D6D4F85A8230C17 /* RCTQQAPI.xcodeproj */,
 				97BCDBA17C724339888AF233 /* RCTWeChat.xcodeproj */,
 				3E6E624ABE2146FE8D6B7704 /* RNBlur.xcodeproj */,
 			);
@@ -688,14 +674,6 @@
 			children = (
 				CC02428F1DF69F4C0045A14A /* libRCTAnimation.a */,
 				CC0242911DF69F4C0045A14A /* libRCTAnimation.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		CC3E396F1E260A200019B85F /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				CC3E39801E260A200019B85F /* libRCTQQAPI.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -937,10 +915,6 @@
 					ProjectRef = CC7959AA1E02A6A600FAA8EB /* RCTPushNotification.xcodeproj */;
 				},
 				{
-					ProductGroup = CC3E396F1E260A200019B85F /* Products */;
-					ProjectRef = 944E0F951D6D4F85A8230C17 /* RCTQQAPI.xcodeproj */;
-				},
-				{
 					ProductGroup = 139105B71AF99BAD00B5F7CC /* Products */;
 					ProjectRef = 139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */;
 				},
@@ -1072,13 +1046,6 @@
 			fileType = archive.ar;
 			path = libRCTAnimation.a;
 			remoteRef = CC0242901DF69F4C0045A14A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		CC3E39801E260A200019B85F /* libRCTQQAPI.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRCTQQAPI.a;
-			remoteRef = CC3E397F1E260A200019B85F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		CC3E39A31E260A200019B85F /* libRCTWeChat.a */ = {
@@ -1407,12 +1374,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = "-lc++";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
@@ -1432,12 +1393,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = "-lc++";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
@@ -1468,7 +1423,6 @@
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native/Libraries/PushNotificationIOS/**",
-					"$(SRCROOT)/../node_modules/react-native-qq/ios/RCTQQAPI/**",
 					"$(SRCROOT)/../node_modules/react-native-wechat/ios",
 					"$(SRCROOT)/../node_modules/react-native-blur/ios",
 				);
@@ -1518,7 +1472,6 @@
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native/Libraries/PushNotificationIOS/**",
-					"$(SRCROOT)/../node_modules/react-native-qq/ios/RCTQQAPI/**",
 					"$(SRCROOT)/../node_modules/react-native-wechat/ios",
 					"$(SRCROOT)/../node_modules/react-native-blur/ios",
 				);

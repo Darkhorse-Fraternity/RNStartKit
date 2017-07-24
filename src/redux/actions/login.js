@@ -116,10 +116,14 @@ export function register(state:Object):Function {
 
         dispatch(_loginRequest());
         return req(params).then((response)=>{
-            dispatch(_loginSucceed(response));
-            dispatch(NavigationActions.navigate({ routeName: 'Home'}))
+            if(response){
+
+                dispatch(_loginSucceed(response));
+                dispatch(NavigationActions.navigate({ routeName: 'Home'}))
+            }
         }).catch(e=>{
             console.log('_loginFailed:', e.message);
+                Toast.show(e.message)
             dispatch(_loginFailed());
         })
     }

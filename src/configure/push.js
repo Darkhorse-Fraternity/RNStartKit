@@ -1,91 +1,93 @@
-
 import  {send} from'../request'
 import {pushInstallation} from '../request/leanCloud'
 import {Toast} from '../util'
 import  PushNotification from 'react-native-push-notification'
 
 import DeviceInfo from 'react-native-device-info'
-import {Platform ,
+import {
+    Platform,
     DeviceEventEmitter,
-    NativeModules,} from 'react-native'
+    NativeModules,
+} from 'react-native'
 
-export default function pushConfig(){
+export default function pushConfig() {
 
 
-    if(Platform.OS == 'ios'){
-        PushNotification.configure({
+    Platform.OS == 'ios' && PushNotification.setApplicationIconBadgeNumber(0)
 
-            // (optional) Called when Token is generated (iOS and Android)
-            onRegister: function(value) {
-                console.log('tokenValue:',value)
-                const param = pushInstallation(value.os,value.token)
-                send(param).then((response)=>{
-                    console.log('push Registe Success:',response)
-                })
-            },
 
-            // (required) Called when a remote or local notification is opened or received
-            onNotification: function(notification) {
-                console.log( 'NOTIFICATION:', notification );
-                if(notification.foreground){
-                    Toast.show(notification.message)
-                }
-            },
+    PushNotification.configure({
 
-            // ANDROID ONLY: GCM Sender ID (optional - not required for local notifications, but is need to receive remote push notifications)
-            senderID: "YOUR GCM SENDER ID",
+        // (optional) Called when Token is generated (iOS and Android)
+        onRegister: function (value) {
+            console.log('tokenValue:', value)
+            const param = pushInstallation(value.os, value.token)
+            send(param).then((response)=> {
+                console.log('push Registe Success:', response)
+            })
+        },
 
-            // IOS ONLY (optional): default: all - Permissions to register.
-            permissions: {
-                alert: true,
-                badge: true,
-                sound: true
-            },
+        // (required) Called when a remote or local notification is opened or received
+        onNotification: function (notification) {
+            console.log('NOTIFICATION:', notification);
+            if (notification.foreground) {
+                Toast.show(notification.message)
+            }
+        },
 
-            // Should the initial notification be popped automatically
-            // default: true
-            popInitialNotification: true,
+        // ANDROID ONLY: GCM Sender ID (optional - not required for local notifications, but is need to receive remote push notifications)
+        senderID: "YOUR GCM SENDER ID",
 
-            /**
-             * (optional) default: true
-             * - Specified if permissions (ios) and token (android and ios) will requested or not,
-             * - if not, you must call PushNotificationsHandler.requestPermissions() later
-             */
-            requestPermissions: true,
-        });
-    }else{
+        // IOS ONLY (optional): default: all - Permissions to register.
+        permissions: {
+            alert: true,
+            badge: true,
+            sound: true
+        },
 
-        const uniqueID =  DeviceInfo.getUniqueID()
+        // Should the initial notification be popped automatically
+        // default: true
+        popInitialNotification: true,
 
-        let  token = uniqueID
-        if(global.TextEncoder){
-            console.log('global.TextEncoder:',global.TextEncoder)
-            const buffer =  new TextEncoder("utf-8").encode(uniqueID)
-            const  uuid = require('react-native-uuid');
+        /**
+         * (optional) default: true
+         * - Specified if permissions (ios) and token (android and ios) will requested or not,
+         * - if not, you must call PushNotificationsHandler.requestPermissions() later
+         */
+        requestPermissions: true,
+    });
+    if (Platform.OS != 'ios') {
+
+        const uniqueID = DeviceInfo.getUniqueID()
+
+        let token = uniqueID
+        if (global.TextEncoder) {
+            console.log('global.TextEncoder:', global.TextEncoder)
+            const buffer = new TextEncoder("utf-8").encode(uniqueID)
+            const uuid = require('react-native-uuid');
             token = uuid.unparse(buffer)
         }
 
 
-
-        const param = pushInstallation(Platform.OS,uniqueID)
-        send(param).then((response)=>{
-            console.log('response:',response)
+        const param = pushInstallation(Platform.OS, uniqueID)
+        send(param).then((response)=> {
+            console.log('response:', response)
         })
 
 
         const LeanCloudPushNative = NativeModules.LeanCloudPush;
-        LeanCloudPushNative.getInitialNotification().then((res)=>{
-            console.log('InitialNotification:',res)
-        }).catch((err)=>{
-            console.log('message:',err.message)
+        LeanCloudPushNative.getInitialNotification().then((res)=> {
+            console.log('InitialNotification:', res)
+        }).catch((err)=> {
+            console.log('message:', err.message)
         })
 
         DeviceEventEmitter.addListener(LeanCloudPushNative.ON_RECEIVE, (res) => {
-            console.log('ON_RECEIVE:',res.data)
+            console.log('ON_RECEIVE:', res.data)
             Toast.show(res.data.toString())
         });
         DeviceEventEmitter.addListener(LeanCloudPushNative.ON_ERROR, (res) => {
-            console.log('ON_ERROR:',res)
+            console.log('ON_ERROR:', res)
         });
 
     }

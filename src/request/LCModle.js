@@ -15,7 +15,7 @@ export function pointModel(name,objectId,className) {
 }
 
 export function user(objectId) {
-    return   pointModel(user.name,objectId,'_User')
+    return   pointModel("user",objectId,'_User')
 }
 
 export function selfUser() {

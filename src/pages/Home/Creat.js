@@ -22,6 +22,7 @@ import {bindActionCreators} from 'redux';
 import {addNormalizrEntity} from '../../redux/actions/list'
 import {mainColor} from '../../configure'
 import {selfUser} from '../../request/LCModle'
+import moment from 'moment'
 //static displayName = Creat
 @connect(
     state =>({
@@ -35,6 +36,8 @@ import {selfUser} from '../../request/LCModle'
             const param = {
                 title,
                 cycle:0,
+                time:0,
+                doneDate:{"__type": "Date", "iso": moment('2017-03-20')},
                 ...selfUser(),
             }
 

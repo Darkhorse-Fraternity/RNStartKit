@@ -26,7 +26,7 @@ export const PRE_CONFIG_STATU = 'PRE_CONFIG_STATU'
 import { NavigationActions } from 'react-navigation';
 
 import {pop} from './nav'
-
+import {dayNotification} from '../configure/localNotification'
 
 
 //前置配置 在一进程序的时候就会
@@ -61,13 +61,17 @@ function _preConfig() {
 
 
 
+
+    dayNotification()
+
+
 }
 
 
 let lastBackPressed: number = 0;
 
 function _backAnroid (getState) {
-    const BackHandler =  BackHandler || BackAndroid
+    // const BackHandler =  BackHandler || BackAndroid
     BackHandler.addEventListener('hardwareBackPress', ()=> {
         const state = getState().nav;
         const index = state.index;

@@ -19,7 +19,6 @@ import com.theweflex.react.WeChatPackage;
 import java.util.Arrays;
 import java.util.List;
 
-import cn.reactnative.modules.qq.QQPackage;
 import io.liaoyuan.reactnative.leancloudpush.LeanCloudPushPackage;
 
 public class MainApplication extends Application implements ReactApplication {
@@ -36,7 +35,7 @@ public class MainApplication extends Application implements ReactApplication {
                     new MainReactPackage(),
             new BlurViewPackage(),
                     new WeChatPackage(),
-                    new QQPackage(),
+//                    new QQPackage(),
                     new LeanCloudPushPackage(),
                     new ReactNativePushNotificationPackage(),
                     new VectorIconsPackage(),

@@ -168,9 +168,6 @@ function send({
 
         const responseData = status != 204 ? response.json() : {}
         if (response.ok) {
-            if (cacheOptimize != cacheType.noCache && responseData.retcode === tag) {
-                cache.set(cacheKey, responseData);
-            }
             return responseData;
         } else {
 
@@ -183,13 +180,13 @@ function send({
                 failCallback(error, urlpath, params);
                 throw error
             } else {
-                responseData.then(res=>{
-                    message = "HttpCode:" + status +  + ',code:'+res.code + ',error:'+res.error
-                    const error = new Error(message);
-                    failCallback(error, urlpath, params);
-                    throw error
-                })
-
+                //  responseData.then(res=>{
+                //     message = "HttpCode:" + status +  + ',code:'+res.code + ',error:'+res.error
+                //     const error = new Error(message);
+                //     // failCallback(error, urlpath, params);
+                //     return res
+                // })
+                throw  new Error(response._bodyInit)
 
             }
 
