@@ -20,7 +20,7 @@ import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux';
 import {logout} from '../../redux/actions/login'
 import {ICARD, IDONE} from '../../redux/reqKeys'
-import {add, search, update,remove} from '../../redux/module/leancloud'
+import {add, search, update, remove} from '../../redux/module/leancloud'
 import {selfUser, iCard} from '../../request/LCModle'
 import {addNormalizrEntity} from '../../redux/actions/list'
 import {addEntities} from '../../redux/module/normalizr'
@@ -31,7 +31,7 @@ import moment from 'moment'
 import Icon from 'react-native-vector-icons/Ionicons'
 import BounceBtn from '../../components/Button/BounceBtn'
 import * as Animatable from 'react-native-animatable';
- const List = Animatable.createAnimatableComponent(FlatList);
+const List = Animatable.createAnimatableComponent(FlatList);
 
 function makeScaleInTranslation(translationType, value) {
     return {
@@ -63,7 +63,7 @@ Animatable.initializeRegistryWithDefinitions({cloudMoveLeft})
                     ...selfUser(),
                     time: {"$ne": -1},
                 },
-                order:'-doneDate'
+                order: 'doneDate'
 
 
             }, ICARD))
@@ -111,9 +111,9 @@ Animatable.initializeRegistryWithDefinitions({cloudMoveLeft})
                 }
             }))
         },
-        delete: async (rowId,objectId)=>{
-            await remove(objectId,ICARD)
-            dispatch(clear(ICARD,rowId))
+        delete: async(rowId, objectId)=> {
+            await remove(objectId, ICARD)
+            dispatch(clear(ICARD, rowId))
         }
 
     })
@@ -126,30 +126,6 @@ export  default  class Home extends Component {
     static propTypes = {};
     static defaultProps = {};
 
-
-    static navigationOptions = props => {
-        const {navigation} = props;
-        // const {state} = navigation;
-        // const {params} = state;
-        return {
-            title: 'COMBO',
-            headerRight: (<TouchableOpacity
-                style={styles.headerBtn}
-                onPress={()=>{
-                        navigation.navigate('Creat')
-                    }}>
-                <Icon name="md-add" size={30}/>
-            </TouchableOpacity>),
-            headerLeft: (
-                <TouchableOpacity
-                    style={styles.headerBtn}
-                    onPress={()=>{
-                        Pop.show(<Menu/>,{maskStyle:{backgroundColor:'transparent'}})
-                }}>
-                    <Icon name="md-list" size={30}/>
-                </TouchableOpacity>)
-        }
-    };
 
     shouldComponentUpdate(nextProps: Object) {
         return !immutable.is(this.props, nextProps)
@@ -165,20 +141,34 @@ export  default  class Home extends Component {
     }
 
 
-    __delete = (index,objectId)=>{
+    __delete = (index, objectId)=> {
         Alert.alert(
             '确定删除?',
             '删除后不可恢复~！',
-            [{text: '取消'}, {text: '确定', onPress: () => this.props.delete(index,objectId)}]
+            [{text: '取消'}, {
+                text: '确定', onPress: async() => {
+                    const itemView = this.rows[index]
+                    ///因为view 是根据key 复用的，所以最后需要还原，否则会出错
+                    const endState = await itemView.fadeOutDownBig(500)
+                    endState.finished && this.props.delete(index, objectId)
+                    await itemView.fadeInRight(500)
+                    //
+                }
+            }]
         )
     }
-
-    __renderItem = ({item,index})=> {
+    rows = []
+    __renderItem = ({item, index})=> {
         const data = this.props.normalizrData.get(item).toJS()
 
         //计算上次完成时间和当前完成时间， 只有大于24个小时，才能再次打卡。
 
-        let FlagView = (<Text style={styles.num}>{data.time}</Text>)
+        let FlagView = (
+            <Animatable.Text
+                animation="zoomInUp"
+                style={styles.num}>
+                {data.time}
+            </Animatable.Text>)
         if (data.time == -1) {
             FlagView = (<Text style={styles.done}>{'恭喜,已完成'}</Text>)
         } else if (data.doneDate) {
@@ -191,11 +181,11 @@ export  default  class Home extends Component {
         }
 
 
-
-
         //flag 为true 的时候说明离上次打卡已经有24小时了
         return (
-            <View style={styles.item}>
+            <Animatable.View
+                ref={(row) => this.rows[index] = row}
+                style={styles.item}>
                 <View style={styles.card}>
                     <View style={styles.toper}>
                         <TouchableOpacity
@@ -211,7 +201,7 @@ export  default  class Home extends Component {
                     {FlagView}
                     <View style={{height:40}}/>
                 </View>
-            </View>
+            </Animatable.View>
         )
     }
 
@@ -222,6 +212,7 @@ export  default  class Home extends Component {
         // console.log('test:',typeof View());
         return (
             <List
+                ref="list"
                 animation="slideInRight"
                 style={styles.container}
                 data={data}
@@ -247,7 +238,7 @@ const styles = StyleSheet.create({
     bc: {
         position: 'absolute',
         width: Dimensions.get('window').width,
-        height: Dimensions.get('window').height-44,
+        height: Dimensions.get('window').height - 44,
     },
     header: {
         marginTop: 30,
@@ -290,14 +281,13 @@ const styles = StyleSheet.create({
     },
 
 
-
     done: {
         fontSize: 17,
     },
     toper: {
-        width:200,
+        width: 200,
         flexDirection: 'row',
-        justifyContent:'space-between',
-        alignItems:'center'
+        justifyContent: 'space-between',
+        alignItems: 'center'
     }
 })
