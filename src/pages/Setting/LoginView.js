@@ -1,368 +1,317 @@
 /* @flow */
-
+//注册页面
 'use strict';
-
 import React, {Component, PropTypes} from 'react';
-
-import {
+import  {
     ScrollView,
     StyleSheet,
-    TextInput,
-    View,
-    Image,
     Text,
+    View,
+    TextInput,
+    Picker,
+    LayoutAnimation,
     TouchableOpacity,
-    LayoutAnimation
+    NativeModules,
+    Dimensions
 } from 'react-native'
-
-
-import {pixel, Toast, checkPhoneNum} from '../../util';
-import {mainColor, backViewColor, textInputTextColor, placeholderTextColor} from '../../configure';
-import WBButton, {BCButton} from '../../components/Base/WBButton';
-
+import {OS} from '../../util/';
+import {checkPhoneNum, Toast} from '../../util'
+import {BCButton} from '../../components/Base/WBButton'
+import Button from 'react-native-button'
+import {request} from '../../request'
+import {requestSmsCode} from '../../request/leanCloud'
+import {deepFontColor, backViewColor, blackFontColor, mainColor} from '../../configure'
 import {connect} from 'react-redux'
-// import {navigatePush} from '../../redux/actions/nav'
-import {login, accountTextChange, passwordTextChange, loadAccountAction} from '../../redux/actions/login'
-
-class LoginView extends React.Component {
-
+import {register} from '../../redux/actions/login'
+import * as Animatable from 'react-native-animatable';
+const webUrl = 'https://static.dayi.im/static/fudaojun/rule.html?version=20160603182000';
+class LoginView extends Component {
   constructor(props: Object) {
     super(props);
     this.state = {
-      needUp: false,
-    }
+      time: 60,
+      codeName: '',
+      phone: __DEV__?'13588833404':"", //号码
+      ymCode: __DEV__?'881743':"", //验证码
+      isTap: false,
+      timeLoad: false,
+    };
   }
 
   state: {
-    needUp:bool
+    phone:string,
+    time:number,
+    codeName:string,
+    ymCode:string,
+    isTap:bool, // 用于time 是否在走。
+    timeLoad:bool,
   };
+
 
   static navigationOptions = props => {
-    const {navigation} = props;
-    const {state} = navigation;
-    const {params} = state;
+    // const {navigation} = props;
+    // const {state} = navigation;
+    // const {params} = state;
     return {
-      title: '登录',
-      headerRight: (
-          <TouchableOpacity
-              onPress={() =>{navigation.navigate('RegPhone')}}
-          >
-            <Text style={{color:'#0093cb',marginHorizontal:15}}>注册</Text>
-          </TouchableOpacity>
-      ),
+      title:'登录'
     }
   };
-  static mode = "modal"
 
-  static propTypes = {
-    loginPress: PropTypes.func.isRequired,
-    accountChange: PropTypes.func.isRequired,
-    passwordChange: PropTypes.func.isRequired,
-    loadAccount: PropTypes.func.isRequired,
-    state: PropTypes.object.isRequired,
-    //  needUp:PropTypes.bool.isRequired,
-  };
+  requestHandle: Object;
+  id: number = 0;
+
+  _onClickCode() {
+    //发送验证码请求
+//没注册过手机号 13517238595
+
+    this.setState({timeLoad: true});
+    var self = this;
+    requestSmsCode.params.mobilePhoneNumber = this.state.phone;
+    this.requestHandle = request(requestSmsCode, function (response) {
+      if (response.statu) {
+        console.log('test:', response)
+        Toast.show("发送成功!");
+        self.refs[2] && self.refs[2].focus()
+        if (self.state.isTap == false) {
+          self.setState({isTap: true});
+          self.id = setInterval(function () {
+            self.time()
+          }, 1000)
+        }
+      }
+      self.setState({timeLoad: false});
+    });
+  }
 
 
-  static contextTypes = {
-    router: PropTypes.object,
-  };
-  //requestHandle:Object;
 
-  _login = () => {
-    if (this.props.state.accountText.length === 0) {
-      Toast.show('账号不能为空');
-      this.refs[1].focus();
-      return;
+  time() {
+    if (this.state.time == 0) {
+      clearInterval(this.id);
+      // this.isTap = false;
+      this.setState({isTap: false});
     }
 
-    //判断手机号的正则
-    var reg2 = /^.{11,16}$/;
-    var flag2 = reg2.test(this.props.state.accountText)
-    if (!flag2) {
+    this.setState({
+      time: this.state.time == 0 ? 60 : --this.state.time,
+    })
+  }
+
+  _gowebView = ()=> {
+
+
+    this.props.pushWebView({key: 'WebView', title: '微著网络服务协议', url: webUrl});
+  };
+
+  _goRegist() {
+    // 判断手机号的正则
+    if (!checkPhoneNum(this.state.phone)) {
       Toast.show('不是正确的手机号码');
       this.refs['1'].focus();
       return;
     }
-
-    //判断设置密码是否正确 6到16位
-    const reg = /^.{6,16}$/;
-    var flag = reg.test(this.props.state.passwordText)
+    //判断验证码的正则
+    const reg = /^\d{6}$/;
+    const flag = reg.test(this.state.ymCode)
     if (!flag) {
-      Toast.show('密码设置不正确');
+      Toast.show('不是正确验证码');
       this.refs['2'].focus();
       return;
     }
 
-    this.props.loginPress(this.props.state);
-    // this.setState({
-    //    loaded: true,
-    // });
-    // var self = this;
-    //
-    // loginRequest.params.user_name = this.state.accountText;
-    // loginRequest.params.password = this.state.passwordText;
-    //
-    // this.requestHandle = request(loginRequest, function(response){
-    //
-    //   self.setState({loaded:false});
-    //      if(response.statu){
-    //
-    //        saveUserData(response.data,loginRequest.params.user_name);//保存到本地。
-    //       !__DEV__ && self.setState({passwordText:"",});
-    //       //  NavigationManager.goBack({isLogin:true});
-    //     //  NavigationManager.login();
-    //     // NavigationManager.goToPage("CourseView")
-    //     console.log('nav:',self.props.navigator);
-    //       self.props.navigator.push({name:"main", component:MainTabView});
-    //      }
-    //
-    // });
-  };
-
-  timer: number;
-  refcus: bool = false;
-  //做视图动画。
-  _needUp(need: bool) {
-    // LayoutAnimation.linear();
-    if (need == this.state.needUp == true) {
-      this.refcus = true;
-    } else {
-      this.refcus = false;
-    }
-
-    if (need == this.state.needUp) {
-      return;
-    }
-    if (need) {
-      LayoutAnimation.configureNext.bind(
-          null, LayoutAnimation.Presets.easeInEaseOut
-      )();
-      this.setState({needUp: need});
-    } else {
-      //如果在10内继续获得焦点，则不作控制。
-      var self = this;
-      this.timer = setTimeout(()=> {
-        if (self.refcus == true) {
-          self.refcus = false;
-          return;
-        }
-        LayoutAnimation.configureNext.bind(
-            null, LayoutAnimation.Presets.easeInEaseOut
-        )();
-        self.setState({needUp: need});
-
-      }, 10);
-    }
+    this.props.mRegister(this.state);
+    this.setState({ymCode:''})
   }
 
-  componentDidMount() {
-    //  NavigationManager.navigator = this.props.navigator;
-  }
-
-  componentWillMount() {
-    !__DEV__ && this.props.loadAccount();
-  }
 
   componentWillUnmount() {
-    this.timer && clearTimeout(this.timer);
-
-    //this.requestHandle && this.requestHandle.next();
+    this.id && clearInterval(this.id);
+    this.requestHandle && this.requestHandle.next();
   }
 
+  componentWillReceiveProps(Props:Object) {
+    if(Props.userData.mobilePhoneNumber != this.props.userData.mobilePhoneNumber){
+      this.setState({phone:Props.userData.mobilePhoneNumber})
+    }
+  }
+
+
   focusNextField(nextField: string) {
-    this.refs[nextField].focus();
+
+    if (nextField == '1') {
+      this.refs['2'].focus();
+    } else if (nextField == '2') {
+      this._goRegist()
+    }
+  }
+
+  _renderRowMain(title: string, placeholder: string, onChangeText: Function,
+                 boardType: PropTypes.oneOf = 'default', autoFocus: bool = false, maxLength: number = 16,
+                 ref: string,defaultValue:string) {
+
+    return (
+        <View style={styles.rowMainStyle}>
+          <Text style={styles.textStyle}>{title}</Text>
+          <TextInput
+              ref={ref}
+              defaultValue={defaultValue}
+              placeholderTextColor="rgba(180,180,180,1)"
+              selectionColor={mainColor}
+              returnKeyType='next'
+              //autoFocus={autoFocus}
+              maxLength={maxLength}
+              keyboardType={boardType}
+              style={styles.textInputStyle}
+              underlineColorAndroid='transparent'
+              placeholder={placeholder}
+              clearButtonMode='while-editing'
+              enablesReturnKeyAutomatically={true}
+              onSubmitEditing={() =>this.focusNextField(ref)}
+              onChangeText={onChangeText}/>
+
+        </View>
+    )
   }
 
   render() {
-    var reg = /^.{6,16}$/;
-    // let disabled = !checkPhoneNum(this.props.state.accountText) || !reg.test(this.props.state.passwordText)
-    var reg2 = /^.{11,16}$/;
-    let disabled = !reg2.test(this.props.state.accountText) || !reg.test(this.props.state.passwordText)
-
-
-    const {state, passwordChange, accountChange} = this.props;
-    const {navigation} = this.props;
+    var codeEnable = checkPhoneNum(this.state.phone) &&
+        this.state.time == 60 && !this.state.isTap;
+    const reg = /^\d{6}$/;
+    const flag = reg.test(this.state.ymCode) && checkPhoneNum(this.state.phone)
     return (
-        <View
+        <Animatable.View
+            animation="slideInUp"
             style={styles.container}
-            onStartShouldSetResponder={()=>true}
-            onResponderGrant={()=>{
-            this.refs[1].isFocused() && this.refs[1].blur();
-            this.refs[2].isFocused() && this.refs[2].blur();
-          }}
-        >
-          {/*{this.state.needUp == false && <Image
-           resizeMode = 'contain'
-           style={styles.icon}
-           source={require('../../source/img/xy_logo/xy_logo.png')}
-           />}*/}
+            >
+
           <View style={styles.top}>
-            <View style={[styles.textBackViewStyle]}>
-              {/*<Image
-               resizeMode = 'contain'
-               style={styles.iconInsertStyle}
-               source={require('../../source/img/xy_id/xy_id.png')}
-               />*/}
-              <TextInput
-                  style={styles.textInputStyle}
-                  placeholderTextColor={placeholderTextColor}
-                  ref="1"
-                  onChangeText={(text) => accountChange(text)}
-                  defaultValue={state.accountText}
-                  placeholder="手机号"
-                  maxLength={12}
-                  //keyboardType='numeric'
-                  underlineColorAndroid='transparent'
-                  clearButtonMode='while-editing'
-                  enablesReturnKeyAutomatically={true}
-                  returnKeyType='next'
-                  selectionColor={mainColor}
-                  onBlur={this._needUp.bind(this,false)}
-                  onFocus={this._needUp.bind(this,true)}
-                  onSubmitEditing={() => this.focusNextField('2')}
-              />
-            </View>
+            {this._renderRowMain('手机号:', '请填入手机号',
+                (text) => this.setState({phone: text}), 'numeric', true, 11, "1",this.state.phone
+            )}
             <View style={styles.line}/>
-            <View style={styles.textBackViewStyle}>
-              {/*<Image
-               resizeMode = 'contain'
-               style={styles.iconInsertStyle}
-               source={require('../../source/img/xy_password/xy_password.png')}
-               />*/}
-              <TextInput
-                  ref="2"
-                  style={styles.textInputStyle}
-                  placeholderTextColor={placeholderTextColor}
-                  onChangeText={(text) => passwordChange(text)}
-                  defaultValue={state.passwordText}
-                  secureTextEntry={true}
-                  placeholder="密码"
-                  selectTextOnFocus={false}
-                  underlineColorAndroid='transparent'
-                  clearButtonMode='while-editing'
-                  enablesReturnKeyAutomatically={true}
-                  returnKeyType='join'
-                  selectionColor={mainColor}
-                  onBlur={this._needUp.bind(this,false)}
-                  onFocus={this._needUp.bind(this,true)}
-                  onSubmitEditing={this._login}
-              />
+            <View style={{flexDirection:'row'}}>
+              {this._renderRowMain('验证码:', '请输入验证码',
+                  (text) => {
+                    this.setState({ymCode: text})
+                  },
+                  'numeric'
+                  , false, 6, "2",this.state.ymCode
+              )}
+              <View style={styles.valLine}/>
+              <BCButton containerStyle={styles.buttonContainerStyle}
+                        disabled={!codeEnable}
+                        loaded={this.state.timeLoad}
+                  //styleDisabled={{fontWeight:'normal'}}
+                        onPress={this._onClickCode.bind(this)}
+                        style={{fontWeight:'400',fontSize:14,color:mainColor}}
+              >
+                {this.state.time == 60 || this.state.time == 0 ? '获取验证码' :
+                this.state.time.toString() + '秒'}
+              </BCButton>
             </View>
           </View>
-          <TouchableOpacity
-
-              onPress={()=>navigation.navigate('FindPwd')}
-              style={styles.mbutton}
-          >
-            <Text style={styles.buttonTextColor}> {'忘记密码?'} </Text>
-          </TouchableOpacity>
-
 
           <BCButton
-              onPress={this._login}
-              containerStyle={styles.cbutton}
-              disabled={disabled}
-              isLoad={state.loaded}
-          >
-            登 录
+              disabled={!flag}
+              isLoad={this.props.userData.loaded}
+              onPress={this._goRegist.bind(this)}
+              containerStyle={styles.buttonContainerStyle2}>
+            下一步
           </BCButton>
-
-          {/*<WBButton*/}
-          {/*onPress={()=>router.push('mine/RegPhone')}*/}
-          {/*style={{color:mainColor}}*/}
-          {/*containerStyle={[styles.creactbutton,{marginTop:10}]}*/}
-          {/*>*/}
-          {/*注 册*/}
-          {/*</WBButton>*/}
-
-        </View>
-
+          {/*<View style={styles.bottom}>*/}
+          {/*<Text style={styles.protocolPre}>点击开始,即表示已阅读并同意</Text>*/}
+          {/*<Button*/}
+          {/*onPress={this._gowebView}*/}
+          {/*style={styles.protocolSuf}>*/}
+          {/*《diff使用条款》*/}
+          {/*</Button>*/}
+          {/*</View>*/}
+        </Animatable.View>
     );
   }
-
-
 }
 
 
 const styles = StyleSheet.create({
-
   container: {
     flex: 1,
-    backgroundColor: "#F5FCFF",
+    backgroundColor: '#F5FCFF',
+    paddingTop: 20,
   },
 
 
-  icon: {
-    alignSelf: 'center',
-    marginTop: 188 / 2,
-    height: 57,
-    width: 187,
-  },
-
-  iconInsertStyle: {
-    marginTop: 17 / 2,
-    marginLeft: 31 / 2,
-    marginBottom: 17 / 2,
-    marginRight: 29 / 2,
-    width: 23,
-  },
-
-  textBackViewStyle: {
-    marginLeft: 29 / 2,
-    marginRight: 29 / 2,
-    backgroundColor: '#ffffff',
-    borderRadius: 3,
-    flexDirection: 'row',
-    paddingVertical:3,
-  },
-
-  textInputStyle: {
+  rowMainStyle: {
+    // flex: 1,
+    width:Dimensions.get('window').width-100,
     height: 40,
-    // marginLeft:29/2,
-    // marginRight:29/2,
-    fontSize:15,
-    color: textInputTextColor,
-    backgroundColor: '#00000000',
-    flex: 1,
-    textAlign: 'left',
-  },
-
-
-  buttonTextColor: {
-    color: "rgb(120,120,120)",
-    fontSize: 13,
-    textAlign: "right",
-  },
-
-  cbutton: {
-    marginLeft: 29 / 2,
-    marginRight: 29 / 2,
     //marginTop: 10,
+    backgroundColor: 'white',
+    paddingHorizontal: 15,
+    flexDirection: 'row',
+    alignItems: 'center',
+    // marginHorizontal: 15,
+  },
+  buttonContainerStyle: {
+    //marginRight: 15,
     height: 40,
+    paddingHorizontal: 15,
+    alignSelf: 'center',
+    backgroundColor: 'white',
     justifyContent: 'center',
-
   },
-  mbutton: {
-    marginTop: 10,
-    marginRight: 15,
-    height: 40,
-    width: 150,
-    alignSelf: 'flex-end',
+  textStyle: {
+    // flex: ,
+    width: 65,
+    fontSize: 14,
+    color: blackFontColor,
   },
-
-  creactbutton: {
-    borderColor: mainColor,
-    borderWidth: pixel,
+  textInputStyle: {
+    // width:200,
+    flex: 1,
+    marginLeft: 0,
+    textAlign: 'left',
+    fontSize: 14,
+    color: 'black',
+  },
+  buttonSelectStyle: {
+    marginLeft: OS == 'ios' ? 29 / 2 : 27,
+    flex: 1,
+    height: 30,
+    justifyContent: 'center',
+  },
+  buttonTextStyle: {
+    fontSize: 14,
+    color: '#9ba0a2'
+  },
+  buttonMainTextStyle: {
+    fontSize: 14,
+    color: deepFontColor,
+  },
+  buttonContainerStyle2: {
     marginLeft: 29 / 2,
     marginRight: 29 / 2,
-    marginTop: 17,
+    marginTop: 30,
     height: 40,
     justifyContent: 'center',
-    borderRadius: 3,
+  },
+
+  protocolPre: {
+    marginTop: 8,
+    fontSize: 11,
+    color: '#9e9e9e',
+  },
+  protocolSuf: {
+    marginTop: 8,
+    fontSize: 11,
+    color: mainColor,
+  },
+
+  bottom: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   top: {
-    marginTop: 10,
     backgroundColor: 'white',
   },
   line: {
@@ -370,34 +319,35 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     backgroundColor: '#ebebeb'
   },
-});
+  valLine:{
+    width:StyleSheet.hairlineWidth,
+    backgroundColor: '#ebebeb',
+    marginVertical:8,
+  }
+})
 
 
 const mapStateToProps = (state) => {
   //从login reduce 中获取state的初始值。
   //console.log('state:',state);
   return {
-    state: state.login,
+    userData: state.login,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    loginPress: (state) => {
-      dispatch(login(state))
-      // dispatch(navigatePush('TabView'));
+    push: ()=> {
+      //index 为空 则为当前index
+      // dispatch(navigateReplaceIndex('TabView'));
     },
-
-
-    accountChange: (text) => {
-      dispatch(accountTextChange(text))
+    mRegister: (state)=> {
+      dispatch(register(state));
     },
-    passwordChange: (text) => {
-      dispatch(passwordTextChange(text))
-    },
-    loadAccount: () => {
-      dispatch(loadAccountAction())
+    pushWebView: (params)=> {
+      // dispatch(navigatePush(params));
     }
+
   }
 }
 
@@ -405,5 +355,3 @@ export default connect(
     mapStateToProps,
     mapDispatchToProps
 )(LoginView)
-
-

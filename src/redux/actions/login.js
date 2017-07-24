@@ -119,7 +119,7 @@ export function register(state:Object):Function {
             if(response){
 
                 dispatch(_loginSucceed(response));
-                dispatch(NavigationActions.navigate({ routeName: 'Home'}))
+                // dispatch(NavigationActions.navigate({ routeName: 'Home'}))
             }
         }).catch(e=>{
             console.log('_loginFailed:', e.message);
@@ -157,7 +157,7 @@ export function loginSucceed(data:Object):Object {
 
 }
 
-function _loginFailed(response:Object):Object {
+export function _loginFailed(response:Object):Object {
     return {
         type: LOGIN_FAILED,
         loaded: false
@@ -170,7 +170,8 @@ export function logout():Function {
     return async (dispatch,getState) => {
 
         try {
-            // const state = getState()
+            const state = getState()
+            if (!state.login.isLogin) return
             // const parame = appLogout(state.login.data.appUserId||'');
             // const response = await send(parame)
             // if (response.isSuccess === '1') {
@@ -181,7 +182,7 @@ export function logout():Function {
                 // Router.pop()
                 clearUserData();
                 dispatch(logout2());//先退出
-                dispatch(NavigationActions.navigate({ routeName: 'Login'}))
+                // dispatch(NavigationActions.navigate({ routeName: 'Login'}))
 
 
 

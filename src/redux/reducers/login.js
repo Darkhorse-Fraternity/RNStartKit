@@ -21,6 +21,7 @@ import {saveUserData} from '../../util/XGlobal'
 const initialLoginState = {
     loaded: false,
     isLogin: false,
+    localLoad:false,
     accountText: __DEV__ ? "13588833404" : '',
     passwordText: __DEV__ ? "123456" : '',
     data: {},
@@ -47,11 +48,13 @@ export default function loginState(state:immutable.Map<string,any> = initialLogi
             return Object.assign({}, state, {
                 ...action,
                 isLogin:false,
+                localLoad:true,
             });
         case LOGIN_SUCCEED:
             return Object.assign({}, state, {
                 ...action,
                 isLogin:true,
+                localLoad:true,
             });
 
 

@@ -31,7 +31,8 @@ import moment from 'moment'
 import Icon from 'react-native-vector-icons/Ionicons'
 import BounceBtn from '../../components/Button/BounceBtn'
 import * as Animatable from 'react-native-animatable';
-export const Btn = Animatable.createAnimatableComponent(TouchableOpacity);
+ const List = Animatable.createAnimatableComponent(FlatList);
+
 function makeScaleInTranslation(translationType, value) {
     return {
         from: {
@@ -220,7 +221,8 @@ export  default  class Home extends Component {
         // const navigation = this.props.navigation
         // console.log('test:',typeof View());
         return (
-            <FlatList
+            <List
+                animation="slideInRight"
                 style={styles.container}
                 data={data}
                 horizontal={true}

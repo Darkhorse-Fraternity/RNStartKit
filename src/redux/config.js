@@ -18,7 +18,7 @@ import React, {
     BackHandler,
     NetInfo
 } from 'react-native';
-import {loginSucceed} from './actions/login'
+import {loginSucceed,_loginFailed} from './actions/login'
 // import {navigatePush} from './actions/nav'
 import pushConfig from '../configure/push'
 import {dataStorage} from '../redux/actions/util'
@@ -114,10 +114,11 @@ export function preConfig():Function {
         loadUserData().then((response)=>{
             dispatch(loginSucceed(response))
             // console.log('test:',response)
-            dispatch(NavigationActions.navigate({ routeName: 'Home'}))
+            // dispatch(NavigationActions.navigate({ routeName: 'Home'}))
             dispatch(__preConfigResult())
         }).catch((error)=>{
             console.log('loadUserDataError:',error.message)
+            dispatch(_loginFailed())
         });
 
     }
