@@ -23,6 +23,7 @@ import {addNormalizrEntity} from '../../redux/actions/list'
 import {mainColor} from '../../configure'
 import {selfUser} from '../../request/LCModle'
 import moment from 'moment'
+import Icon from 'react-native-vector-icons/Ionicons'
 //static displayName = Creat
 @connect(
     state =>({
@@ -35,9 +36,9 @@ import moment from 'moment'
             const user = state.login.data;
             const param = {
                 title,
-                cycle:0,
-                time:0,
-                doneDate:{"__type": "Date", "iso": moment('2017-03-20')},
+                cycle: 0,
+                time: 0,
+                doneDate: {"__type": "Date", "iso": moment('2017-03-20')},
                 ...selfUser(),
             }
 
@@ -55,7 +56,8 @@ export  default  class Creat extends Component {
     constructor(props: Object) {
         super(props);
         this.state = {
-            title: ''
+            title: '',
+            step: 0,
         }
     }
 
@@ -66,7 +68,8 @@ export  default  class Creat extends Component {
         // const {state} = navigation;
         // const {params} = state;
         return {
-            //title: '新建',
+            title: '新建卡片',
+            headerLeft: <View/>
         }
     };
 
@@ -74,15 +77,43 @@ export  default  class Creat extends Component {
         return !immutable.is(this.props, nextProps) || !immutable.is(this.state, nextState)
     }
 
+
+
+    __nextStep = () => {
+
+
+        const step = this.state.step + 1
+        this.setState({step})
+        if (step == 2) {
+            this.props.add(this.state.title)
+        }
+
+    }
+
+    __backStep = ()=> {
+
+        const step = this.state.step - 1
+        this.setState({step})
+        if (step == -1) {
+            this.props.navigation.goBack()
+        }
+    }
+
+    __doOption = ()=>{
+
+    }
+
+
     __renderName = ()=> {
         return (
-            <View style={{alignItems:'center'}}>
+            <View >
                 <View style={styles.row}>
                     <TextInput
                         placeholderTextColor="rgba(180,180,180,1)"
                         selectionColor={mainColor}
                         returnKeyType='next'
                         maxLength={50}
+                        value={this.state.title}
                         //keyboardType={boardType}
                         style={styles.textInputStyle}
                         underlineColorAndroid='transparent'
@@ -93,23 +124,58 @@ export  default  class Creat extends Component {
                         onChangeText={(text)=>this.setState({title:text})}
                     />
                 </View>
-                <TouchableOpacity
-                    disabled={this.state.title.length === 0 }
-                    onPress={()=>this.props.add(this.state.title)}
-                    style={styles.sureBtn}>
-                    <Text style={[styles.sureBtnText,
-                    {color:this.state.title.length === 0?'rgba(180,180,180,1)':mainColor}]}>
-                        确定
-                    </Text>
-                </TouchableOpacity>
+                <View style={styles.ctrlView}>
+                    <TouchableOpacity
+                        onPress={this.__backStep}
+                        style={[styles.sureBtn,{backgroundColor:'#00abfb'}]}>
+                        <Icon name="ios-arrow-back-outline" size={20} color="white"/>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        disabled={this.state.title.length === 0 }
+                        onPress={this.__nextStep}
+                        style={[styles.sureBtn,{backgroundColor:this.state.title.length === 0?"rgb(220,200,200)":"#ff768e"}]}>
+                        <Icon name="ios-arrow-forward-outline" size={20} color="white"/>
+                    </TouchableOpacity>
+                </View>
             </View>
         )
     }
 
+
+    __doneView = ()=> {
+        return (
+            <View>
+                <View style={styles.downRow}>
+                    <Text style={styles.doneTitle}>{this.state.title}</Text>
+                </View>
+                <View style={styles.doneCtrlView}>
+                    <TouchableOpacity
+                        onPress={this.__backStep}
+                        style={[styles.doneBtn,{backgroundColor:'#00abfb'}]}>
+                        <Icon name="ios-arrow-back-outline" size={20} color="white"/>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={this.__doOption}
+                        style={[styles.doneBtn,{backgroundColor:'#00abfb'}]}>
+                        <Icon name="ios-more" size={30} color="white"/>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        disabled={this.state.title.length === 0 }
+                        onPress={this.__nextStep}
+                        style={[styles.doneBtn,{backgroundColor:this.state.title.length === 0?"rgb(220,200,200)":"#ff768e"}]}>
+                        <Icon name="ios-done-all" size={30} color="white"/>
+                    </TouchableOpacity>
+                </View>
+            </View>
+        )
+    }
+
+
     render(): ReactElement<any> {
         return (
             <View style={[this.props.style,styles.wrap]}>
-                {this.__renderName()}
+                {this.state.step == 0 && this.__renderName()}
+                {this.state.step == 1 && this.__doneView()}
             </View>
         );
     }
@@ -121,23 +187,67 @@ const styles = StyleSheet.create({
         backgroundColor: '#F5FCFF'
     },
     row: {
-        borderBottomWidth: StyleSheet.hairlineWidth,
-        borderBottomColor: mainColor,
+        // borderBottomWidth: StyleSheet.hairlineWidth,
+        // borderBottomColor: mainColor,
         marginHorizontal: 30,
+        padding: 20,
+    },
+    downRow:{
+        marginHorizontal: 30,
+        height:90,
+        padding: 20,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     textInputStyle: {
 
         marginLeft: 0,
-        textAlign: 'center',
+        //textAlign: 'center',
         fontSize: 14,
-        height: 40,
-        width: Dimensions.get('window').width - 60,
+        height: 50,
+        paddingLeft: 15,
+        //width: Dimensions.get('window').width - 60,
         color: 'black',
+        marginTop: 10,
+        borderWidth: StyleSheet.hairlineWidth,
+        borderColor: "rgb(180,180,180)",
+        borderRadius: 25,
+
     },
     sureBtn: {
-        marginTop: 20,
+        width: 50,
+        height: 50,
+        marginTop: 0,
+        borderRadius: 25,
+        backgroundColor: '#ff768e',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     sureBtnText: {
-        color: mainColor
+        color: 'white'
+    },
+    ctrlView: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingHorizontal: 50,
+        paddingTop: 20,
+    },
+    doneBtn:{
+        width:50,
+        height: 50,
+        marginTop: 20,
+        borderRadius: 25,
+        backgroundColor: '#ff768e',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    doneCtrlView:{
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingHorizontal:50,
+        paddingTop:10,
+    },
+    doneTitle:{
+        fontSize:20,
     }
 })

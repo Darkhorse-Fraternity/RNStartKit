@@ -132,9 +132,23 @@ export  default  class Home extends Component {
         return !immutable.is(this.props, nextProps)
     }
 
+    componentWillReceiveProps(nextProps: Objec) {
+        const size1 = nextProps.data.get('listData').size
+        const size2 = this.props.data.get('listData').size
+        if(size1  > size2 && size2 !=0  ){
+            this.refs.list.ref._component &&
+            this.refs.list.ref._component.scrollToOffset({x: 0, y: 0, animated: false})
+        }
+    }
+
+
+
     componentDidMount() {
         this.props.search()
     }
+
+
+
 
     _keyExtractor = (item, index) => {
         const key = item.id || index;
