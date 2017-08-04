@@ -41,11 +41,11 @@ const pageKey = 'pageIndex'
 export function listReq(key: string = '', params: Object, more: bool = false, option: Object = {}) {
     return (dispatch, getState) => {
         const listKey  = option.sKey ||key
-        const page = !more ? 0 : getState().list.getIn([key, 'page']) + 1;
-        const load = getState().list.getIn([key, 'loadStatu'])
+        const page = !more ? 0 : getState().list.getIn([listKey, 'page']) + 1;
+        const load = getState().list.getIn([listKey, 'loadStatu'])
         if (load != LIST_LOAD_DATA && load != LIST_LOAD_MORE) {//not serial
             // params.params[pageKey] = page + '';
-            dispatch(_listStart(page !== 0, load == undefined, key));//当page 不为0 的时候则表示不是加载多页。
+            dispatch(_listStart(page !== 0, load == undefined, listKey));//当page 不为0 的时候则表示不是加载多页。
             req(params).then(response => {
                     const data = cleanData(key, response, {...option,'normalizr':true})
                     if(!data){

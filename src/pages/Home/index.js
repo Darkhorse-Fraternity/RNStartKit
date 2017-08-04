@@ -66,7 +66,7 @@ export  default  class Home extends Component {
         const isLogin = params ? params.isLogin : false
         const localLoad = params ? params.localLoad : false
         const title = localLoad?"登录":""
-        console.log('test:', params,localLoad);
+        // console.log('test:', params,localLoad);
         return {
             // header: isLogin ? undefined : ()=>(<View style={{height:64,backgroundColor:'#F5FCFF'}}/>),
             title:!isLogin ?  title: 'COMBO',
@@ -109,6 +109,14 @@ export  default  class Home extends Component {
                     )}
                     {isLogin && (<CardView
                         animation="slideInDown"
+                        onScroll={(e)=>{
+                             const x =  e.nativeEvent.contentOffset.x
+                            if(x<-80){
+                                console.log('test:', x);
+                                 Pop.show(<Menu/>,{maskStyle:{backgroundColor:'transparent'}})
+                            }
+
+                        }}
                     />)}
                 </View>)}
             </View>

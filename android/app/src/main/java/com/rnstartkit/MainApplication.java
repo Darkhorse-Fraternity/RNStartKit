@@ -2,6 +2,7 @@ package com.rnstartkit;
 
 import android.app.Application;
 
+import com.aakashns.reactnativedialogs.RNSHPackage;
 import com.aakashns.reactnativedialogs.ReactNativeDialogsPackage;
 import com.avos.avoscloud.AVOSCloud;
 import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
@@ -41,7 +42,8 @@ public class MainApplication extends Application implements ReactApplication {
                     new VectorIconsPackage(),
                     new ImagePickerPackage(),
                     new ReactNativeDialogsPackage(),
-                    new RNDeviceInfo()
+                    new RNDeviceInfo(),
+                    new RNSHPackage()
             );
         }
     };

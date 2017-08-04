@@ -9,7 +9,7 @@ import topView from 'rn-topview';
 import PopContainer from './PopContainer';
 import configureStore from '../../redux/configureStore'
 let popupInstance;
-
+let mContent;
 export default {
     show(content,  {
         animationType= 'fade',
@@ -18,6 +18,8 @@ export default {
         maskStyle,
         onMaskClose=()=> {},
     }={}) {
+        if(!content && mContent == content)return
+        mContent = content
         topView.set(
             <PopContainer
                 maskStyle={maskStyle}
@@ -37,6 +39,7 @@ export default {
     hide() {
         if (popupInstance) {
             popupInstance.hide();
+            mContent = null;
         }
     },
 };

@@ -71,7 +71,7 @@ Animatable.initializeRegistryWithDefinitions({cloudMoveLeft})
         done: async(data) => {
             const id = data.objectId
             let time, cycle
-            if (data.time == 21) {
+            if (data.time == 6) {
                 time = -1
                 cycle = data.cycle + 1
             } else {
@@ -111,9 +111,10 @@ Animatable.initializeRegistryWithDefinitions({cloudMoveLeft})
                 }
             }))
         },
-        delete: async(rowId, objectId)=> {
+        delete: async(rowId, objectId,callBack)=> {
             await remove(objectId, ICARD)
             dispatch(clear(ICARD, rowId))
+            callBack && callBack()
         }
 
     })
@@ -150,8 +151,9 @@ export  default  class Home extends Component {
                     const itemView = this.rows[index]
                     ///因为view 是根据key 复用的，所以最后需要还原，否则会出错
                     const endState = await itemView.fadeOutDownBig(500)
-                    endState.finished && this.props.delete(index, objectId)
-                    await itemView.fadeInRight(500)
+                    endState.finished && this.props.delete(index, objectId,()=>itemView.fadeInRight(500))
+
+
                     //
                 }
             }]
@@ -212,6 +214,7 @@ export  default  class Home extends Component {
         // console.log('test:',typeof View());
         return (
             <List
+                onScroll={this.props.onScroll}
                 ref="list"
                 animation="slideInRight"
                 style={styles.container}

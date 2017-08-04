@@ -85,8 +85,8 @@ export default class Record extends Component {
 
     renderRow({item, index}: Object) {
         // md-refresh
-        console.log('test:', item);
-        const days = 22 * (item.cycle + 1) + (item.time + 1)
+        // console.log('test:', item);
+        const days = 7 * (item.cycle ) + (item.time )
         const reflesh = item.time == -1
         return (
             <TouchableOpacity
