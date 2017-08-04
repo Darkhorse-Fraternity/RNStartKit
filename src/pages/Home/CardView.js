@@ -152,9 +152,6 @@ export  default  class Home extends Component {
                     ///因为view 是根据key 复用的，所以最后需要还原，否则会出错
                     const endState = await itemView.fadeOutDownBig(500)
                     endState.finished && this.props.delete(index, objectId,()=>itemView.fadeInRight(500))
-
-
-                    //
                 }
             }]
         )
@@ -175,8 +172,8 @@ export  default  class Home extends Component {
             FlagView = (<Text style={styles.done}>{'恭喜,已完成'}</Text>)
         } else if (data.doneDate) {
             const doneDate = data.doneDate.iso
-            const lastMoment = moment(doneDate).add(24, 'hours')
-            if (moment.min(lastMoment, moment()) === lastMoment) {
+            const lastMoment = moment(doneDate)
+            if (moment.min(lastMoment, moment(2,"HH")) === lastMoment) {
                 FlagView = (
                     <BounceBtn onPress={()=>this.props.done(data)} title="轻触打卡"/>)
             }
