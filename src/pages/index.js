@@ -2,7 +2,7 @@ import Setting from  './Setting'
 import Home from './Home'
 import LoginView from './Setting/LoginView'
 import RegPhone from './Setting/RegPhone'
-import Creat from './Home/Creat'
+import Creat from './NewCard/Creat'
 import Record from './Home/Record'
 export  const route = {
     // RegPhone:{screen:RegPhone},

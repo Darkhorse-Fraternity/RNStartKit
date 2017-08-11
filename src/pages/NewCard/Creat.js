@@ -24,6 +24,7 @@ import {mainColor} from '../../configure'
 import {selfUser} from '../../request/LCModle'
 import moment from 'moment'
 import Icon from 'react-native-vector-icons/Ionicons'
+import OptionView from './OptionView'
 //static displayName = Creat
 @connect(
     state =>({
@@ -31,13 +32,14 @@ import Icon from 'react-native-vector-icons/Ionicons'
     }),
     (dispatch, props) =>({
         //...bindActionCreators({},dispatch),
-        add: (title)=> dispatch(async(dispatch, getState)=> {
+        add: (title,option)=> dispatch(async(dispatch, getState)=> {
             const state = getState()
             const user = state.login.data;
             const param = {
                 title,
                 cycle: 0,
                 time: 0,
+                notifyTime:option&&option.notifyTime||"20.00",
                 doneDate: {"__type": "Date", "iso": moment('2017-03-20')},
                 ...selfUser(),
             }
@@ -58,6 +60,7 @@ export  default  class Creat extends Component {
         this.state = {
             title: '',
             step: 0,
+            optionOpen: false,
         }
     }
 
@@ -78,14 +81,13 @@ export  default  class Creat extends Component {
     }
 
 
-
     __nextStep = () => {
 
 
         const step = this.state.step + 1
         this.setState({step})
         if (step == 2) {
-            this.props.add(this.state.title)
+            this.props.add(this.state.title,this.option)
         }
 
     }
@@ -99,8 +101,8 @@ export  default  class Creat extends Component {
         }
     }
 
-    __doOption = ()=>{
-
+    __doOption = ()=> {
+        this.setState({optionOpen: true})
     }
 
 
@@ -133,7 +135,8 @@ export  default  class Creat extends Component {
                     <TouchableOpacity
                         disabled={this.state.title.length === 0 }
                         onPress={this.__nextStep}
-                        style={[styles.sureBtn,{backgroundColor:this.state.title.length === 0?"rgb(220,200,200)":"#ff768e"}]}>
+                        style={[styles.sureBtn,{backgroundColor:
+                        this.state.title.length === 0?"rgb(220,200,200)":"#ff768e"}]}>
                         <Icon name="ios-arrow-forward-outline" size={20} color="white"/>
                     </TouchableOpacity>
                 </View>
@@ -171,11 +174,16 @@ export  default  class Creat extends Component {
     }
 
 
+
     render(): ReactElement<any> {
         return (
             <View style={[this.props.style,styles.wrap]}>
-                {this.state.step == 0 && this.__renderName()}
-                {this.state.step == 1 && this.__doneView()}
+                {this.state.step == 0 && !this.state.optionOpen && this.__renderName()}
+                {this.state.step == 1 && !this.state.optionOpen && this.__doneView()}
+                {this.state.optionOpen && (<OptionView goBack={(option)=>{
+                    this.setState({optionOpen:false})
+                    this.option = option
+                }}/>)}
             </View>
         );
     }
@@ -192,9 +200,9 @@ const styles = StyleSheet.create({
         marginHorizontal: 30,
         padding: 20,
     },
-    downRow:{
+    downRow: {
         marginHorizontal: 30,
-        height:90,
+        height: 90,
         padding: 20,
         alignItems: 'center',
         justifyContent: 'center',
@@ -232,8 +240,8 @@ const styles = StyleSheet.create({
         paddingHorizontal: 50,
         paddingTop: 20,
     },
-    doneBtn:{
-        width:50,
+    doneBtn: {
+        width: 50,
         height: 50,
         marginTop: 20,
         borderRadius: 25,
@@ -241,13 +249,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    doneCtrlView:{
+    doneCtrlView: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        paddingHorizontal:50,
-        paddingTop:10,
+        paddingHorizontal: 50,
+        paddingTop: 10,
     },
-    doneTitle:{
-        fontSize:20,
+    doneTitle: {
+        fontSize: 20,
     }
 })

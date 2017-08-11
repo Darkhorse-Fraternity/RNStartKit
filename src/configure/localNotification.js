@@ -2,8 +2,10 @@ import  PushNotification from 'react-native-push-notification'
 import {
     Platform
 } from 'react-native'
-
 import moment from 'moment'
+import React, {Component, PropTypes} from 'react';
+import {connect} from 'react-redux'
+import {ICARD} from '../redux/reqKeys'
 export  function nowNotification() {
 
 
@@ -39,8 +41,9 @@ export  function nowNotification() {
         actions: '["Yes", "No"]',  // (Android only) See the doc for notification actions to know more
     });
 }
-export async function  dayNotification() {
+export async function  dayNotification(data) {
 
+    // console.log('test:', data);
     PushNotification.cancelAllLocalNotifications()
 
     // let res = 0
@@ -55,18 +58,42 @@ export async function  dayNotification() {
     // console.log('moment:',  moment().toDate());
     // console.log('Date:',  new Date());
 
-    PushNotification.localNotificationSchedule({
-        message: "今天的挑战完成了吗？", // (required)
-        date: moment(20, "HH").toDate(), // in 60 secs
-        // date: new Date(Date.now() + (1*1000)), // in 60 secs
-        number:  1,
-        repeatType: 'day',
-        userInfo: {'type': 'local'},
-    });
+    // const data1 = [{title:'测试',notifyTime:'9:00',doneDate:'2017-08-06 21:33:11'}]
+
+
+    data.forEach(item=>{
+
+        let notifyTime = item.notifyTime.split(":")[0]
+        notifyTime = parseInt(notifyTime)
+
+
+        //如果上次打卡的时间超过夜里两点则需提醒，否则要到明天才提醒。
+        const doneDate = item.doneDate.iso
+        const lastMoment = moment(doneDate)
+        const flag = moment.min(lastMoment, moment(2,"HH")) === lastMoment //没超过
+
+
+        // console.log('test:', moment(notifyTime, "HH").toDate());
+        // console.log('test:', moment(notifyTime, "HH").add(1, 'days').toDate());
+        const date = !flag?moment(notifyTime, "HH").toDate()
+            :moment(notifyTime, "HH").add(1, 'days').toDate()
+
+        PushNotification.localNotificationSchedule({
+            message: item.title +"完成了吗?", // (required)
+            date: date, // in 60 secs
+            // date: new Date(Date.now() + (1*1000)), // in 60 secs
+            number:  1,
+            repeatType: 'day',
+            userInfo: {'type': 'local'},
+        });
+    })
+
+
+
 
     PushNotification.localNotificationSchedule({
         message: "设置一些本周挑战吧~！", // (required)
-        date: moment(20, "HH").day(7).toDate(), // in 60 secs
+        date: moment(21, "HH").day(7).toDate(), // in 60 secs
         // date: new Date(Date.now() + (1*1000)), // in 60 secs
         number: 1,
         repeatType: 'week',
@@ -75,3 +102,43 @@ export async function  dayNotification() {
 
 
 }
+
+@connect(
+    state =>({
+        data: state.list.get(ICARD),
+        normalizrData: state.normalizr.get(ICARD)
+    }),
+    dispatch =>({})
+)
+
+export  default  class PushManage extends Component {
+    constructor(props: Object) {
+        super(props);
+    }
+    static propTypes = {};
+    static defaultProps = {};
+
+    componentWillReceiveProps(props) {
+
+        let  data = props.data.toJS()
+
+
+        if(data.loadStatu != "LIST_LOAD_DATA"){
+            const ndata = props.normalizrData.toJS()
+            data = data.listData
+            const array = data.map(key =>{
+                return ndata[key]
+            })
+
+            // console.log('test:', array);
+            dayNotification(array)
+
+
+        }
+    }
+    
+    render(): ReactElement<any> {
+        return null
+    }
+}
+

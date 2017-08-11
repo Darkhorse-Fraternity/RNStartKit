@@ -27,6 +27,9 @@ export const Btn = Animatable.createAnimatableComponent(TouchableOpacity);
 import BG from '../../components/BG/BG'
 import CardView from './CardView'
 import LoginView from '../Setting/LoginView'
+
+import PushManage from '../../configure/localNotification'
+
 function makeScaleInTranslation(translationType, value) {
     return {
         from: {
@@ -102,6 +105,7 @@ export  default  class Home extends Component {
         const {localLoad, isLogin} = this.props
         return (
             <View style={[this.props.style,styles.container]}>
+                <PushManage/>
                 <BG style={styles.bc}/>
                 {localLoad && (<View style={styles.main}>
                     {!isLogin && (

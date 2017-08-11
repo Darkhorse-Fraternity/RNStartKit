@@ -223,6 +223,8 @@ export  default  class Home extends Component {
         const data = this.props.data.toJS().listData
         // const navigation = this.props.navigation
         // console.log('test:',typeof View());
+
+
         return (
             <List
                 onScroll={this.props.onScroll}

@@ -26,7 +26,6 @@ export const PRE_CONFIG_STATU = 'PRE_CONFIG_STATU'
 import { NavigationActions } from 'react-navigation';
 
 import {pop} from './nav'
-import {dayNotification} from '../configure/localNotification'
 
 
 //前置配置 在一进程序的时候就会
@@ -62,7 +61,7 @@ function _preConfig() {
 
 
 
-    dayNotification()
+    // dayNotification()
 
 
 }
