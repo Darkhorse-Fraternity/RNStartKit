@@ -24,7 +24,7 @@ import {mainColor} from '../../configure'
 import {selfUser} from '../../request/LCModle'
 import moment from 'moment'
 import Icon from 'react-native-vector-icons/Ionicons'
-import OptionView from './OptionView'
+import OptionView,{StaticOption} from './OptionView'
 //static displayName = Creat
 @connect(
     state =>({
@@ -32,7 +32,12 @@ import OptionView from './OptionView'
     }),
     (dispatch, props) =>({
         //...bindActionCreators({},dispatch),
-        add: (title,option)=> dispatch(async(dispatch, getState)=> {
+        add: (title,option = StaticOption)=> dispatch(async(dispatch, getState)=> {
+
+            console.log('test:', option);
+            // console.log('test:', option);
+            // console.log('test:', StaticOption)
+
             const state = getState()
             const user = state.login.data;
             const param = {

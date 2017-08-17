@@ -21,6 +21,12 @@ export const Btn = Animatable.createAnimatableComponent(TouchableOpacity);
 import {bindActionCreators} from 'redux';
 import Icon from 'react-native-vector-icons/Ionicons'
 //static displayName = OptionView
+
+export  const StaticOption = {
+    notifyTime: '20:00',
+    period:'7',
+}
+
 @connect(
     state =>({
         //data:state.req.get()
@@ -29,13 +35,15 @@ import Icon from 'react-native-vector-icons/Ionicons'
         //...bindActionCreators({},dispatch),
     })
 )
+
+
+
 export  default  class OptionView extends Component {
     constructor(props: Object) {
         super(props);
         this.state = {
             option: 0,
-            notifyTime: '20:00',
-            period:7,
+            ...StaticOption,
             type:'notifyTime'
         }
     }

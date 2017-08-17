@@ -20,7 +20,7 @@ import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux';
 import {logout} from '../../redux/actions/login'
 import {ICARD, IDONE} from '../../redux/reqKeys'
-import {add, search, update, remove} from '../../redux/module/leancloud'
+import {add, search, update} from '../../redux/module/leancloud'
 import {selfUser, iCard} from '../../request/LCModle'
 import {addNormalizrEntity} from '../../redux/actions/list'
 import {addEntities} from '../../redux/module/normalizr'
@@ -88,11 +88,7 @@ Animatable.initializeRegistryWithDefinitions({cloudMoveLeft})
                 }
             }))
         },
-        delete: async(rowId, objectId,callBack)=> {
-            await remove(objectId, ICARD)
-            dispatch(clear(ICARD, rowId))
-            callBack && callBack()
-        },
+
         setting:(entity,setting)=>{
             entity.setting = setting
             dispatch(addEntities({
@@ -160,28 +156,36 @@ export  default  class Home extends Component {
     }
 
 
-    __delete = (index, objectId)=> {
-        Alert.alert(
-            '确定删除?',
-            '删除后不可恢复~！',
-            [{text: '取消'}, {
-                text: '确定', onPress: async() => {
-                    const itemView = this.rows[index]
+
+    __settingView = ({item, index})=>{
+        const self = this
+        return (<View>
+            <BounceBtn
+                color="#rgb(136,175,160)"
+                radius={60}
+                moveColor="#rgba(136,175,160,0.4)"
+                onPress={()=>{}}
+                title="修改模式"/>
+            <View style={{height:20}}/>
+            <BounceBtn
+                radius={60}
+                color="#rgb(156,175,170)"
+                moveColor="#rgba(156,175,170,0.4)"
+                onPress={async ()=>{
+                            const last = self.props.data.get('listData').size-1 == index
+                            const itemView = this.rows[index]
                     ///因为view 是根据key 复用的，所以最后需要还原，否则会出错
-                    const endState = await itemView.fadeOutDownBig(500)
-                    endState.finished && this.props.delete(index, objectId,()=>{
-                        itemView && itemView.fadeInRight(500)
-                    })
-                }
-            }]
-        )
+                            const endState = await itemView.fadeOutDownBig(500)
+                            endState.finished && this.props.stop(data,index,()=>{
+                                !last && itemView.fadeInRight(500)
+                            })
+
+                        }}
+                title="暂停打卡"/>
+        </View>)
     }
-    rows = []
-    __renderItem = ({item, index})=> {
-        const data = this.props.normalizrData.get(item).toJS()
 
-        //计算上次完成时间和当前完成时间， 只有大于24个小时，才能再次打卡。
-
+    __flagView = ({item, index},data)=>{
         let FlagView = (
             <Animatable.Text
                 animation="zoomInUp"
@@ -198,39 +202,22 @@ export  default  class Home extends Component {
                     <BounceBtn onPress={()=>this.props.done(data)} title="轻触打卡"/>)
             }
         }
+        return FlagView
+    }
 
 
+    rows = []
+    __renderItem = ({item, index})=> {
+        const data = this.props.normalizrData.get(item).toJS()
 
-        const self = this
+        //计算上次完成时间和当前完成时间， 只有大于24个小时，才能再次打卡。
+
         //flag 为true 的时候说明离上次打卡已经有24小时了
         const inView = ()=>{
             if(!data.setting){
-                return  FlagView
+                return  this.__flagView({item, index},data)
             }else {
-                return (<View>
-                    <BounceBtn
-                        color="#rgb(136,175,160)"
-                        radius={60}
-                        moveColor="#rgba(136,175,160,0.4)"
-                        onPress={()=>{}}
-                        title="修改模式"/>
-                    <View style={{height:20}}/>
-                    <BounceBtn
-                        radius={60}
-                        color="#rgb(156,175,170)"
-                        moveColor="#rgba(156,175,170,0.4)"
-                        onPress={async ()=>{
-                            const last = self.props.data.get('listData').size-1 == index
-                            const itemView = this.rows[index]
-                    ///因为view 是根据key 复用的，所以最后需要还原，否则会出错
-                            const endState = await itemView.fadeOutDownBig(500)
-                            endState.finished && this.props.stop(data,index,()=>{
-                                !last && itemView.fadeInRight(500)
-                            })
-
-                        }}
-                        title="暂停打卡"/>
-                    </View>)
+                return this.__settingView({item, index})
             }
 
         }

@@ -54,16 +54,13 @@ export  default  class ReqListView extends Component {
     }
 
     componentWillReceiveProps(nextProps: Object) {
-        // if(nextProps.reqParam != this.props.reqParam){
-        //     // console.log('test:', nextProps.reqParam);
-        //
-        // }
 
-        if(!immutable.is(nextProps.reqParam,this.props.reqParam)){
+        //只进行值比较
+        if (JSON.stringify(nextProps.reqParam) != JSON.stringify(this.props.reqParam)) {
             this.loadData(nextProps.reqParam)
         }
-    }
 
+    }
 
 
     __renderItem({item,index}: {item: Item, index: number}):ReactElement<any>{
