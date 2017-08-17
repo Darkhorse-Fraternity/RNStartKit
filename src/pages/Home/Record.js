@@ -31,9 +31,13 @@ import {update} from '../../redux/module/leancloud'
         refresh: async(data) => {
             const id = data.objectId
 
+
+           const isDone = data.time == data.period
+
             const param = {
-                time: 0,
-                cycle:data.cycle + 1,
+                time:   isDone?0:data.time,
+                statu: 'start',
+                cycle:isDone?data.cycle + 1:data.cycle,
             }
 
             const res = await update(id, param, ICARD)
@@ -74,8 +78,9 @@ export default class Record extends Component {
     }
 
     __refresh = (data)=>{
+        const isDone = data.time == data.period
         Alert.alert(
-            '再来一组?',
+            isDone?'再来一组?':'重新开启',
             '',
             [{text: '取消'}, {text: '确定', onPress: () => this.props.refresh(data)}]
         )
@@ -86,8 +91,8 @@ export default class Record extends Component {
     renderRow({item, index}: Object) {
         // md-refresh
         // console.log('test:', item);
-        const days = 7 * (item.cycle ) + (item.time )
-        const reflesh = item.time == -1
+        const days = item.period * (item.cycle ) + (item.time )
+        const reflesh = item.time == item.period || item.statu == 'stop'
         return (
             <TouchableOpacity
                 style={styles.card}

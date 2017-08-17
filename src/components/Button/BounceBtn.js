@@ -10,13 +10,13 @@ import {
     View,
     StyleSheet,
     Text,
-    TouchableOpacity,
+    TouchableWithoutFeedback,
     TouchableHighlight
 } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 
 import * as Animatable from 'react-native-animatable';
-export const Btn = Animatable.createAnimatableComponent(TouchableOpacity);
+export const Btn = Animatable.createAnimatableComponent(TouchableWithoutFeedback);
 // function makeSlideInTranslation(translationType, fromValue) {
 //     return {
 //         from: {
@@ -51,9 +51,16 @@ export default class BounceBtn extends Component {
 
 
     static propTypes = {
-        title: PropTypes.string
+        title: PropTypes.string,
+        color: PropTypes.string,
+        moveColor: PropTypes.string,
+        radius: PropTypes.number,
     };
-    static defaultProps = {};
+    static defaultProps = {
+        color: '#0094cb',
+        moveColor: '#cce9f4',
+        radius: 70
+    };
     static
     navigationOptions = props => {
         // const {navigation} = props;
@@ -65,7 +72,8 @@ export default class BounceBtn extends Component {
     };
 
     render() {
-        const {title} = this.props
+        const {title, radius} = this.props
+        // console.log('radius:', radius);
         return (
             <Btn
                 {...this.props}
@@ -73,21 +81,34 @@ export default class BounceBtn extends Component {
                 duration={2000}
                 easing="ease-in-out"
                 animation="bounceIn"
-                style={[this.props.style,styles.wrap]}>
-                <Animatable.View
-                    useNativeDriver
-                    iterationCount="infinite"
-                    direction="alternate"
-                    duration={2000}
-                    easing="ease-in-out"
-                    animation="scaleSpring"
-                    style={styles.background1}>
+                >
+                <View style={[this.props.style,styles.wrap]}>
+                    <Animatable.View
+                        useNativeDriver
+                        iterationCount="infinite"
+                        direction="alternate"
+                        duration={2000}
+                        easing="ease-in-out"
+                        animation="scaleSpring"
+                        style={[styles.background1,
+                    {backgroundColor:this.props.moveColor,
+                    height:radius+20,
+                     width: radius+20,
+                     borderRadius:radius+20,
+                    }]}>
 
-                </Animatable.View>
-                <View
-                    style={styles.background2}>
-                    <Text style={styles.title}>{title}</Text>
-                    {/*<Icon name="md-checkmark" size={50} color='white'/>*/}
+                    </Animatable.View>
+                    <View
+                        style={[styles.background2,
+                    {backgroundColor:this.props.color,
+                     height:radius,
+                     width: radius,
+                     borderRadius:radius,
+                     marginTop:-radius - 10
+                    }]}>
+                        <Text style={styles.title}>{title}</Text>
+                        {/*<Icon name="md-checkmark" size={50} color='white'/>*/}
+                    </View>
                 </View>
             </Btn>
         );
@@ -97,30 +118,30 @@ const styles = StyleSheet.create({
     wrap: {
         alignItems: 'center',
         // backgroundColor:'red',
-        padding:10,
+        padding: 10,
     },
-    background1:{
+    background1: {
         height: 90,
         width: 90,
-        backgroundColor:'#cce9f4',
+        backgroundColor: '#cce9f4',
         alignItems: 'center',
-        justifyContent:'center',
-        borderRadius:45,
+        justifyContent: 'center',
+        borderRadius: 45,
     },
-    background2:{
+    background2: {
         height: 70,
         width: 70,
-        borderRadius:70,
-        backgroundColor:'#0094cb',
+        borderRadius: 70,
+        backgroundColor: '#0094cb',
         alignItems: 'center',
-        justifyContent:'center',
-        marginTop:-80,
+        justifyContent: 'center',
+        marginTop: -80,
     },
-    title:{
-        width:40,
-        color:'white',
-        textAlign:'center',
-        lineHeight:18,
-        fontSize:16,
+    title: {
+        width: 40,
+        color: 'white',
+        textAlign: 'center',
+        lineHeight: 18,
+        fontSize: 16,
     }
 })

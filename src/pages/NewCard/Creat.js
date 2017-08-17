@@ -39,7 +39,8 @@ import OptionView from './OptionView'
                 title,
                 cycle: 0,
                 time: 0,
-                notifyTime:option&&option.notifyTime||"20.00",
+                // notifyTime:option&&option.notifyTime||"20.00",
+                ...option,
                 doneDate: {"__type": "Date", "iso": moment('2017-03-20')},
                 ...selfUser(),
             }

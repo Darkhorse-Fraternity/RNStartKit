@@ -63,6 +63,7 @@ export async function  dayNotification(data) {
 
     data.forEach(item=>{
 
+        if(item.statu == 'stop'){return}
         let notifyTime = item.notifyTime.split(":")[0]
         notifyTime = parseInt(notifyTime)
 

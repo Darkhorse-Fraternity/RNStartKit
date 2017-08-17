@@ -61,7 +61,7 @@ Animatable.initializeRegistryWithDefinitions({cloudMoveLeft})
             dispatch(search(false, {
                 where: {
                     ...selfUser(),
-                    time: {"$ne": -1},
+                    statu:'start'
                 },
                 order: 'doneDate'
 
@@ -70,36 +70,13 @@ Animatable.initializeRegistryWithDefinitions({cloudMoveLeft})
         },
         done: async(data) => {
             const id = data.objectId
-            let time, cycle
-            if (data.time == 6) {
-                time = -1
-                cycle = data.cycle + 1
-            } else {
-                time = data.time + 1
-                cycle = data.cycle
-            }
-            // const param = {
-            //     ...iCard(id),
-            //     ...selfUser()
-            // }
-            //
-            // const res = await add(param, IDONE)
-            // console.log('test:', res);
-            // const entity = {
-            //     ...param,
-            //     ...res
-            // }
-            // dispatch(addEntities({[IDONE]:{
-            //     [entity.objectId]:entity
-            // }}))
-
-
+            const time = data.time + 1
             const param = {
                 doneDate: {"__type": "Date", "iso": moment()},
                 time: time,
-                cycle,
+                //cycle,
+                statu:time == data.period?"stop":"start"
             }
-
             const res = await update(id, param, ICARD)
             const entity = {
                 ...param,
@@ -115,7 +92,34 @@ Animatable.initializeRegistryWithDefinitions({cloudMoveLeft})
             await remove(objectId, ICARD)
             dispatch(clear(ICARD, rowId))
             callBack && callBack()
-        }
+        },
+        setting:(entity,setting)=>{
+            entity.setting = setting
+            dispatch(addEntities({
+                [ICARD]: {
+                    [entity.objectId]: entity
+                }
+            }))
+        },
+        stop:async(data,index,callBack)=> {
+            const id = data.objectId
+            const param = {
+                statu: 'stop',
+                //cycle,
+            }
+            const res = await update(id, param, ICARD)
+            const entity = {
+                ...param,
+                ...res
+            }
+            dispatch(addEntities({
+                [ICARD]: {
+                    [entity.objectId]: entity
+                }
+            }))
+            dispatch(clear(ICARD, index))
+            callBack && callBack()
+        },
 
     })
 )
@@ -165,7 +169,9 @@ export  default  class Home extends Component {
                     const itemView = this.rows[index]
                     ///因为view 是根据key 复用的，所以最后需要还原，否则会出错
                     const endState = await itemView.fadeOutDownBig(500)
-                    endState.finished && this.props.delete(index, objectId,()=>itemView.fadeInRight(500))
+                    endState.finished && this.props.delete(index, objectId,()=>{
+                        itemView && itemView.fadeInRight(500)
+                    })
                 }
             }]
         )
@@ -182,7 +188,7 @@ export  default  class Home extends Component {
                 style={styles.num}>
                 {data.time}
             </Animatable.Text>)
-        if (data.time == -1) {
+        if (data.time == data.period) {
             FlagView = (<Text style={styles.done}>{'恭喜,已完成'}</Text>)
         } else if (data.doneDate) {
             const doneDate = data.doneDate.iso
@@ -194,7 +200,40 @@ export  default  class Home extends Component {
         }
 
 
+
+        const self = this
         //flag 为true 的时候说明离上次打卡已经有24小时了
+        const inView = ()=>{
+            if(!data.setting){
+                return  FlagView
+            }else {
+                return (<View>
+                    <BounceBtn
+                        color="#rgb(136,175,160)"
+                        radius={60}
+                        moveColor="#rgba(136,175,160,0.4)"
+                        onPress={()=>{}}
+                        title="修改模式"/>
+                    <View style={{height:20}}/>
+                    <BounceBtn
+                        radius={60}
+                        color="#rgb(156,175,170)"
+                        moveColor="#rgba(156,175,170,0.4)"
+                        onPress={async ()=>{
+                            const last = self.props.data.get('listData').size-1 == index
+                            const itemView = this.rows[index]
+                    ///因为view 是根据key 复用的，所以最后需要还原，否则会出错
+                            const endState = await itemView.fadeOutDownBig(500)
+                            endState.finished && this.props.stop(data,index,()=>{
+                                !last && itemView.fadeInRight(500)
+                            })
+
+                        }}
+                        title="暂停打卡"/>
+                    </View>)
+            }
+
+        }
         return (
             <Animatable.View
                 ref={(row) => this.rows[index] = row}
@@ -203,15 +242,16 @@ export  default  class Home extends Component {
                     <View style={styles.toper}>
                         <TouchableOpacity
                             onPress={()=>{
-                                this.__delete(index,data.objectId)
+                                {/*this.__delete(index,data.objectId)*/}
+                                this.props.setting(data,!data.setting)
                             }}
                             style={{marginTop:20}}>
-                            <Icon name="md-close" size={20}/>
+                            <Icon name={!data.setting?"ios-settings-outline":'md-close'} size={20}/>
                         </TouchableOpacity>
                         <Text style={styles.title}>{data.title}</Text>
                         <View/>
                     </View>
-                    {FlagView}
+                    {inView()}
                     <View style={{height:40}}/>
                 </View>
             </Animatable.View>
@@ -272,15 +312,15 @@ const styles = StyleSheet.create({
     card: {
         flex: 1,
         alignItems: 'center',
-        backgroundColor: "#fff",
+        backgroundColor: "rgba(255,255,255,0.6)",
         borderRadius: 12,
-        shadowColor: "#000000",
-        shadowOpacity: 0.3,
-        shadowRadius: 1,
-        shadowOffset: {
-            height: 1,
-            width: 0.3,
-        },
+        // shadowColor: "#000000",
+        // shadowOpacity: 0.3,
+        // shadowRadius: 1,
+        // shadowOffset: {
+        //     height: 1,
+        //     width: 0.3,
+        // },
         justifyContent: 'space-between',
         // elevation:10,
     },

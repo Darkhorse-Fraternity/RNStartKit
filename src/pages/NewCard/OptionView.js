@@ -34,7 +34,9 @@ export  default  class OptionView extends Component {
         super(props);
         this.state = {
             option: 0,
-            notifyTime: '20:00'
+            notifyTime: '20:00',
+            period:7,
+            type:'notifyTime'
         }
     }
 
@@ -58,7 +60,7 @@ export  default  class OptionView extends Component {
         if (this.state.option != 0) {
             this.setState({option: 0})
         } else {
-            const {option,...other} = this.state
+            const {option,type,...other} = this.state
             this.props.goBack && this.props.goBack(other)
         }
     }
@@ -79,7 +81,7 @@ export  default  class OptionView extends Component {
             >
                 <TouchableOpacity
                     onPress={()=>{
-                        this.setState({option:props.index})
+                        this.setState({option:props.index,type:props.type})
                     }}
                     style={[styles.item,{width:props.width}]}>
                     <Text>
@@ -87,6 +89,26 @@ export  default  class OptionView extends Component {
                     </Text>
                 </TouchableOpacity>
             </Animatable.View>
+        )
+    }
+
+    __renderperiod = ()=> {
+        const items = ['5', '6', '7', '8', '9', '10', '11', '12', '13', '14']
+        return (
+            <View style={styles.notifyTimeView}>
+                {items.map((item)=> {
+                    return (
+                        <TouchableOpacity
+                            onPress={()=>{
+                                this.setState({period:item})
+                            }}
+                            style={[styles.notifyTimeItem,
+                            {backgroundColor:this.state.period == item?'#00abfb':'white'}]}
+                            key={item}>
+                            <Text style={{color:this.state.period == item?'white':'black'}}>{item}</Text>
+                        </TouchableOpacity>)
+                })}
+            </View>
         )
     }
 
@@ -111,6 +133,7 @@ export  default  class OptionView extends Component {
         )
     }
 
+
     render(): ReactElement<any> {
         return (
             <View style={[this.props.style,styles.wrap]}>
@@ -119,9 +142,20 @@ export  default  class OptionView extends Component {
                     <this.__renderItem
                         title={"提醒时间:   "+this.state.notifyTime}
                         width={160}
+                        type="notifyTime"
+                        index={1}/>
+                    <this.__renderItem
+                        title={"周期:   "+this.state.period +'天'}
+                        width={120}
+                        type="period"
                         index={1}/>
                 </ScrollView>)}
-                {this.state.option == 1 && this.__renderNotifyTime()}
+                {this.state.option == 1 &&
+                    this.state.type == 'notifyTime'&&
+                this.__renderNotifyTime()}
+                {this.state.option == 1 &&
+                this.state.type == 'period'&&
+                this.__renderperiod()}
                 {this.__remderBack()}
             </View>
         );
