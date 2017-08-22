@@ -17,7 +17,7 @@ import {
     FlatList
 } from 'react-native'
 import {mainColor, backViewColor} from '../../configure';
-import ExceptionView, {ExceptionType} from '../ExceptionView';
+import ExceptionView, {ExceptionType} from './ExceptionView';
 import {is} from 'immutable';
 const delay = () => new Promise((resolve) => InteractionManager.runAfterInteractions(resolve));
 

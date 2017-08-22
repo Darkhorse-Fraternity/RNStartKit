@@ -6,9 +6,6 @@
 'use strict'
 
 import {loadUserData,loadAccount} from '../util/XGlobal'
-// import jsCheckUpdate from '../../util/checkUpdate'
-// import {lockToPortrait} from 'react-native-orientation'
-// import umeng from '../util/umeng'
 import React, {
     Platform,
     UIManager,

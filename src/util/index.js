@@ -6,15 +6,11 @@
  */
 'use strict';
 import React,{
-  PixelRatio,
   AsyncStorage,
 } from "react-native";
 import URLManage from './URLManage'
-import Dimensions from "Dimensions";
-import Platform  from 'Platform'
 import Storage from 'react-native-storage';
 
-// import viewUtil from './viewUtil'
 
 function throwIfMissing(paramName:string=''):string {
   throw new Error('Missing parameter'+paramName);
@@ -54,11 +50,6 @@ function checkPhoneNum(num:string):bool{
 
 
 module.exports = {
-  /*最小线宽*/
-  /*屏幕尺寸*/
-  screenWidth : Dimensions.get('window').width,
-  screenHeight: Dimensions.get('window').height,
-  navbarHeight: Platform.OS == 'ios' ? 0: 0,
   URLManage, //将URLManage 适配安卓苹果。
   throwIfMissing,
   checkPhoneNum,

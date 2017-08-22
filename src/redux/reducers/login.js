@@ -15,7 +15,6 @@ import {
     LOAD_ACCOUNT,
     UPDATE_USERDATA
 } from '../actions/login'
-//import {checkPhoneNum} from '../../util';
 import {CHANGEAVATAR} from '../actions/util'
 import {saveUserData} from '../../util/XGlobal'
 const initialLoginState = {

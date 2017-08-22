@@ -10,10 +10,7 @@ import {
     TouchableOpacity
 } from 'react-native';
 import PropTypes from 'prop-types';
-// import Spinner from 'react-native-gifted-spinner';
-import {screenHeight} from '../util';
 
-import {backViewColor} from '../configure';
 import * as Animatable from 'react-native-animatable';
 import Icon from 'react-native-vector-icons/Ionicons'
 const AniView = Animatable.createAnimatableComponent(Icon);

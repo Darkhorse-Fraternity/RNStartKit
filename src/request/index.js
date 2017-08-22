@@ -5,9 +5,6 @@
 import {throwIfMissing} from '../util';
 import Toast from 'react-native-simple-toast';
 import {defaultHost, httpHeaders, tag} from '../configure';
-// import {LimitableMap} from './LimitableMap'
-// import {userManager} from '../util/XGlobal';
-import RCTDeviceEventEmitter  from 'RCTDeviceEventEmitter';
 import {addParams} from './useMeth';
 
 var LimitableMap = require('./limitableMap');

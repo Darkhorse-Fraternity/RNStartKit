@@ -15,7 +15,7 @@ import ReactNative, {
 
 import {navbarHeight, screenHeight} from '../../util';
 
-import ExceptionView, {ExceptionType} from '../ExceptionView';
+import ExceptionView, {ExceptionType} from './ExceptionView';
 import {connect} from 'react-redux';
 
 
