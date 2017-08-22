@@ -19,11 +19,23 @@ export const SUCCODE = '1'
 export const MSG = 'msg'
 export const DATA = 'results'
 
+
+export function reqY(params) {
+    return send(params).then((response)=> {
+        const contentType = response.headers.get("content-type")
+        const responseData  = contentType.indexOf("application/json") !== -1 ? response.json() : {}
+        if (response.ok) {
+            return responseData;
+        }
+    })
+}
+
 export function reqS(params) {
     // const state = store.getState()
     // const isConnected = state.util.get('isConnected')
     // if(!isConnected) return
-    return send(params).then(response => {
+    return reqY(params).then(response => {
+
         // if (response[RESCODE] === "2" || response[RESCODE] === "3") {
         //     console.log('response[RESCODE]:', response[RESCODE]);
         //     store.dispatch(logout())
@@ -65,7 +77,6 @@ export function req(params: Object, key: string, option: Object = {}) {
     if (!key) {
         return reqM(params)
     }
-
     const dispatch = store.dispatch
     dispatch(requestStart(key))
     return reqM(params).then(response => {
@@ -73,12 +84,10 @@ export function req(params: Object, key: string, option: Object = {}) {
             dispatch(requestSucceed(key, data))
               return response
     }).catch(e => {
-        console.log('message:', e.message);
-        Toast.show(e.message)
+        console.warn('message:', e.message);
+        Toast.show(e.message,Toast.LONG)
         dispatch(requestFailed(key, e.message))
     })
-
-
 }
 
 export function load(params: Object, key: stringg) {

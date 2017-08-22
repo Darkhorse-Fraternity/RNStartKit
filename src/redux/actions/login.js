@@ -99,21 +99,11 @@ export function login(state:Object):Function {
  */
 export function register(state:Object):Function {
 
-    let params = requestUsersByMobilePhone(state.phone, state.ymCode,
-        state.setPwd);
-
-
-
     return dispatch => {
-
-        // if(state.phone == '13588833404'){
-        //     //这边是给苹果检查时候使用。
-        //     dispatch(login(state));
-        //     return
-        // }
-
-
+        const params = requestUsersByMobilePhone(state.phone, state.ymCode,
+            state.setPwd);
         dispatch(_loginRequest());
+
         return req(params).then((response)=>{
             if(response){
 

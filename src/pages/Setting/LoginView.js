@@ -13,7 +13,8 @@ import  {
     TouchableOpacity,
     NativeModules,
     Dimensions,
-    Platform
+    Platform,
+    Keyboard
 } from 'react-native'
 import Toast from 'react-native-simple-toast';
 import {BCButton} from '../../components/Base/WBButton'
@@ -42,6 +43,7 @@ const webUrl = 'https://static.dayi.im/static/fudaojun/rule.html?version=2016060
             // dispatch(navigateReplaceIndex('TabView'));
         },
         mRegister: (state)=> {
+            Keyboard.dismiss()
             dispatch(register(state));
         },
         pushWebView: (params)=> {
@@ -196,6 +198,8 @@ export  default class LoginView extends Component {
             <Animatable.View
                 animation="slideInUp"
                 style={styles.container}
+                onStartShouldSetResponder={()=>true}
+                onResponderGrant={Keyboard.dismiss}
             >
 
                 <View style={styles.top}>
@@ -214,7 +218,8 @@ export  default class LoginView extends Component {
                         <View style={styles.valLine}/>
                         <BCButton containerStyle={styles.buttonContainerStyle}
                                   disabled={!codeEnable||authLoad}
-                                  loaded={authLoad}
+                                  isLoad={authLoad}
+                                  loadColor = 'rgb(230,230,230)'
                             //styleDisabled={{fontWeight:'normal'}}
                                   onPress={this._onClickCode.bind(this)}
                                   style={{fontWeight:'400',fontSize:14,color:mainColor}}
@@ -251,6 +256,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: 'transparent',
         paddingTop: 20,
+        height:Dimensions.get('window').height - 64,
     },
 
 
