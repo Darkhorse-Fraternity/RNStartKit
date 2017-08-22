@@ -173,7 +173,7 @@ export  default  class Home extends Component {
     }
 
 
-    __settingView = ({item, index})=> {
+    __settingView = ({item, index},data)=> {
         const self = this
         return (<View>
             <BounceBtn
@@ -249,7 +249,7 @@ export  default  class Home extends Component {
             if (!data.setting) {
                 return this.__flagView({item, index}, data)
             } else {
-                return this.__settingView({item, index})
+                return this.__settingView({item, index},data)
             }
 
         }

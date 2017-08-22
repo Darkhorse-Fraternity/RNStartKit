@@ -5,10 +5,8 @@ import {addNavigationHelpers, StackNavigator} from 'react-navigation';
 
 
 import {route} from '../../../pages'
-import BaseWebView from  '../../Base/BaseWebView.js'
 export const AppNavigator = StackNavigator({
     ...route,
-    WebView: {screen: BaseWebView,},
 }, {
     // initialRouteName:'Home',
     navigationOptions: {

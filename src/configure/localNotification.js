@@ -81,8 +81,11 @@ export async function  dayNotification(data) {
         const date = !flag?moment(notifyTime, "HH").toDate()
             :moment(notifyTime, "HH").add(1, 'days').toDate()
 
+
+        const message = item.notifyText ||( item.title +"完成了吗?")
+
         PushNotification.localNotificationSchedule({
-            message: item.title +"完成了吗?", // (required)
+            message: message, // (required)
             date: date, // in 60 secs
             // date: new Date(Date.now() + (1*1000)), // in 60 secs
             number:  1,

@@ -7,179 +7,69 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		05B57E13C80E3C602DE3C6565B71D2E3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AC5D9C5B838BE747D0154460D02F926 /* Foundation.framework */; };
-		14DD78062E33839871A3CFA30EAEF0F8 /* HexColors-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4F65144142E5EA244BCDE7ACCEA6E0 /* HexColors-dummy.m */; };
-		22C7E2CA411DFBB1A9E0D082B87E7235 /* Toast-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8858DECE5AA256CD2EB01280CB58F00D /* Toast-dummy.m */; };
-		3D04DDB7FB8601B1ED65B8D9F9E7B67A /* UIView+Toast.h in Headers */ = {isa = PBXBuildFile; fileRef = 01BD492E8B18CAD70EB8DEB35181668F /* UIView+Toast.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4FBD524D0DBA7A0008C51165AD93F9AB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BACC64101FAE4862F8806DB02FC71B0E /* QuartzCore.framework */; };
-		55AE698E68D4CB61E1511E0FD3D9BD9D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AC5D9C5B838BE747D0154460D02F926 /* Foundation.framework */; };
-		5C15E9FEE3A7C5D621CCE7DB55B0DA53 /* HexColors.h in Headers */ = {isa = PBXBuildFile; fileRef = EFE086F6325E36336992C61EBA11E6E5 /* HexColors.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9B98BE9EE06BAC5D1F7F6B08B3ACBC78 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AC5D9C5B838BE747D0154460D02F926 /* Foundation.framework */; };
-		A4950E142AD29C6F3F5E021256208496 /* HexColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 72D998FD7E0CEA0910275B56E9399E07 /* HexColors.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		DF7ADCABBA3A9ACAA930D56D9FFB4C3D /* Pods-RNStartKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 51AD06412DB5035DB3200AA60233CF92 /* Pods-RNStartKit-dummy.m */; };
-		FBF6AB27000ABE9248E4FAA5344BC1D2 /* UIView+Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = 585B4D7894A7711B7501A4F923C19ED8 /* UIView+Toast.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		3363828AD15AA1550D4C561974000314 /* Pods-RNStartKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 51AD06412DB5035DB3200AA60233CF92 /* Pods-RNStartKit-dummy.m */; };
+		67369DE3AD4F7C86A54D1B2D5D2DAAF0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		B5E683A556726D43D140D036A378D151 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = EC7BAA2B0109B633CE06A36E872A9505;
-			remoteInfo = HexColors;
-		};
-		C21D38E108A50EDF498AB31B059950E9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 19DFCA0648DE0B96E3C338CD48D757C7;
-			remoteInfo = Toast;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
-		01BD492E8B18CAD70EB8DEB35181668F /* UIView+Toast.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIView+Toast.h"; path = "Toast/Toast/UIView+Toast.h"; sourceTree = "<group>"; };
 		0B33ABE15AD0ECFB98091050F949D46C /* Pods-RNStartKit-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-RNStartKit-acknowledgements.plist"; sourceTree = "<group>"; };
-		1109B9B6CDA099AEACB99E0968B6E9A3 /* HexColors-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "HexColors-prefix.pch"; sourceTree = "<group>"; };
-		2905190D1393C774E12B37B95DA65272 /* libHexColors.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libHexColors.a; path = libHexColors.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		38048EAC33A222C4AF7B3A468ED6E1C5 /* HexColors.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = HexColors.xcconfig; sourceTree = "<group>"; };
-		3AC5D9C5B838BE747D0154460D02F926 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		3BAA8BD5E69321A4F54DFF542374DE88 /* Toast.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Toast.xcconfig; sourceTree = "<group>"; };
+		12DFEEB3509D877B6CE65BCE2EEB0562 /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reveal.framework; path = "Reveal-Framework-iOS-1.6.2/Reveal.framework"; sourceTree = "<group>"; };
+		12FD610B3542258AF7D3384E6C33BBF9 /* libPods-RNStartKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-RNStartKit.a"; path = "libPods-RNStartKit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4494D2D11D5AE3DF997906AE5EB9F5D9 /* Pods-RNStartKit-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-RNStartKit-frameworks.sh"; sourceTree = "<group>"; };
 		51AD06412DB5035DB3200AA60233CF92 /* Pods-RNStartKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-RNStartKit-dummy.m"; sourceTree = "<group>"; };
-		57DC09535FFBBDC49BD4ACE5A3DA1DDB /* Toast-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Toast-prefix.pch"; sourceTree = "<group>"; };
-		585B4D7894A7711B7501A4F923C19ED8 /* UIView+Toast.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIView+Toast.m"; path = "Toast/Toast/UIView+Toast.m"; sourceTree = "<group>"; };
 		5B412171BA771F7FBCE0C98D52824006 /* Pods-RNStartKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-RNStartKit.release.xcconfig"; sourceTree = "<group>"; };
-		72D998FD7E0CEA0910275B56E9399E07 /* HexColors.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HexColors.m; path = Classes/HexColors.m; sourceTree = "<group>"; };
 		843BC329B02E8AB4955A94C6AC1565DA /* Pods-RNStartKit-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-RNStartKit-acknowledgements.markdown"; sourceTree = "<group>"; };
-		8858DECE5AA256CD2EB01280CB58F00D /* Toast-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Toast-dummy.m"; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		99E6789AF98D3B9131E242384DDBE502 /* libToast.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libToast.a; path = libToast.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		AABA1015775B00CBEEF35AD3633B0EF4 /* Pods-RNStartKit-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-RNStartKit-resources.sh"; sourceTree = "<group>"; };
 		B167102B4917B8164D0D49E13F2A99A1 /* Pods-RNStartKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-RNStartKit.debug.xcconfig"; sourceTree = "<group>"; };
-		BACC64101FAE4862F8806DB02FC71B0E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
-		D5D2AB4A50E277D3AF3623456CAE901D /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reveal.framework; path = "Reveal-Framework-iOS-1.6.2/Reveal.framework"; sourceTree = "<group>"; };
-		EFE086F6325E36336992C61EBA11E6E5 /* HexColors.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HexColors.h; path = Classes/HexColors.h; sourceTree = "<group>"; };
-		F82FD15F6058A1AD7B32943248684FE6 /* libPods-RNStartKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-RNStartKit.a"; path = "libPods-RNStartKit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		FC4F65144142E5EA244BCDE7ACCEA6E0 /* HexColors-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "HexColors-dummy.m"; sourceTree = "<group>"; };
+		CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		2F45FD804D336CC90E6F5B7EB2369D0E /* Frameworks */ = {
+		8FFCF1D80400E18E49673CE1CD34979F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B98BE9EE06BAC5D1F7F6B08B3ACBC78 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		498E44A4299019492C0E28B0B6DA92D3 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				05B57E13C80E3C602DE3C6565B71D2E3 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		75B6D52AC316324258ECD8EE9E83B289 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				55AE698E68D4CB61E1511E0FD3D9BD9D /* Foundation.framework in Frameworks */,
-				4FBD524D0DBA7A0008C51165AD93F9AB /* QuartzCore.framework in Frameworks */,
+				67369DE3AD4F7C86A54D1B2D5D2DAAF0 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		03CB521D246DC339DEBF081EB45F493E /* Support Files */ = {
+		7531C8F8DE19F1AA3C8A7AC97A91DC29 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				38048EAC33A222C4AF7B3A468ED6E1C5 /* HexColors.xcconfig */,
-				FC4F65144142E5EA244BCDE7ACCEA6E0 /* HexColors-dummy.m */,
-				1109B9B6CDA099AEACB99E0968B6E9A3 /* HexColors-prefix.pch */,
+				CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/HexColors";
-			sourceTree = "<group>";
-		};
-		1394CD4BFA2BAA2B4E6F3A96B5953F40 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				2905190D1393C774E12B37B95DA65272 /* libHexColors.a */,
-				F82FD15F6058A1AD7B32943248684FE6 /* libPods-RNStartKit.a */,
-				99E6789AF98D3B9131E242384DDBE502 /* libToast.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		433CD3331B6C3787F473C941B61FC68F /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				C7AB6F27FF3606F9360547F8F1977A63 /* iOS */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		4EC389E97665EE251A91723EA9AEE47B /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				95EDB03AB30608D53682DE20C5E9FA3E /* HexColors */,
-				5FE610EF51348D41587E52D207F37514 /* Reveal-iOS-SDK */,
-				D324D7ED6D9DA91568A5C6F9F35BA64E /* Toast */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		5FE610EF51348D41587E52D207F37514 /* Reveal-iOS-SDK */ = {
-			isa = PBXGroup;
-			children = (
-				B29A9EDC70FA844381716710D127B6BC /* Frameworks */,
-			);
-			name = "Reveal-iOS-SDK";
-			path = "Reveal-iOS-SDK";
+			name = iOS;
 			sourceTree = "<group>";
 		};
 		7DB346D0F39D3F0E887471402A8071AB = {
 			isa = PBXGroup;
 			children = (
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
-				433CD3331B6C3787F473C941B61FC68F /* Frameworks */,
-				4EC389E97665EE251A91723EA9AEE47B /* Pods */,
-				1394CD4BFA2BAA2B4E6F3A96B5953F40 /* Products */,
+				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
+				C6FF86527080A6ABFC16B69A3DC0DFFB /* Pods */,
+				A40E78BCD5822D944AB717B876DB6A40 /* Products */,
 				B9A9AF7D604270C7C27FB4C39804E3AB /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		95EDB03AB30608D53682DE20C5E9FA3E /* HexColors */ = {
+		81C689C3AFC1C7FF242CFAB8DDD09E4A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				EFE086F6325E36336992C61EBA11E6E5 /* HexColors.h */,
-				72D998FD7E0CEA0910275B56E9399E07 /* HexColors.m */,
-				03CB521D246DC339DEBF081EB45F493E /* Support Files */,
-			);
-			name = HexColors;
-			path = HexColors;
-			sourceTree = "<group>";
-		};
-		A0D358780B6FFA48286D1436D3F5C87A /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				3BAA8BD5E69321A4F54DFF542374DE88 /* Toast.xcconfig */,
-				8858DECE5AA256CD2EB01280CB58F00D /* Toast-dummy.m */,
-				57DC09535FFBBDC49BD4ACE5A3DA1DDB /* Toast-prefix.pch */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/Toast";
-			sourceTree = "<group>";
-		};
-		B29A9EDC70FA844381716710D127B6BC /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				D5D2AB4A50E277D3AF3623456CAE901D /* Reveal.framework */,
+				12DFEEB3509D877B6CE65BCE2EEB0562 /* Reveal.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A40E78BCD5822D944AB717B876DB6A40 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				12FD610B3542258AF7D3384E6C33BBF9 /* libPods-RNStartKit.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		B9A9AF7D604270C7C27FB4C39804E3AB /* Targets Support Files */ = {
@@ -190,24 +80,29 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		C7AB6F27FF3606F9360547F8F1977A63 /* iOS */ = {
+		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3AC5D9C5B838BE747D0154460D02F926 /* Foundation.framework */,
-				BACC64101FAE4862F8806DB02FC71B0E /* QuartzCore.framework */,
+				7531C8F8DE19F1AA3C8A7AC97A91DC29 /* iOS */,
 			);
-			name = iOS;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		D324D7ED6D9DA91568A5C6F9F35BA64E /* Toast */ = {
+		C6FF86527080A6ABFC16B69A3DC0DFFB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				01BD492E8B18CAD70EB8DEB35181668F /* UIView+Toast.h */,
-				585B4D7894A7711B7501A4F923C19ED8 /* UIView+Toast.m */,
-				A0D358780B6FFA48286D1436D3F5C87A /* Support Files */,
+				D70BEE20B57C04A4512260E625802768 /* Reveal-iOS-SDK */,
 			);
-			name = Toast;
-			path = Toast;
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		D70BEE20B57C04A4512260E625802768 /* Reveal-iOS-SDK */ = {
+			isa = PBXGroup;
+			children = (
+				81C689C3AFC1C7FF242CFAB8DDD09E4A /* Frameworks */,
+			);
+			name = "Reveal-iOS-SDK";
+			path = "Reveal-iOS-SDK";
 			sourceTree = "<group>";
 		};
 		E9B23C7BED81BB64A3294E709E597BF8 /* Pods-RNStartKit */ = {
@@ -227,76 +122,21 @@
 		};
 /* End PBXGroup section */
 
-/* Begin PBXHeadersBuildPhase section */
-		B614DA345A86993AB81695ABCAC62CE3 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				5C15E9FEE3A7C5D621CCE7DB55B0DA53 /* HexColors.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DFBC73316C34C4567BCFB525CF1443CC /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3D04DDB7FB8601B1ED65B8D9F9E7B67A /* UIView+Toast.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXHeadersBuildPhase section */
-
 /* Begin PBXNativeTarget section */
-		0BC1FBE23EBED5D95E6AFECEEE43C98C /* Pods-RNStartKit */ = {
+		A48029A04FE2C601A7D7877510F854AF /* Pods-RNStartKit */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6225FCC7E0D0304C753BDBF0A60D0250 /* Build configuration list for PBXNativeTarget "Pods-RNStartKit" */;
+			buildConfigurationList = F0963E80BF123CCA8D616A414614FB94 /* Build configuration list for PBXNativeTarget "Pods-RNStartKit" */;
 			buildPhases = (
-				07C24F04C005E7B5831CDAD9F2137C15 /* Sources */,
-				498E44A4299019492C0E28B0B6DA92D3 /* Frameworks */,
+				B8DD1618E387B5465A0DE27C94DD0C96 /* Sources */,
+				8FFCF1D80400E18E49673CE1CD34979F /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				A146FD301C47707254B84195DCD83697 /* PBXTargetDependency */,
-				E2C4D5DB26307A4DFD7D8F228044DCFD /* PBXTargetDependency */,
 			);
 			name = "Pods-RNStartKit";
 			productName = "Pods-RNStartKit";
-			productReference = F82FD15F6058A1AD7B32943248684FE6 /* libPods-RNStartKit.a */;
-			productType = "com.apple.product-type.library.static";
-		};
-		19DFCA0648DE0B96E3C338CD48D757C7 /* Toast */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = CD244782E394ABFD7C8802D51D2A542F /* Build configuration list for PBXNativeTarget "Toast" */;
-			buildPhases = (
-				F440273FED5B1974712E76EC7F22022D /* Sources */,
-				75B6D52AC316324258ECD8EE9E83B289 /* Frameworks */,
-				DFBC73316C34C4567BCFB525CF1443CC /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = Toast;
-			productName = Toast;
-			productReference = 99E6789AF98D3B9131E242384DDBE502 /* libToast.a */;
-			productType = "com.apple.product-type.library.static";
-		};
-		EC7BAA2B0109B633CE06A36E872A9505 /* HexColors */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = EC7728CE8385DA0D792A4B410991DA2C /* Build configuration list for PBXNativeTarget "HexColors" */;
-			buildPhases = (
-				E8EFD4C0C40128513B4BF22F928B8067 /* Sources */,
-				2F45FD804D336CC90E6F5B7EB2369D0E /* Frameworks */,
-				B614DA345A86993AB81695ABCAC62CE3 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = HexColors;
-			productName = HexColors;
-			productReference = 2905190D1393C774E12B37B95DA65272 /* libHexColors.a */;
+			productReference = 12FD610B3542258AF7D3384E6C33BBF9 /* libPods-RNStartKit.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -316,60 +156,25 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = 1394CD4BFA2BAA2B4E6F3A96B5953F40 /* Products */;
+			productRefGroup = A40E78BCD5822D944AB717B876DB6A40 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				EC7BAA2B0109B633CE06A36E872A9505 /* HexColors */,
-				0BC1FBE23EBED5D95E6AFECEEE43C98C /* Pods-RNStartKit */,
-				19DFCA0648DE0B96E3C338CD48D757C7 /* Toast */,
+				A48029A04FE2C601A7D7877510F854AF /* Pods-RNStartKit */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		07C24F04C005E7B5831CDAD9F2137C15 /* Sources */ = {
+		B8DD1618E387B5465A0DE27C94DD0C96 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DF7ADCABBA3A9ACAA930D56D9FFB4C3D /* Pods-RNStartKit-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E8EFD4C0C40128513B4BF22F928B8067 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				14DD78062E33839871A3CFA30EAEF0F8 /* HexColors-dummy.m in Sources */,
-				A4950E142AD29C6F3F5E021256208496 /* HexColors.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F440273FED5B1974712E76EC7F22022D /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				22C7E2CA411DFBB1A9E0D082B87E7235 /* Toast-dummy.m in Sources */,
-				FBF6AB27000ABE9248E4FAA5344BC1D2 /* UIView+Toast.m in Sources */,
+				3363828AD15AA1550D4C561974000314 /* Pods-RNStartKit-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		A146FD301C47707254B84195DCD83697 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = HexColors;
-			target = EC7BAA2B0109B633CE06A36E872A9505 /* HexColors */;
-			targetProxy = B5E683A556726D43D140D036A378D151 /* PBXContainerItemProxy */;
-		};
-		E2C4D5DB26307A4DFD7D8F228044DCFD /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Toast;
-			target = 19DFCA0648DE0B96E3C338CD48D757C7 /* Toast */;
-			targetProxy = C21D38E108A50EDF498AB31B059950E9 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		015A368F878AC3E2CEAE21DDE8026304 /* Debug */ = {
@@ -416,9 +221,9 @@
 			};
 			name = Debug;
 		};
-		283992143C2305EE38394694C2691309 /* Release */ = {
+		2B779EA77500C21B7F52BD0955DE6770 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 38048EAC33A222C4AF7B3A468ED6E1C5 /* HexColors.xcconfig */;
+			baseConfigurationReference = 5B412171BA771F7FBCE0C98D52824006 /* Pods-RNStartKit.release.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -426,14 +231,14 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/HexColors/HexColors-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MACH_O_TYPE = staticlib;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 			};
@@ -479,76 +284,7 @@
 			};
 			name = Release;
 		};
-		53F828636E0A2885C69728310380E76E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3BAA8BD5E69321A4F54DFF542374DE88 /* Toast.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Toast/Toast-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		6EDE42538BBBFE1A4A31F5D9611DADB8 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 38048EAC33A222C4AF7B3A468ED6E1C5 /* HexColors.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/HexColors/HexColors-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		8046EB9E809F119F21FD453D44A2EBF6 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5B412171BA771F7FBCE0C98D52824006 /* Pods-RNStartKit.release.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				MACH_O_TYPE = staticlib;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		976F77D31940FCFEFAB7F0F42F73DFCB /* Debug */ = {
+		48AD0981F515A70532014C8C9462563D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B167102B4917B8164D0D49E13F2A99A1 /* Pods-RNStartKit.debug.xcconfig */;
 			buildSettings = {
@@ -571,29 +307,6 @@
 			};
 			name = Debug;
 		};
-		A3E27AE057888833D02BADA02702A1B5 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3BAA8BD5E69321A4F54DFF542374DE88 /* Toast.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Toast/Toast-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -606,29 +319,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6225FCC7E0D0304C753BDBF0A60D0250 /* Build configuration list for PBXNativeTarget "Pods-RNStartKit" */ = {
+		F0963E80BF123CCA8D616A414614FB94 /* Build configuration list for PBXNativeTarget "Pods-RNStartKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				976F77D31940FCFEFAB7F0F42F73DFCB /* Debug */,
-				8046EB9E809F119F21FD453D44A2EBF6 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		CD244782E394ABFD7C8802D51D2A542F /* Build configuration list for PBXNativeTarget "Toast" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				53F828636E0A2885C69728310380E76E /* Debug */,
-				A3E27AE057888833D02BADA02702A1B5 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		EC7728CE8385DA0D792A4B410991DA2C /* Build configuration list for PBXNativeTarget "HexColors" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				6EDE42538BBBFE1A4A31F5D9611DADB8 /* Debug */,
-				283992143C2305EE38394694C2691309 /* Release */,
+				48AD0981F515A70532014C8C9462563D /* Debug */,
+				2B779EA77500C21B7F52BD0955DE6770 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

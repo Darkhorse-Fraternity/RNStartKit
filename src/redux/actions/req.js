@@ -8,7 +8,7 @@ export const REQUEST_LOAD = 'REQUEST_LOAD'
 export const REQUEST_SUCCEEED = 'REQUEST_SUCCEEED'
 export const REQUEST_FAILED = 'REQUEST_FAILED'
 export const REQUESR_CHANGE_DATA = 'REQUESR_CHANGE_DATA'
-import {Toast} from '../../util'
+import Toast from 'react-native-simple-toast';
 import {logout} from './login'
 import  store from '../configureStore'
 import {schemas} from '../scemes'

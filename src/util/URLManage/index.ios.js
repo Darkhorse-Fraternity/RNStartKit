@@ -3,7 +3,7 @@
 import {
   NativeModules,
 } from "react-native";
-var ExportURLManager = NativeModules.ExportURLManager
+const ExportURLManager = NativeModules.ExportURLManager
 export default  class URLManager {
   static openURL(url:String){
     ExportURLManager.presentURL(url,true);

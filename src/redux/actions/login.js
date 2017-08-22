@@ -28,7 +28,7 @@ export const LOGIN_FAILED = 'LOGIN_FAILED'
 export const LOAD_ACCOUNT = 'LOAD_ACCOUNT'
 export const LOGOUT = 'LOGOUT'
 export const UPDATE_USERDATA = 'UPDATE_USERDATA'
-import {Toast} from '../../util'
+import Toast from 'react-native-simple-toast';
 //当为异步的时候这么写，返回一个函数
 export function loadAccountAction():Function {
 

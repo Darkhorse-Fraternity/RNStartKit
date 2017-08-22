@@ -1,6 +1,6 @@
 import  {send} from'../request'
 import {pushInstallation} from '../request/leanCloud'
-import {Toast} from '../util'
+import Toast from 'react-native-simple-toast';
 import  PushNotification from 'react-native-push-notification'
 
 import DeviceInfo from 'react-native-device-info'

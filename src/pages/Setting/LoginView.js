@@ -15,7 +15,7 @@ import  {
     Dimensions
 } from 'react-native'
 import {OS} from '../../util/';
-import {checkPhoneNum, Toast} from '../../util'
+import Toast from 'react-native-simple-toast';
 import {BCButton} from '../../components/Base/WBButton'
 import Button from 'react-native-button'
 import {request} from '../../request'

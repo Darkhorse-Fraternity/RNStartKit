@@ -13,7 +13,7 @@ import {
     Linking,
     Platform,
 } from 'react-native'
-import {Toast} from '../../util'
+import Toast from 'react-native-simple-toast';
 import {blackFontColor, backViewColor, mainColor} from '../../configure';
 import {connect} from 'react-redux'
 import {logout} from '../../redux/actions/login'

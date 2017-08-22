@@ -9,7 +9,6 @@ import React,{
   PixelRatio,
   AsyncStorage,
 } from "react-native";
-import Toast from './Toast'
 import URLManage from './URLManage'
 import Dimensions from "Dimensions";
 import Platform  from 'Platform'
@@ -56,14 +55,10 @@ function checkPhoneNum(num:string):bool{
 
 module.exports = {
   /*最小线宽*/
-  pixel: 1 / PixelRatio.get(),
   /*屏幕尺寸*/
   screenWidth : Dimensions.get('window').width,
   screenHeight: Dimensions.get('window').height,
   navbarHeight: Platform.OS == 'ios' ? 0: 0,
-
-  OS:Platform.OS == 'ios' ?'ios':'android',
-  Toast,
   URLManage, //将URLManage 适配安卓苹果。
   throwIfMissing,
   checkPhoneNum,

@@ -165,8 +165,8 @@ export  default  class OptionView extends Component {
                     placeholder={"提醒文字"}
                     clearButtonMode='while-editing'
                     enablesReturnKeyAutomatically={true}
-                    onChangeText={()=>{
-
+                    onChangeText={(text)=>{
+                        this.setState({[this.state.type]:text})
                     }}/>
             </View>
         )
@@ -190,8 +190,8 @@ export  default  class OptionView extends Component {
                         type="notifyTime"
                         index={1}/>
                     <this.__renderItem
-                        title={"提醒文字:  无"}
-                        width={150}
+                        title={"提醒文字"}
+                        width={110}
                         type="notifyText"
                         index={1}/>
                     <this.__renderItem

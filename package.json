@@ -24,6 +24,7 @@
     "react-native-push-notification": "^3.0.0",
     "react-native-qq": "^2.0.5",
     "react-native-scrollable-tab-view": "^0.6.7",
+    "react-native-simple-toast": "0.0.6",
     "react-native-storage": "^0.2.2",
     "react-native-swiper": "^1.5.10",
     "react-native-textinput-effects": "^0.4.0",

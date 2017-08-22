@@ -12,14 +12,14 @@ import{
     LIST_LOAD_NO_MORE,
     LIST_LOAD_ERROR,
     LIST_NORMAL,
-} from '../../components/Base/BaseListView'
+} from '../../components/Base/BaseSectionView'
 export const LIST_START = 'LIST_START'
 export const LIST_FAILED = 'LIST_FAILED'
 export const LIST_SUCCEED = 'LIST_SUCCEEDT'
 export const LIST_SELECT = 'LIST_SELECT'
 export const LIST_DELETE = 'LIST_DELETE'
 export const LIST_ADD = 'LIST_ADD'
-import {Toast} from '../../util'
+import Toast from 'react-native-simple-toast';
 const pageSize = 20;
 import {logout} from './login'
 // import {limitSearch} from '../../../../DBike/src/request/leanCloud'
