@@ -5,7 +5,6 @@
  */
 'use strict'
 
-import {request,send} from '../../request';
 import {requestLogin, requestUsersByMobilePhone,getUserByID} from '../../request/leanCloud';
 import {leancloud_installationId} from '../../configure/push'
 import {saveAccount,saveUserData, loadAccount, clearUserData} from '../../configure/XGlobal'
@@ -227,9 +226,9 @@ export  function getUserByObjectID(objectID:string,callBack:Function) :Function{
     return dispatch => {
         dispatch(_loginRequest());
        const param = getUserByID(objectID);
-        return request(param, (response)=> {
+        return req(param, (response)=> {
 
-            if (response.statu) {
+            if (response) {
                 //加入sessionToken
                 dispatch(_loginSucceed(response));
                 // dispatch(navigatePush('TabView'));

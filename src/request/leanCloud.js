@@ -4,12 +4,15 @@
 import { methodType, cacheType } from './'
 
 
-export const requestSmsCode = {
-    path   : '/requestSmsCode',
-    method : methodType.post,
-    params :{
-      mobilePhoneNumber: "13588833404", //必须
+export function requestSmsCode(mobilePhoneNumber) {
+    return {
+        path   : '/requestSmsCode',
+        method : methodType.post,
+        params :{
+            mobilePhoneNumber, //必须
+        }
     }
+
 }
 
 

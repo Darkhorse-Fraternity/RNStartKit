@@ -21,9 +21,6 @@ export const LIST_DELETE = 'LIST_DELETE'
 export const LIST_ADD = 'LIST_ADD'
 import Toast from 'react-native-simple-toast';
 const pageSize = 20;
-import {logout} from './login'
-// import {limitSearch} from '../../../../DBike/src/request/leanCloud'
-import {send} from '../../request'
 import {addEntities} from '../module/normalizr'
 /**
  * 保证加载的时候，同个请求不窜行。
