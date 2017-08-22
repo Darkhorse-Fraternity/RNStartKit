@@ -4,8 +4,9 @@
  */
 'use strict';
 
-import React,{PropTypes} from 'react';
+import React from 'react';
 import Modal from 'rc-dialog/lib/Modal';
+import PropTypes from 'prop-types';
 
 
 

@@ -13,18 +13,22 @@ import {
     Text,
     ScrollView,
     TouchableOpacity,
-    Dimensions
+    Dimensions,
+    TextInput,
+    Keyboard
 } from 'react-native'
 import {connect} from 'react-redux'
 import * as Animatable from 'react-native-animatable';
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 export const Btn = Animatable.createAnimatableComponent(TouchableOpacity);
 import {bindActionCreators} from 'redux';
 import Icon from 'react-native-vector-icons/Ionicons'
 //static displayName = OptionView
 
-export  const StaticOption = {
+export const StaticOption = {
     notifyTime: '20:00',
-    period:'7',
+    period: '7',
+    notifyText: '',
 }
 
 @connect(
@@ -44,7 +48,7 @@ export  default  class OptionView extends Component {
         this.state = {
             option: 0,
             ...StaticOption,
-            type:'notifyTime'
+            type: 'notifyTime'
         }
     }
 
@@ -68,7 +72,7 @@ export  default  class OptionView extends Component {
         if (this.state.option != 0) {
             this.setState({option: 0})
         } else {
-            const {option,type,...other} = this.state
+            const {option, type, ...other} = this.state
             this.props.goBack && this.props.goBack(other)
         }
     }
@@ -92,7 +96,7 @@ export  default  class OptionView extends Component {
                         this.setState({option:props.index,type:props.type})
                     }}
                     style={[styles.item,{width:props.width}]}>
-                    <Text>
+                    <Text numberOfLines={1}>
                         {props.title}
                     </Text>
                 </TouchableOpacity>
@@ -141,10 +145,43 @@ export  default  class OptionView extends Component {
         )
     }
 
+    __remderNotifyText = ()=> {
+
+
+        return (
+            <View
+                style={{paddingHorizontal:15,
+                marginHorizontal:5,
+                backgroundColor:'white'}}>
+                <TextInput
+                    placeholderTextColor="rgba(180,180,180,1)"
+                    //selectionColor={mainColor}
+                    returnKeyType='done'
+                    //autoFocus={autoFocus}
+                    maxLength={100}
+                    //keyboardType={boardType}
+                    style={styles.textInputStyle}
+                    underlineColorAndroid='transparent'
+                    placeholder={"提醒文字"}
+                    clearButtonMode='while-editing'
+                    enablesReturnKeyAutomatically={true}
+                    onChangeText={()=>{
+
+                    }}/>
+            </View>
+        )
+
+    }
+
 
     render(): ReactElement<any> {
         return (
-            <View style={[this.props.style,styles.wrap]}>
+            <View
+                onStartShouldSetResponder={()=>true}
+                onResponderGrant={()=>{
+                Keyboard.dismiss()
+          }}
+                style={[this.props.style,styles.wrap]}>
 
                 {this.state.option == 0 && (<ScrollView style={[styles.wrap]}>
                     <this.__renderItem
@@ -153,17 +190,26 @@ export  default  class OptionView extends Component {
                         type="notifyTime"
                         index={1}/>
                     <this.__renderItem
+                        title={"提醒文字:  无"}
+                        width={150}
+                        type="notifyText"
+                        index={1}/>
+                    <this.__renderItem
                         title={"周期:   "+this.state.period +'天'}
                         width={120}
                         type="period"
                         index={1}/>
+
                 </ScrollView>)}
                 {this.state.option == 1 &&
-                    this.state.type == 'notifyTime'&&
+                this.state.type == 'notifyTime' &&
                 this.__renderNotifyTime()}
                 {this.state.option == 1 &&
-                this.state.type == 'period'&&
+                this.state.type == 'period' &&
                 this.__renderperiod()}
+                {this.state.option == 1 &&
+                this.state.type == 'notifyText' &&
+                this.__remderNotifyText()}
                 {this.__remderBack()}
             </View>
         );
@@ -201,11 +247,19 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         margin: 5,
-        borderRadius:8,
+        borderRadius: 8,
     },
     notifyTimeView: {
         padding: 10,
         flexDirection: 'row',
         flexWrap: 'wrap'
-    }
+    },
+    textInputStyle: {
+        // width:200,
+        height:40,
+        marginLeft: 0,
+        textAlign: 'left',
+        fontSize: 14,
+        color: 'black',
+    },
 })

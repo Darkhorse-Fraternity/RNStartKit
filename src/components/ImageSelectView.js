@@ -2,7 +2,7 @@
 'use strict'
 
 
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
 import ReactNative, {
     NavigationExperimental,
     StyleSheet,
@@ -15,6 +15,7 @@ import ReactNative, {
 } from 'react-native';
 import imagePicker from '../util/imagePicker'
 import Button from 'react-native-button'
+import PropTypes from 'prop-types';
 // const source = require('../../source/img/pic_upload/pic_upload.png');
 import * as immutable from 'immutable';
 

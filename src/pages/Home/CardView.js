@@ -61,7 +61,7 @@ Animatable.initializeRegistryWithDefinitions({cloudMoveLeft})
             dispatch(search(false, {
                 where: {
                     ...selfUser(),
-                    statu:'start'
+                    statu: 'start'
                 },
                 order: 'doneDate'
 
@@ -75,7 +75,7 @@ Animatable.initializeRegistryWithDefinitions({cloudMoveLeft})
                 doneDate: {"__type": "Date", "iso": moment()},
                 time: time,
                 //cycle,
-                statu:time == data.period?"stop":"start"
+                statu: time == data.period ? "stop" : "start"
             }
             const res = await update(id, param, ICARD)
             const entity = {
@@ -89,7 +89,7 @@ Animatable.initializeRegistryWithDefinitions({cloudMoveLeft})
             }))
         },
 
-        setting:(entity,setting)=>{
+        setting: (entity, setting)=> {
             entity.setting = setting
             dispatch(addEntities({
                 [ICARD]: {
@@ -97,7 +97,7 @@ Animatable.initializeRegistryWithDefinitions({cloudMoveLeft})
                 }
             }))
         },
-        stop:async(data,index,callBack)=> {
+        stop: async(data, index, callBack)=> {
             const id = data.objectId
             const param = {
                 statu: 'stop',
@@ -115,6 +115,26 @@ Animatable.initializeRegistryWithDefinitions({cloudMoveLeft})
             }))
             dispatch(clear(ICARD, index))
             callBack && callBack()
+        },
+        refresh: async(data) => {
+            const id = data.objectId
+            const param = {
+                time:  0 ,
+                statu: 'start',
+                cycle: data.cycle + 1 ,
+            }
+
+            const res = await  await update(id, param, ICARD)
+
+            const entity = {
+                ...param,
+                ...res
+            }
+            dispatch(addEntities({
+                [ICARD]: {
+                    [entity.objectId]: entity
+                }
+            }))
         },
 
     })
@@ -135,19 +155,16 @@ export  default  class Home extends Component {
     componentWillReceiveProps(nextProps: Objec) {
         const size1 = nextProps.data.get('listData').size
         const size2 = this.props.data.get('listData').size
-        if(size1  > size2 && size2 !=0  ){
+        if (size1 > size2 && size2 != 0) {
             this.refs.list.ref._component &&
             this.refs.list.ref._component.scrollToOffset({x: 0, y: 0, animated: false})
         }
     }
 
 
-
     componentDidMount() {
         this.props.search()
     }
-
-
 
 
     _keyExtractor = (item, index) => {
@@ -156,8 +173,7 @@ export  default  class Home extends Component {
     }
 
 
-
-    __settingView = ({item, index})=>{
+    __settingView = ({item, index})=> {
         const self = this
         return (<View>
             <BounceBtn
@@ -185,7 +201,23 @@ export  default  class Home extends Component {
         </View>)
     }
 
-    __flagView = ({item, index},data)=>{
+    __doneView = (data) => {
+        return (
+            <View>
+                <Text style={styles.done}>{'恭喜,已完成'}</Text>
+                <BounceBtn
+                    color="#rgb(236,175,160)"
+                    radius={60}
+                    moveColor="#rgba(236,175,160,0.4)"
+                    onPress={()=>{
+                        this.props.refresh(data)
+                    }}
+                    title="再来一组"/>
+            </View>
+        )
+    }
+
+    __flagView = ({item, index}, data)=> {
         let FlagView = (
             <Animatable.Text
                 animation="zoomInUp"
@@ -193,11 +225,11 @@ export  default  class Home extends Component {
                 {data.time}
             </Animatable.Text>)
         if (data.time == data.period) {
-            FlagView = (<Text style={styles.done}>{'恭喜,已完成'}</Text>)
+            FlagView = this.__doneView(data)
         } else if (data.doneDate) {
             const doneDate = data.doneDate.iso
             const lastMoment = moment(doneDate)
-            if (moment.min(lastMoment, moment(2,"HH")) === lastMoment) {
+            if (moment.min(lastMoment, moment(2, "HH")) === lastMoment) {
                 FlagView = (
                     <BounceBtn onPress={()=>this.props.done(data)} title="轻触打卡"/>)
             }
@@ -213,10 +245,10 @@ export  default  class Home extends Component {
         //计算上次完成时间和当前完成时间， 只有大于24个小时，才能再次打卡。
 
         //flag 为true 的时候说明离上次打卡已经有24小时了
-        const inView = ()=>{
-            if(!data.setting){
-                return  this.__flagView({item, index},data)
-            }else {
+        const inView = ()=> {
+            if (!data.setting) {
+                return this.__flagView({item, index}, data)
+            } else {
                 return this.__settingView({item, index})
             }
 
@@ -326,6 +358,7 @@ const styles = StyleSheet.create({
 
     done: {
         fontSize: 17,
+        marginBottom:20
     },
     toper: {
         width: 200,

@@ -3,7 +3,9 @@ import {
     Platform
 } from 'react-native'
 import moment from 'moment'
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+
 import {connect} from 'react-redux'
 import {ICARD} from '../redux/reqKeys'
 export  function nowNotification() {

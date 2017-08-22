@@ -5,7 +5,7 @@
 'use strict';
 
 
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
 import {
     View,
     StyleSheet,
@@ -21,6 +21,7 @@ import {placeholder} from '../../source'
 import {mainColor} from '../configure'
 import {Toast} from '../util'
 import {dataStorage} from '../redux/actions/util'
+import PropTypes from 'prop-types';
 class MyComponet extends Component {
     constructor(props: Object) {
         super(props);

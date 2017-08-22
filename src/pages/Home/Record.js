@@ -28,6 +28,18 @@ import {update, remove,search} from '../../redux/module/leancloud'
 import {SwipeAction} from 'antd-mobile'
 import {clear} from '../../redux/actions/list'
 import * as Animatable from 'react-native-animatable';
+
+const heightZoomIn= {
+    from: {
+        height: 100,
+        translateX:500,
+    },
+    to: {
+        height: 0,
+        translateX:500,
+    },
+}
+Animatable.initializeRegistryWithDefinitions({heightZoomIn})
 @connect(
     state =>({
         data:state.list.get(IRECORD)
@@ -116,11 +128,12 @@ export default class Record extends Component {
                     const last = self.props.data.get('listData').size-1 == index
                     const itemView = this.rows[index]
                     ///因为view 是根据key 复用的，所以最后需要还原，否则会出错
-                    const endState = await itemView.fadeOutLeftBig(500)
+
+                    await itemView.fadeOutLeft(500)
+                    const endState = await itemView.heightZoomIn(500)
                     endState.finished && this.props.delete(index, objectId,()=>{
-                        !last && itemView.fadeInRight(5)
+                        !last && itemView.bounce(1)
                     })
-                    // this.props.delete(index, objectId)
                 }
             }]
         )

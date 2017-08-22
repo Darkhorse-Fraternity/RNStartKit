@@ -1,6 +1,6 @@
 'use strict';
 
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
 import {
     AppRegistry,
     StyleSheet,
@@ -18,7 +18,7 @@ import {
 import Camera from 'react-native-camera'
 import {sweep_bg, sweep_line} from '../../source'
 import * as Animatable from 'react-native-animatable';
-
+import PropTypes from 'prop-types';
 function makeSlideInTranslation(translationType, fromValue) {
     return {
         from: {

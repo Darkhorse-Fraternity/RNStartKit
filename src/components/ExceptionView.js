@@ -1,5 +1,5 @@
 /*@flow*/
-import React, {Component, PropTypes, isValidElement} from 'react';
+import React, {Component, isValidElement} from 'react';
 import {
     StyleSheet,
     Text,
@@ -9,7 +9,7 @@ import {
     ActivityIndicator,
     TouchableOpacity
 } from 'react-native';
-
+import PropTypes from 'prop-types';
 // import Spinner from 'react-native-gifted-spinner';
 import {screenHeight} from '../util';
 
