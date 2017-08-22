@@ -25,11 +25,11 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import * as Animatable from 'react-native-animatable';
 export const Btn = Animatable.createAnimatableComponent(TouchableOpacity);
 import BG from '../../components/BG/BG'
-import CardView from './CardView'
+import CardView from '../Card/CardView'
 import LoginView from '../Setting/LoginView'
 
 import PushManage from '../../configure/localNotification'
-
+import styled from 'styled-components/native';
 function makeScaleInTranslation(translationType, value) {
     return {
         from: {
@@ -42,6 +42,8 @@ function makeScaleInTranslation(translationType, value) {
 }
 const cloudMoveLeft = makeScaleInTranslation('translateX', -500);
 Animatable.initializeRegistryWithDefinitions({cloudMoveLeft})
+
+
 
 @connect(
     state =>({

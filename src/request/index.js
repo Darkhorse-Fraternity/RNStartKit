@@ -40,18 +40,18 @@ export function send({
     ...otherParams,
 }:Object): Promise<any> {
 
-    let urlpath = scheme + '://' + host + path;
+    const urlpath = scheme + '://' + host + path;
     const httpHeader = head ? head : httpHeaders(needSession);
 
     const body = httpHeader["Content-Type"] === "application/x-www-form-urlencoded"
         ? toQueryString(params) :
         JSON.stringify(params)
 
-    let request = method == 'GET' ? new Request(addParams(urlpath, params), {
+    const request = method == 'GET' ? new Request(addParams(urlpath, params), {
         method: method,
         headers: httpHeader
     }) : new Request(urlpath, {method: method, headers: httpHeader, body: body});
-    let requestPromise = Promise.race([
+    const requestPromise = Promise.race([
         fetch(request, {credentials: 'include'}),
         new Promise(function (resolve, reject) {
             var reason = __DEV__ ? '网络请求超时' + urlpath : '网络请求超时'
