@@ -8,7 +8,7 @@
 import {request,send} from '../../request';
 import {requestLogin, requestUsersByMobilePhone,getUserByID} from '../../request/leanCloud';
 import {leancloud_installationId} from '../../configure/push'
-import {saveAccount,saveUserData, loadAccount, clearUserData} from '../../util/XGlobal'
+import {saveAccount,saveUserData, loadAccount, clearUserData} from '../../configure/XGlobal'
 // import {
 //     navigatePush,
 //     navigatePop,

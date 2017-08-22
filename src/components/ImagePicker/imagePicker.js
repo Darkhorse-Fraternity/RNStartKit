@@ -7,7 +7,7 @@
 'use strict';
 
 import ImagePicker from 'react-native-image-picker'
-import {Toast} from './'
+import Toast from 'react-native-simple-toast';
 import {StatusBar} from 'react-native'
 
 const DEFAULT_OPTIONS = {

@@ -12,9 +12,9 @@ import  {
     LayoutAnimation,
     TouchableOpacity,
     NativeModules,
-    Dimensions
+    Dimensions,
+    Platform
 } from 'react-native'
-import {OS} from '../../util/';
 import Toast from 'react-native-simple-toast';
 import {BCButton} from '../../components/Base/WBButton'
 import Button from 'react-native-button'
@@ -24,6 +24,7 @@ import {deepFontColor, backViewColor, blackFontColor, mainColor} from '../../con
 import {connect} from 'react-redux'
 import {register} from '../../redux/actions/login'
 import * as Animatable from 'react-native-animatable';
+import {checkPhoneNum} from '../../request/validation'
 const webUrl = 'https://static.dayi.im/static/fudaojun/rule.html?version=20160603182000';
 class LoginView extends Component {
   constructor(props: Object) {
@@ -275,7 +276,7 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   buttonSelectStyle: {
-    marginLeft: OS == 'ios' ? 29 / 2 : 27,
+    marginLeft: Platform.OS == 'ios' ? 29 / 2 : 27,
     flex: 1,
     height: 30,
     justifyContent: 'center',

@@ -2,7 +2,6 @@
 
 'use strict';
 
-import {throwIfMissing} from '../util';
 import Toast from 'react-native-simple-toast';
 import {defaultHost, httpHeaders, tag} from '../configure';
 import {addParams} from './useMeth';
@@ -109,6 +108,13 @@ function handlerError(urlpath: string, iParam: Object, oParam: Object) {
     }
 
 }
+
+function throwIfMissing(paramName:string=''):string {
+    throw new Error('Missing parameter'+paramName);
+    // return '';
+}
+
+
 
 function send({
     scheme = schemeType.https,

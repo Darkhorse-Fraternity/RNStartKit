@@ -3,7 +3,7 @@
 
 
 import React, {Component} from 'react';
-import ReactNative, {
+import  {
     NavigationExperimental,
     StyleSheet,
     Text,
@@ -13,7 +13,7 @@ import ReactNative, {
     Platform,
     LayoutAnimation,
 } from 'react-native';
-import imagePicker from '../util/imagePicker'
+import imagePicker from './imagePicker'
 import Button from 'react-native-button'
 import PropTypes from 'prop-types';
 // const source = require('../../source/img/pic_upload/pic_upload.png');

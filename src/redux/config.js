@@ -5,7 +5,7 @@
  */
 'use strict'
 
-import {loadUserData,loadAccount} from '../util/XGlobal'
+import {loadUserData,loadAccount} from '../configure/XGlobal'
 import React, {
     Platform,
     UIManager,

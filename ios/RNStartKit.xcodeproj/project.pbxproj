@@ -44,16 +44,9 @@
 		CC3E39B01E2623400019B85F /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC3E39AF1E2623400019B85F /* CoreTelephony.framework */; };
 		CC3E39B21E26234D0019B85F /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CC3E39B11E26234D0019B85F /* libsqlite3.0.tbd */; };
 		CC3E39B41E2624580019B85F /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC3E39B31E2624580019B85F /* TencentOpenAPI.framework */; };
-		CC4E422F1DF59D1E005783A6 /* ExportURLManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4E42261DF59D1E005783A6 /* ExportURLManager.m */; };
-		CC4E42301DF59D1E005783A6 /* UIViewController+URLManage.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4E42291DF59D1E005783A6 /* UIViewController+URLManage.m */; };
-		CC4E42311DF59D1E005783A6 /* URLManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4E422B1DF59D1E005783A6 /* URLManager.m */; };
-		CC4E42321DF59D1E005783A6 /* URLNavigation.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4E422D1DF59D1E005783A6 /* URLNavigation.m */; };
 		CC7959CA1E02A6B500FAA8EB /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC7959BB1E02A6A600FAA8EB /* libRCTPushNotification.a */; };
 		CCA664821DFFFFD500BD9511 /* libRCTCameraRoll.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CCA6646E1DFFFFC400BD9511 /* libRCTCameraRoll.a */; };
 		CCC010571DF9485700613165 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CCC010561DF9485700613165 /* InfoPlist.strings */; };
-		CCF7B9731F4BD4620006AD0A /* NSArray+EasyExtend.mm in Sources */ = {isa = PBXBuildFile; fileRef = CCF7B96E1F4BD4620006AD0A /* NSArray+EasyExtend.mm */; };
-		CCF7B9741F4BD4620006AD0A /* NSString+EasyExtend.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF7B9701F4BD4620006AD0A /* NSString+EasyExtend.m */; };
-		CCF7B9751F4BD4620006AD0A /* NSURL+EasyExtend.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF7B9721F4BD4620006AD0A /* NSURL+EasyExtend.m */; };
 		D71CAA7614784130A59C55F9 /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 03425A176E554E0CA0F9D1AB /* libRNImagePicker.a */; };
 		EA37A754FED54D1288E2F9B5 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ECCF4E078DE943C5B1B7BA60 /* Octicons.ttf */; };
 		FD58D12201884E4BB246296B /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D8A92630460414B84B548A3 /* Foundation.ttf */; };
@@ -403,23 +396,9 @@
 		CC3E39B11E26234D0019B85F /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		CC3E39B31E2624580019B85F /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TencentOpenAPI.framework; path = "../node_modules/react-native-qq/ios/RCTQQAPI/TencentOpenAPI.framework"; sourceTree = "<group>"; };
 		CC4548E71E03FBAC00A6CE93 /* RNStartKit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = RNStartKit.entitlements; path = RNStartKit/RNStartKit.entitlements; sourceTree = "<group>"; };
-		CC4E42251DF59D1E005783A6 /* ExportURLManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExportURLManager.h; sourceTree = "<group>"; };
-		CC4E42261DF59D1E005783A6 /* ExportURLManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportURLManager.m; sourceTree = "<group>"; };
-		CC4E42281DF59D1E005783A6 /* UIViewController+URLManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+URLManage.h"; sourceTree = "<group>"; };
-		CC4E42291DF59D1E005783A6 /* UIViewController+URLManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+URLManage.m"; sourceTree = "<group>"; };
-		CC4E422A1DF59D1E005783A6 /* URLManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLManager.h; sourceTree = "<group>"; };
-		CC4E422B1DF59D1E005783A6 /* URLManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLManager.m; sourceTree = "<group>"; };
-		CC4E422C1DF59D1E005783A6 /* URLNavigation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLNavigation.h; sourceTree = "<group>"; };
-		CC4E422D1DF59D1E005783A6 /* URLNavigation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLNavigation.m; sourceTree = "<group>"; };
 		CC7959AA1E02A6A600FAA8EB /* RCTPushNotification.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTPushNotification.xcodeproj; path = "../node_modules/react-native/Libraries/PushNotificationIOS/RCTPushNotification.xcodeproj"; sourceTree = "<group>"; };
 		CCA664661DFFFFC400BD9511 /* RCTCameraRoll.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTCameraRoll.xcodeproj; path = "../node_modules/react-native/Libraries/CameraRoll/RCTCameraRoll.xcodeproj"; sourceTree = "<group>"; };
 		CCC010561DF9485700613165 /* InfoPlist.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
-		CCF7B96D1F4BD4620006AD0A /* NSArray+EasyExtend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+EasyExtend.h"; sourceTree = "<group>"; };
-		CCF7B96E1F4BD4620006AD0A /* NSArray+EasyExtend.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "NSArray+EasyExtend.mm"; sourceTree = "<group>"; };
-		CCF7B96F1F4BD4620006AD0A /* NSString+EasyExtend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+EasyExtend.h"; sourceTree = "<group>"; };
-		CCF7B9701F4BD4620006AD0A /* NSString+EasyExtend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+EasyExtend.m"; sourceTree = "<group>"; };
-		CCF7B9711F4BD4620006AD0A /* NSURL+EasyExtend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+EasyExtend.h"; sourceTree = "<group>"; };
-		CCF7B9721F4BD4620006AD0A /* NSURL+EasyExtend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+EasyExtend.m"; sourceTree = "<group>"; };
 		ECCF4E078DE943C5B1B7BA60 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		F3027EBB794D45B4AC82FCB0 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		FE3142187D364EDDA87EED18 /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNImagePicker.xcodeproj; path = "../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj"; sourceTree = "<group>"; };
@@ -573,8 +552,6 @@
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
-				CCF7B96B1F4BD4620006AD0A /* Lib */,
-				CC4E42201DF59D1E005783A6 /* Util */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
@@ -713,37 +690,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		CC4E42201DF59D1E005783A6 /* Util */ = {
-			isa = PBXGroup;
-			children = (
-				CC4E42241DF59D1E005783A6 /* URLManager */,
-			);
-			path = Util;
-			sourceTree = "<group>";
-		};
-		CC4E42241DF59D1E005783A6 /* URLManager */ = {
-			isa = PBXGroup;
-			children = (
-				CC4E42251DF59D1E005783A6 /* ExportURLManager.h */,
-				CC4E42261DF59D1E005783A6 /* ExportURLManager.m */,
-				CC4E42271DF59D1E005783A6 /* URLManager */,
-			);
-			path = URLManager;
-			sourceTree = "<group>";
-		};
-		CC4E42271DF59D1E005783A6 /* URLManager */ = {
-			isa = PBXGroup;
-			children = (
-				CC4E42281DF59D1E005783A6 /* UIViewController+URLManage.h */,
-				CC4E42291DF59D1E005783A6 /* UIViewController+URLManage.m */,
-				CC4E422A1DF59D1E005783A6 /* URLManager.h */,
-				CC4E422B1DF59D1E005783A6 /* URLManager.m */,
-				CC4E422C1DF59D1E005783A6 /* URLNavigation.h */,
-				CC4E422D1DF59D1E005783A6 /* URLNavigation.m */,
-			);
-			path = URLManager;
-			sourceTree = "<group>";
-		};
 		CC4E426D1DF59F03005783A6 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -800,27 +746,6 @@
 				CCF7B9431F4BD2380006AD0A /* libLRDRCTSimpleToast.a */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		CCF7B96B1F4BD4620006AD0A /* Lib */ = {
-			isa = PBXGroup;
-			children = (
-				CCF7B96C1F4BD4620006AD0A /* Other */,
-			);
-			path = Lib;
-			sourceTree = "<group>";
-		};
-		CCF7B96C1F4BD4620006AD0A /* Other */ = {
-			isa = PBXGroup;
-			children = (
-				CCF7B96D1F4BD4620006AD0A /* NSArray+EasyExtend.h */,
-				CCF7B96E1F4BD4620006AD0A /* NSArray+EasyExtend.mm */,
-				CCF7B96F1F4BD4620006AD0A /* NSString+EasyExtend.h */,
-				CCF7B9701F4BD4620006AD0A /* NSString+EasyExtend.m */,
-				CCF7B9711F4BD4620006AD0A /* NSURL+EasyExtend.h */,
-				CCF7B9721F4BD4620006AD0A /* NSURL+EasyExtend.m */,
-			);
-			path = Other;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1376,13 +1301,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
-				CC4E42321DF59D1E005783A6 /* URLNavigation.m in Sources */,
-				CCF7B9751F4BD4620006AD0A /* NSURL+EasyExtend.m in Sources */,
-				CC4E422F1DF59D1E005783A6 /* ExportURLManager.m in Sources */,
-				CC4E42311DF59D1E005783A6 /* URLManager.m in Sources */,
-				CCF7B9731F4BD4620006AD0A /* NSArray+EasyExtend.mm in Sources */,
-				CCF7B9741F4BD4620006AD0A /* NSString+EasyExtend.m in Sources */,
-				CC4E42301DF59D1E005783A6 /* UIViewController+URLManage.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
