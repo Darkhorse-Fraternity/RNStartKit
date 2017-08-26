@@ -14,19 +14,25 @@ import  store from '../configureStore'
 import {schemas} from '../scemes'
 import {normalize} from 'normalizr';
 import {addEntities} from '../module/normalizr'
-export const RESCODE = 'isSuccess'
-export const SUCCODE = '1'
-export const MSG = 'msg'
-export const DATA = 'results'
+export const RESCODE = 'code'
+export const SUCCODE = -1000
+export const MSG = 'error'
+export const DATA = 'data'
 
 
 export function reqY(params) {
     return send(params).then((response)=> {
         const contentType = response.headers.get("content-type")
-        const responseData  = contentType.indexOf("application/json") !== -1 ? response.json() : {}
-        if (response.ok) {
-            return responseData;
+        let responseData  = contentType.indexOf("application/json") !== -1 ? response.json() : {}
+        console.log('test:', response);
+        //对leancloud 的数据格式进行包装，做成通用型数据
+        if(!params.host && response.ok){
+
+            responseData = {data:responseData,code : -1000}
         }
+
+
+        return responseData;
     })
 }
 
@@ -47,8 +53,11 @@ export function reqS(params) {
 //加入msg
 export function reqM(params) {
     return reqS(params).then(response => {
-        // response[RESCODE] !== SUCCODE && console.log('Error:', response);
-        // response[RESCODE] !== SUCCODE && Toast.show(response.msg)
+        if(response[RESCODE]){
+            // response[RESCODE] !== SUCCODE && console.log('Error:', response);
+            response[RESCODE] !== SUCCODE && Toast.show(response.msg)
+        }
+
         return response
     })
 }

@@ -49,9 +49,9 @@ const webUrl = 'https://static.dayi.im/static/fudaojun/rule.html?version=2016060
         pushWebView: (params)=> {
             // dispatch(navigatePush(params));
         },
-        authCode: async (number)=> {
+        authCode:  (number)=> {
             const parmas = requestSmsCode(number)
-            return await req(parmas, AUTHCODE)
+            return  req(parmas, AUTHCODE)
         }
     })
 )
@@ -92,16 +92,17 @@ export  default class LoginView extends Component {
     async _onClickCode() {
         //发送验证码请求
         var self = this;
-        const res = this.props.authCode(this.state.phone)
-        if (res.data) {
+        const res = await this.props.authCode(this.state.phone)
+        if (!res.code) {
             Toast.show("发送成功!");
-            this.refs[2] && this.refs[2].focus()
             if (this.state.isTap == false) {
                 this.setState({isTap: true});
                 this.id = setInterval(function () {
                     self.time()
                 }, 1000)
             }
+         }else {
+            this.refs[2] && this.refs[2].focus()
         }
 
     }

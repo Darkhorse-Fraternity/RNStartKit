@@ -59,13 +59,12 @@ export function send({
         })
     ]);
     return requestPromise.then((response)=> {
-        if (response.ok) {
-            return response;
-        } else {
+        if (!response.ok) {
             const message = __DEV__ ?'接口请求错误:\n' + 'URL:\n' + urlpath + '\n参数:\n' + JSON.stringify(params) + ' \n回值:\n'
             + response._bodyInit:response._bodyInit
-            throw  new Error(message)
+            console.log('test:', message);
         }
+        return response;
     })
 }
 
