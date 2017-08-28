@@ -17,30 +17,25 @@ import {addEntities} from '../module/normalizr'
 export const RESCODE = 'code'
 export const SUCCODE = -1000
 export const MSG = 'error'
-export const DATA = 'data'
+export const DATA = 'results'
 
 
 export function reqY(params) {
     return send(params).then((response)=> {
         const contentType = response.headers.get("content-type")
-        let responseData  = contentType.indexOf("application/json") !== -1 ? response.json() : {}
-        console.log('test:', response);
-        //对leancloud 的数据格式进行包装，做成通用型数据
-        if(!params.host && response.ok){
-
-            responseData = {data:responseData,code : -1000}
-        }
-
-
+        let responseData = contentType.indexOf("application/json") !== -1 ? response.json() : {}
         return responseData;
     })
 }
 
 export function reqS(params) {
-    // const state = store.getState()
-    // const isConnected = state.util.get('isConnected')
-    // if(!isConnected) return
+
     return reqY(params).then(response => {
+
+        //对leancloud 的数据格式进行包装，兼容通用数据模型
+        if (!params.host && !response[RESCODE]) {
+            response = {[DATA]: response, [RESCODE]: -1000}
+        }
 
         // if (response[RESCODE] === "2" || response[RESCODE] === "3") {
         //     console.log('response[RESCODE]:', response[RESCODE]);
@@ -53,9 +48,9 @@ export function reqS(params) {
 //加入msg
 export function reqM(params) {
     return reqS(params).then(response => {
-        if(response[RESCODE]){
-            // response[RESCODE] !== SUCCODE && console.log('Error:', response);
-            response[RESCODE] !== SUCCODE && Toast.show(response.msg)
+        if (response[RESCODE]) {
+            __DEV__ && response[RESCODE] !== SUCCODE && console.log('message:', response[MSG]);
+            response[RESCODE] !== SUCCODE && Toast.show(response[MSG], Toast.LONG)
         }
 
         return response
@@ -74,7 +69,7 @@ export function cleanData(key, response, option) {
     if (option.normalizr && data) {
         data = normalizr(key, data)
         const dispatch = store.dispatch
-        data && data.entities&&  dispatch(addEntities(data.entities))
+        data && data.entities && dispatch(addEntities(data.entities))
         return data.result[DATA]
     }
     return data;
@@ -82,47 +77,52 @@ export function cleanData(key, response, option) {
 
 
 //加入 根据key 存入store
-export function req(params: Object, key: string, option: Object = {}) {
+export function reqA(params: Object, key: string, option: Object = {}) {
     if (!key) {
         return reqM(params)
     }
     const dispatch = store.dispatch
     dispatch(requestStart(key))
     return reqM(params).then(response => {
-            const data = cleanData(key, response, option)
-            dispatch(requestSucceed(key, data))
-              return response
+        if(response[RESCODE]){
+            if(response[RESCODE] === SUCCODE){
+                const data = cleanData(key, response, option)
+                dispatch(requestSucceed(key, data))
+            }else {
+                dispatch(requestFailed(key, response[MSG]))
+            }
+        }
+        return response
     }).catch(e => {
-        console.warn('message:', e.message);
-        Toast.show(e.message,Toast.LONG)
-        dispatch(requestFailed(key, e.message))
+        if(e.message){
+            console.log('message:', e.message)
+            Toast.show(e.message, Toast.LONG)
+        }
+        if(key){
+            dispatch(requestFailed(key, e.message))
+        }
+
     })
 }
+
+//不返回错误码，直接通过通用错误处理渠道。
+export function req(params: Object, key: string, option: Object = {}) {
+    return reqA(params,key,option).then(response =>{
+            if(response[RESCODE] === SUCCODE ){
+                return response[DATA]
+            }else{
+                throw new Error();
+            }
+        })
+}
+
 
 export function load(params: Object, key: stringg) {
     return req(params, key, {'normalizr': true})
 }
 
 
-export function request(key: string, params: Object, callBack: Function): Function {
-    const callback2 = callBack
-    return (dispatch) => {
 
-        dispatch(requestStart(key));//当page 不为0 的时候则表示不是加载多页。
-        reqM(params).then(response => {
-            if (callback2) callback2(response)
-            if (response[RESCODE] === SUCCODE) {
-                dispatch(requestSucceed(key, response))
-            } else {
-                dispatch(requestFailed(key, response.msg))
-            }
-
-        }).catch(e => {
-            Toast.show(e.message)
-            dispatch(requestFailed(key, e.message))
-        })
-    }
-}
 
 function requestSucceed(key: string, data: Object): Object {
     return {

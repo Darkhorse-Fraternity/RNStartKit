@@ -29,7 +29,9 @@ import {addEntities} from '../module/normalizr'
 import {
     RESCODE,
     SUCCODE,
-    req,
+    DATA,
+    MSG,
+    reqA,
     cleanData
 } from './req'
 
@@ -43,13 +45,20 @@ export function listReq(key: string = '', params: Object, more: bool = false, op
         if (load != LIST_LOAD_DATA && load != LIST_LOAD_MORE) {//not serial
             // params.params[pageKey] = page + '';
             dispatch(_listStart(page !== 0, load == undefined, listKey));//当page 不为0 的时候则表示不是加载多页。
-            req(params).then(response => {
-                    const data = cleanData(key, response, {...option,'normalizr':true})
-                    if(!data){
-                        console.log( key,'数据为空');
-                        return dispatch(_listFailed(listKey));
+            reqA(params).then(response => {
+                if(response[RESCODE]){
+                    if(response[RESCODE] === SUCCODE){
+                        const data = cleanData(key, response[DATA], {...option,'normalizr':true})
+                        if(!data){
+                            console.log( key,response[DATA],'数据为空');
+                            return dispatch(_listFailed(listKey));
+                        }
+                        dispatch(_listSucceed(data, page, listKey));
+                    }else {
+                        console.log('response:', response);
+                        dispatch(_listFailed(key, response[MSG]))
                     }
-                    dispatch(_listSucceed(data, page, listKey));
+                }
             }).catch((e) => {
                 console.log('error:', e.message)
                 Toast.show(e.message)
@@ -72,7 +81,7 @@ export function listLoad(key: string, params: Object, more: bool = false, dataMa
             req(params).then(response => {
                 // console.log('response:', response);
                 if (response[RESCODE] === SUCCODE) {
-                    const res = response.data||response
+                    const res = response[DATA]||response
                     let data = dataMap ? dataMap(res) : res.results
                     // console.log('response:', data);
                     dispatch(_listSucceed(data, page, key));

@@ -34,7 +34,7 @@ const webUrl = 'https://static.dayi.im/static/fudaojun/rule.html?version=2016060
     state =>({
         //data:state.req.get()
         userData: state.login,
-        auth:state.req.get(AUTHCODE)
+        auth: state.req.get(AUTHCODE)
     }),
     (dispatch, props) =>({
         //...bindActionCreators({},dispatch),
@@ -49,9 +49,9 @@ const webUrl = 'https://static.dayi.im/static/fudaojun/rule.html?version=2016060
         pushWebView: (params)=> {
             // dispatch(navigatePush(params));
         },
-        authCode:  (number)=> {
+        authCode: (number)=> {
             const parmas = requestSmsCode(number)
-            return  req(parmas, AUTHCODE)
+            return req(parmas)
         }
     })
 )
@@ -92,18 +92,15 @@ export  default class LoginView extends Component {
     async _onClickCode() {
         //发送验证码请求
         var self = this;
-        const res = await this.props.authCode(this.state.phone)
-        if (!res.code) {
-            Toast.show("发送成功!");
-            if (this.state.isTap == false) {
-                this.setState({isTap: true});
-                this.id = setInterval(function () {
-                    self.time()
-                }, 1000)
-            }
-         }else {
-            this.refs[2] && this.refs[2].focus()
+        await this.props.authCode(this.state.phone)
+        Toast.show("发送成功!");
+        if (this.state.isTap == false) {
+            this.setState({isTap: true});
+            this.id = setInterval(function () {
+                self.time()
+            }, 1000)
         }
+
 
     }
 
@@ -220,7 +217,7 @@ export  default class LoginView extends Component {
                         <BCButton containerStyle={styles.buttonContainerStyle}
                                   disabled={!codeEnable||authLoad}
                                   isLoad={authLoad}
-                                  loadColor = 'rgb(230,230,230)'
+                                  loadColor='rgb(230,230,230)'
                             //styleDisabled={{fontWeight:'normal'}}
                                   onPress={this._onClickCode.bind(this)}
                                   style={{fontWeight:'400',fontSize:14,color:mainColor}}
@@ -257,7 +254,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: 'transparent',
         paddingTop: 20,
-        height:Dimensions.get('window').height - 64,
+        height: Dimensions.get('window').height - 64,
     },
 
 

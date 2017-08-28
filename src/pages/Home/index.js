@@ -115,10 +115,11 @@ export  default  class Home extends Component {
                     )}
                     {isLogin && (<CardView
                         animation="slideInDown"
+                        navigation={this.props.navigation}
                         onScroll={(e)=>{
                              const x =  e.nativeEvent.contentOffset.x
                             if(x<-80){
-                                console.log('test:', x);
+                                {/*console.log('test:', x);*/}
                                  Pop.show(<Menu/>,{maskStyle:{backgroundColor:'transparent'}})
                             }
 
@@ -135,7 +136,6 @@ const height = Dimensions.get('window').height
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
         backgroundColor: '#F5FCFF',
     },
     bc: {
@@ -156,8 +156,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 15,
     },
     main: {
-        flexDirection: 'row',
-        alignItems: 'center',
+        flex:1,
     },
     loginBg: {
         width: width,

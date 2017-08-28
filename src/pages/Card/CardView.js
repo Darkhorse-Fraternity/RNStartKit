@@ -61,7 +61,7 @@ Animatable.initializeRegistryWithDefinitions({cloudMoveLeft})
             dispatch(search(false, {
                 where: {
                     ...selfUser(),
-                    statu: 'start'
+                    statu: 'start1'
                 },
                 order: 'doneDate'
 
@@ -119,9 +119,9 @@ Animatable.initializeRegistryWithDefinitions({cloudMoveLeft})
         refresh: async(data) => {
             const id = data.objectId
             const param = {
-                time:  0 ,
+                time: 0,
                 statu: 'start',
-                cycle: data.cycle + 1 ,
+                cycle: data.cycle + 1,
             }
 
             const res = await  await update(id, param, ICARD)
@@ -173,7 +173,7 @@ export  default  class Home extends Component {
     }
 
 
-    __settingView = ({item, index},data)=> {
+    __settingView = ({item, index}, data)=> {
         const self = this
         return (<View>
             <BounceBtn
@@ -249,7 +249,7 @@ export  default  class Home extends Component {
             if (!data.setting) {
                 return this.__flagView({item, index}, data)
             } else {
-                return this.__settingView({item, index},data)
+                return this.__settingView({item, index}, data)
             }
 
         }
@@ -279,11 +279,27 @@ export  default  class Home extends Component {
 
 
     render(): ReactElement<any> {
-        const data = this.props.data.toJS().listData
+
         // const navigation = this.props.navigation
         // console.log('test:',typeof View());
+        const statu = this.props.data.get('loadStatu')
 
+        if (statu === 'LIST_NO_DATA') {
+            return (
+                <View style={{flex:1,alignItems:'center',justifyContent:'center',marginTop:-100}}>
+                    <TouchableOpacity
+                        style={styles.noDataBc}
+                        onPress={()=>{
+                        this.props.navigation.navigate('Creat')
+                }}>
+                        <Icon name="md-add" color="white" size={50}/>
+                    </TouchableOpacity>
+                    <Text style={{marginTop:10}}>新增一个卡片吧</Text>
+                </View>
+            )
+        }
 
+        const data = this.props.data.toJS().listData
         return (
             <List
                 onScroll={this.props.onScroll}
@@ -358,12 +374,21 @@ const styles = StyleSheet.create({
 
     done: {
         fontSize: 17,
-        marginBottom:20
+        marginBottom: 20
     },
     toper: {
         width: 200,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center'
+    },
+    noDataBc: {
+        backgroundColor: '#fabc46',
+        width: 100,
+        height: 100,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 50,
+
     }
 })

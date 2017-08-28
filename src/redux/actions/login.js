@@ -15,7 +15,7 @@ import {saveAccount,saveUserData, loadAccount, clearUserData} from '../../config
 //     navigatePopToIndex,
 //     navigateReplaceIndex
 // } from './nav'
-import {req,SUCCODE,MSG,DATA} from './req'
+import {req} from './req'
 import { NavigationActions } from 'react-navigation';
 import {setLeanCloudSession,setAPPAuthorization} from '../../configure'
 // *** Action Types ***
@@ -105,19 +105,8 @@ export function register(state:Object):Function {
         dispatch(_loginRequest());
 
         return req(params).then((response)=>{
-            console.log('test:', response);
-            if(response.code === SUCCODE){
-
-                dispatch(_loginSucceed(response[DATA]));
-                // dispatch(NavigationActions.navigate({ routeName: 'Home'}))
-            }else {
-                console.log('_loginFailed:', response[MSG]);
-                Toast.show(response[MSG])
-                dispatch(_loginFailed());
-            }
+                dispatch(_loginSucceed(response));
         }).catch(e=>{
-            console.log('_loginFailed:', e.message);
-                Toast.show(e.message)
             dispatch(_loginFailed());
         })
     }
