@@ -25,6 +25,6 @@ export function selfUser() {
 }
 
 export function iCard(id) {
-    return pointModel(iCard.name,id)
+    return pointModel('iCard',id)
 }
 

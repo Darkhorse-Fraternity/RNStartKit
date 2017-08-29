@@ -9,7 +9,6 @@ export const REQUEST_SUCCEEED = 'REQUEST_SUCCEEED'
 export const REQUEST_FAILED = 'REQUEST_FAILED'
 export const REQUESR_CHANGE_DATA = 'REQUESR_CHANGE_DATA'
 import Toast from 'react-native-simple-toast';
-import {logout} from './login'
 import  store from '../configureStore'
 import {schemas} from '../scemes'
 import {normalize} from 'normalizr';
@@ -31,10 +30,9 @@ export function reqY(params) {
 export function reqS(params) {
 
     return reqY(params).then(response => {
-
         //对leancloud 的数据格式进行包装，兼容通用数据模型
         if (!params.host && !response[RESCODE]) {
-            response = {[DATA]: response, [RESCODE]: -1000}
+            response = {[DATA]: response, [RESCODE]:SUCCODE}
         }
 
         // if (response[RESCODE] === "2" || response[RESCODE] === "3") {
@@ -124,7 +122,7 @@ export function load(params: Object, key: stringg) {
 
 
 
-function requestSucceed(key: string, data: Object): Object {
+export  function requestSucceed(key: string, data: Object): Object {
     return {
         type: REQUEST_SUCCEEED,
         load: false,
@@ -140,7 +138,7 @@ function requestSucceed(key: string, data: Object): Object {
  * @param  {[type]} response:Object [description]
  * @return {[type]}                 [description]
  */
-function requestFailed(key: string, err: any): Object {
+export function requestFailed(key: string, err: any): Object {
     return {
         type: REQUEST_FAILED,
         load: false,
@@ -154,7 +152,7 @@ function requestFailed(key: string, err: any): Object {
  * @param  {[type]} response:Object [description]
  * @return {[type]}                 [description]
  */
-function requestStart(key: string): Object {
+export function requestStart(key: string): Object {
     return {
         type: REQUEST_LOAD,
         load: true,

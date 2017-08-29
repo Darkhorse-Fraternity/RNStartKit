@@ -60,7 +60,7 @@ Animatable.initializeRegistryWithDefinitions({heightZoomIn})
             const res = await update(id, param, ICARD)
             const entity = {
                 ...param,
-                ...res
+                ...res,
             }
             // dispatch(addEntities({
             //     [ICARD]: {

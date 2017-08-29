@@ -19,9 +19,9 @@ import {
 } from 'react-native'
 import {connect} from 'react-redux'
 import * as Animatable from 'react-native-animatable';
-import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
-export const Btn = Animatable.createAnimatableComponent(TouchableOpacity);
-import {bindActionCreators} from 'redux';
+import {addEntities} from '../../redux/module/normalizr'
+import {update} from '../../redux/module/leancloud'
+import {ICARD} from '../../redux/reqKeys'
 import Icon from 'react-native-vector-icons/Ionicons'
 //static displayName = OptionView
 
@@ -29,6 +29,7 @@ export const StaticOption = {
     notifyTime: '20:00',
     period: '7',
     notifyText: '',
+    record:[]
 }
 
 @connect(
@@ -37,6 +38,24 @@ export const StaticOption = {
     }),
     dispatch =>({
         //...bindActionCreators({},dispatch),
+        refresh:async (data,op)=>{
+            const id = data.objectId
+            const param = {
+                ...op
+            }
+
+            const res =   await update(id, param, ICARD)
+
+            const entity = {
+                ...param,
+                ...res
+            }
+            dispatch(addEntities({
+                [ICARD]: {
+                    [entity.objectId]: entity
+                }
+            }))
+        }
     })
 )
 
@@ -45,9 +64,17 @@ export const StaticOption = {
 export  default  class OptionView extends Component {
     constructor(props: Object) {
         super(props);
+
+        let propsOption = StaticOption
+        if(props.navigation){
+            const data = props.navigation.state.params.opData
+            propsOption = {notifyTime:data.notifyTime,
+                notifyText:data.notifyText||StaticOption.notifyText}
+        }
         this.state = {
             option: 0,
             ...StaticOption,
+            ...propsOption,
             type: 'notifyTime'
         }
     }
@@ -59,7 +86,8 @@ export  default  class OptionView extends Component {
         // const {state} = navigation;
         // const {params} = state;
         return {
-            title: '主页',
+            title: '修改配置',
+            headerLeft: <View/>
         }
     };
 
@@ -73,7 +101,17 @@ export  default  class OptionView extends Component {
             this.setState({option: 0})
         } else {
             const {option, type, ...other} = this.state
-            this.props.goBack && this.props.goBack(other)
+
+            const revise = this.props.navigation
+            if(revise){
+                const data = this.props.navigation.state.params.opData
+                this.props.refresh(data,{notifyTime:other.notifyTime,
+                    notifyText:other.notifyText})
+                this.props.navigation.goBack()
+            }else {
+                this.props.goBack && this.props.goBack(other)
+            }
+
         }
     }
 
@@ -90,13 +128,16 @@ export  default  class OptionView extends Component {
     __renderItem = (props)=> {
         return (
             <Animatable.View animation="fadeInLeft"
+                             delay={Math.random() * 300}
             >
                 <TouchableOpacity
                     onPress={()=>{
                         this.setState({option:props.index,type:props.type})
                     }}
-                    style={[styles.item,{width:props.width}]}>
-                    <Text numberOfLines={1}>
+                    style={[styles.item]}>
+                    <Text
+                        style={{backgroundColor:'white',padding:15}}
+                        numberOfLines={1}>
                         {props.title}
                     </Text>
                 </TouchableOpacity>
@@ -154,10 +195,11 @@ export  default  class OptionView extends Component {
                 marginHorizontal:5,
                 backgroundColor:'white'}}>
                 <TextInput
+                    defaultValue={this.state.notifyText}
                     placeholderTextColor="rgba(180,180,180,1)"
                     //selectionColor={mainColor}
                     returnKeyType='done'
-                    //autoFocus={autoFocus}
+                    autoFocus={true}
                     maxLength={100}
                     //keyboardType={boardType}
                     style={styles.textInputStyle}
@@ -174,7 +216,43 @@ export  default  class OptionView extends Component {
     }
 
 
+    __remderRecord = ()=> {
+
+        const items = ['文字','图片']
+        const records = this.state.record
+
+        return (
+            <View style={styles.notifyTimeView}>
+                {items.map((item)=> {
+                    const index=  records.indexOf(item)
+                    const contain = index !== -1
+                    return (
+                        <TouchableOpacity
+                            onPress={()=>{
+                                if(contain){
+                                    records.splice(index,1)
+                                }else {
+                                    records.push(item)
+                                }
+
+                                this.setState({record:records})
+                            }}
+                            style={[styles.notifyTimeItem,
+                            {backgroundColor:contain?'#00abfb':'white'}]}
+                            key={item}>
+                            <Text style={{color:contain?'white':'black'}}>{item}</Text>
+                        </TouchableOpacity>)
+                })}
+            </View>
+        )
+
+    }
+
+
     render(): ReactElement<any> {
+        const revise = this.props.navigation
+        const notifyText = this.state.notifyText.length>0?this.state.notifyText:'未定义'
+        const record =  this.state.record.length == 0 ?'无':this.state.record.join('+')
         return (
             <View
                 onStartShouldSetResponder={()=>true}
@@ -186,30 +264,38 @@ export  default  class OptionView extends Component {
                 {this.state.option == 0 && (<ScrollView style={[styles.wrap]}>
                     <this.__renderItem
                         title={"提醒时间:   "+this.state.notifyTime}
-                        width={160}
                         type="notifyTime"
                         index={1}/>
                     <this.__renderItem
-                        title={"提醒文字"}
-                        width={110}
+                        title={"提醒文字:   "+ notifyText}
                         type="notifyText"
                         index={1}/>
-                    <this.__renderItem
+                    {!revise && (<this.__renderItem
                         title={"周期:   "+this.state.period +'天'}
-                        width={120}
                         type="period"
-                        index={1}/>
+                        index={1}/>)}
+                    {!revise && (<this.__renderItem
+                        title={"记录方式:   " + record }
+                        type="record"
+                        index={1}/>)}
 
                 </ScrollView>)}
                 {this.state.option == 1 &&
                 this.state.type == 'notifyTime' &&
                 this.__renderNotifyTime()}
+
                 {this.state.option == 1 &&
                 this.state.type == 'period' &&
                 this.__renderperiod()}
+
                 {this.state.option == 1 &&
                 this.state.type == 'notifyText' &&
                 this.__remderNotifyText()}
+
+                {this.state.option == 1 &&
+                this.state.type == 'record' &&
+                this.__remderRecord()}
+
                 {this.__remderBack()}
             </View>
         );
@@ -219,14 +305,12 @@ export  default  class OptionView extends Component {
 const styles = StyleSheet.create({
     wrap: {
         flex: 1,
+        backgroundColor: '#F5FCFF'
     },
     item: {
         marginTop: 10,
-        width: 200,
         flexDirection: 'row',
-        backgroundColor: 'white',
-        padding: 15,
-        paddingHorizontal: 20,
+        width:200
     },
     sureBtn: {
         width: 50,
@@ -256,7 +340,7 @@ const styles = StyleSheet.create({
     },
     textInputStyle: {
         // width:200,
-        height:40,
+        height: 40,
         marginLeft: 0,
         textAlign: 'left',
         fontSize: 14,

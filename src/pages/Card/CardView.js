@@ -17,10 +17,10 @@ import {
     Alert
 } from 'react-native'
 import {connect} from 'react-redux'
-import {bindActionCreators} from 'redux';
 import {logout} from '../../redux/actions/login'
-import {ICARD, IDONE} from '../../redux/reqKeys'
-import {add, search, update} from '../../redux/module/leancloud'
+import {ICARD, IDO} from '../../redux/reqKeys'
+import {add, search, update,batch} from '../../redux/module/leancloud'
+import {classUpdate,classCreatNewOne} from '../../request/leanCloud'
 import {selfUser, iCard} from '../../request/LCModle'
 import {addNormalizrEntity} from '../../redux/actions/list'
 import {addEntities} from '../../redux/module/normalizr'
@@ -61,7 +61,7 @@ Animatable.initializeRegistryWithDefinitions({cloudMoveLeft})
             dispatch(search(false, {
                 where: {
                     ...selfUser(),
-                    statu: 'start1'
+                    statu: 'start'
                 },
                 order: 'doneDate'
 
@@ -69,6 +69,7 @@ Animatable.initializeRegistryWithDefinitions({cloudMoveLeft})
             }, ICARD))
         },
         done: async(data) => {
+            //在这边添加新的判断
             const id = data.objectId
             const time = data.time + 1
             const param = {
@@ -77,11 +78,22 @@ Animatable.initializeRegistryWithDefinitions({cloudMoveLeft})
                 //cycle,
                 statu: time == data.period ? "stop" : "start"
             }
-            const res = await update(id, param, ICARD)
+
+            const iCardP = classUpdate(ICARD,id,param)
+            const iDoP = classCreatNewOne(IDO,{
+                ...selfUser(),
+                ...iCard(id)
+            })
+            const res = await batch([iCardP,iDoP])
+            // const res = await update(id, param, ICARD)
+
+
+
             const entity = {
                 ...param,
-                ...res
+                ...(res[0].success)
             }
+
             dispatch(addEntities({
                 [ICARD]: {
                     [entity.objectId]: entity
@@ -106,7 +118,8 @@ Animatable.initializeRegistryWithDefinitions({cloudMoveLeft})
             const res = await update(id, param, ICARD)
             const entity = {
                 ...param,
-                ...res
+                ...res,
+                setting:false,
             }
             dispatch(addEntities({
                 [ICARD]: {
@@ -180,8 +193,10 @@ export  default  class Home extends Component {
                 color="#rgb(136,175,160)"
                 radius={60}
                 moveColor="#rgba(136,175,160,0.4)"
-                onPress={()=>{}}
-                title="修改模式"/>
+                onPress={()=>{
+                    this.props.navigation.navigate('OptionView',{opData:data})
+                }}
+                title="修改配置"/>
             <View style={{height:20}}/>
             <BounceBtn
                 radius={60}

@@ -64,7 +64,7 @@ export  default class LoginView extends Component {
             time: 60,
             codeName: '',
             phone: __DEV__ ? '13588833404' : "", //号码
-            ymCode: __DEV__ ? '881743' : "", //验证码
+            ymCode: __DEV__ ? '007342' : "", //验证码
             isTap: false,
         };
     }

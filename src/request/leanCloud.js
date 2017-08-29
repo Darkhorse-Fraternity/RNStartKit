@@ -265,7 +265,7 @@ export function classDelete(className:string,objectId:string,params:Object):Obje
 export function classBatch(requests:[Object]):Object{
   const  newRequests = requests.map((request,i)=>{
     return {
-      path:'1.1'+request.path,
+      path:'/1.1'+request.path,
       method:request.method,
       body:request.params,
     }
@@ -273,7 +273,7 @@ export function classBatch(requests:[Object]):Object{
   return {
     path:'/batch',
     method:methodType.post,
-    params:newRequests,
+    params:{requests:newRequests},
   }
 }
 
