@@ -5,7 +5,7 @@
  */
 'use strict'
 
-import {loadUserData,loadAccount} from '../configure/XGlobal'
+import {loadUserData} from '../configure/XGlobal'
 import React, {
     Platform,
     UIManager,
@@ -15,7 +15,7 @@ import React, {
     BackHandler,
     NetInfo
 } from 'react-native';
-import {loginSucceed,_loginFailed} from './actions/login'
+import {loginSucceed} from './actions/user'
 // import {navigatePush} from './actions/nav'
 import pushConfig from '../configure/push'
 import {dataStorage} from '../redux/actions/util'
@@ -105,27 +105,15 @@ export function preConfig():Function {
     return (dispatch,getState) =>{
         Platform.OS != 'ios' && _backAnroid(getState)
         _isConnected(dispatch)
-        // dispatch(tabSwitch(0))
-        //dispatch(navigatePush({key:'Home',applyAnimation:false}))
         loadUserData().then((response)=>{
             dispatch(loginSucceed(response))
-            // console.log('test:',response)
-            // dispatch(NavigationActions.navigate({ routeName: 'Home'}))
-            dispatch(__preConfigResult())
         }).catch((error)=>{
             console.log('loadUserDataError:',error.message)
-            dispatch(_loginFailed())
         });
 
     }
 
 }
 
-function __preConfigResult():Object {
 
-    return {
-        type: PRE_CONFIG_STATU,
-        status:'done',
-    };
-}
 

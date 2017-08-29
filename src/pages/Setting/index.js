@@ -16,7 +16,7 @@ import {
 import Toast from 'react-native-simple-toast';
 import {blackFontColor, backViewColor, mainColor} from '../../configure';
 import {connect} from 'react-redux'
-import {logout} from '../../redux/actions/login'
+import {logout} from '../../redux/actions/user'
 import {dataStorage} from '../../redux/actions/util'
 import DeviceInfo from 'react-native-device-info'
 const styles = StyleSheet.create({

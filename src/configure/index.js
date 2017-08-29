@@ -6,31 +6,15 @@ import {LeanCloud_APP_ID,LeanCloud_APP_KEY} from './leancloud'
 const defaultHost = !__DEV__ ?
     /*release*/   'api.leancloud.cn/1.1' :
     /*debug*/     'api.leancloud.cn/1.1'
-    //'task.dayi.im'
 
-//
-// const LeanCloud_APP_ID = 'hd16vijfry1s8lpklrhbqpccl77erki0836v4vlrilnl35ui';
-// const LeanCloud_APP_KEY = 'gz0v89hdmstmq3x4swyuhpxdi5lyg4wtcjq1iuxxcaziwobb';
+
 let LeanCloud_APP_Session = '';
 
 function setLeanCloudSession(session:string){
   LeanCloud_APP_Session = session;
 }
 
-// var httpHeader = {
-//     // 'Content-Type': 'multipart/form-data',
-//     // token: userManager.userData.user_token || "",
-//     // versionCode: __DEV__ ? (DeviceInfo.getVersion() + 'Dev')
-//     //     : DeviceInfo.getVersion() || "",
-//     // platform: DeviceInfo.getBundleId() || "",
-//     // deviceInfo: encodeURIComponent(DeviceInfo.getDeviceName()) || "",
-//     // deviceId: DeviceInfo.getUniqueID() || "",
-//     // apiVersion: '1.0',
-//     "Content-Type": "application/json",
-//     "X-LC-Key": LeanCloud_APP_KEY,
-//     "X-LC-Id": LeanCloud_APP_ID,
-//     "X-LC-Session":LeanCloud_APP_Session,
-// }
+
 
 function httpHeaders(needSession:bool):Object{
 
@@ -51,7 +35,6 @@ function httpHeaders(needSession:bool):Object{
 }
 
 
-const tag = 1;
 
 
 //主题色彩
@@ -75,7 +58,6 @@ const themeColorConfig = {
     placeholderTextColor: '#b7b7b7',
 }
 
-const isLogin = false;
 
 //主题字体 这边看是否需要把CSS 样式进行抽取
 const themeFontConfig = {}
@@ -85,7 +67,5 @@ module.exports = {
     defaultHost,
     httpHeaders,
     ...themeColorConfig,
-    isLogin,
-    tag,
     setLeanCloudSession,
 };

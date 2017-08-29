@@ -14,7 +14,7 @@ import {
     LOGOUT,
     LOAD_ACCOUNT,
     UPDATE_USERDATA
-} from '../actions/login'
+} from '../actions/user'
 import {CHANGEAVATAR} from '../actions/util'
 import {saveUserData} from '../../configure/XGlobal'
 const initialLoginState = {
@@ -33,7 +33,7 @@ const initialLoginState = {
  * @param  {[type]} action:Object atcions 提交的会在这边显示。
  * @return {[type]}         返回给component 的state 值。
  */
-export default function loginState(state:immutable.Map<string,any> = initialLoginState, action:Object) {
+export default function userState(state:immutable.Map<string,any> = initialLoginState, action:Object) {
     switch (action.type) {
         case LOAD_ACCOUNT:
         case ACCOUNT_CHANGE:
@@ -78,8 +78,4 @@ export default function loginState(state:immutable.Map<string,any> = initialLogi
 }
 
 
-// const loginReducers = combineReducers({
-// 	loginState
-// })
-//
-// export default loginReducers
+

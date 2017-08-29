@@ -24,7 +24,7 @@ import {AUTHCODE} from '../../redux/reqKeys'
 import {requestSmsCode} from '../../request/leanCloud'
 import {deepFontColor, backViewColor, blackFontColor, mainColor} from '../../configure'
 import {connect} from 'react-redux'
-import {register} from '../../redux/actions/login'
+import {register} from '../../redux/actions/user'
 import * as Animatable from 'react-native-animatable';
 import {checkPhoneNum} from '../../request/validation'
 const webUrl = 'https://static.dayi.im/static/fudaojun/rule.html?version=20160603182000';
@@ -33,7 +33,7 @@ const webUrl = 'https://static.dayi.im/static/fudaojun/rule.html?version=2016060
 @connect(
     state =>({
         //data:state.req.get()
-        userData: state.login,
+        userData: state.user,
         auth: state.req.get(AUTHCODE)
     }),
     (dispatch, props) =>({

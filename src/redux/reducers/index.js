@@ -1,7 +1,7 @@
 /* @flow */
 
 'use strict';
-import login  from './login'
+import user  from './user'
 import util from './util'
 import list from './list'
 import share from './share'
@@ -11,7 +11,7 @@ import normalizr from '../module/normalizr'
 export {
     normalizr,
     req,
-    login,
+    user,
     util,
     list,
     share,

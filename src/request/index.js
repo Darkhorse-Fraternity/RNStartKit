@@ -2,8 +2,7 @@
 
 'use strict';
 
-import Toast from 'react-native-simple-toast';
-import {defaultHost, httpHeaders, tag} from '../configure';
+import {defaultHost, httpHeaders} from '../configure';
 import {addParams} from './useMeth';
 
 

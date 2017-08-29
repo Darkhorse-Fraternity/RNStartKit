@@ -17,6 +17,7 @@
     "react-native-animatable": "^1.2.3",
     "react-native-blur": "^3.1.3",
     "react-native-button": "^2.1.0",
+    "react-native-default-preference": "^1.1.1",
     "react-native-device-info": "git+https://github.com/Darkhorse-Fraternity/react-native-device-info.git",
     "react-native-dialogs": "0.0.19",
     "react-native-image-picker": "0.26.3",

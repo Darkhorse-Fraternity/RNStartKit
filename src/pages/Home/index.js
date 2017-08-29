@@ -47,8 +47,8 @@ Animatable.initializeRegistryWithDefinitions({cloudMoveLeft})
 
 @connect(
     state =>({
-        isLogin: state.login.isLogin,
-        localLoad: state.login.localLoad,
+        isLogin: state.user.isLogin,
+        localLoad: state.user.localLoad,
     }),
     (dispatch, props) =>({
         //...bindActionCreators({},dispatch)

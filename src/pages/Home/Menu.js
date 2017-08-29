@@ -22,7 +22,7 @@ import {BlurView as BlurViewIOS} from 'react-native-blur';
 const BlurView = Platform.OS == 'ios' ? BlurViewIOS : View
 import Icon from 'react-native-vector-icons/Ionicons'
 import Pop from '../../components/Pop'
-import {logout} from '../../redux/actions/login'
+import {logout} from '../../redux/actions/user'
 import * as Animatable from 'react-native-animatable';
 import { NavigationActions } from 'react-navigation';
 export const Btn = Animatable.createAnimatableComponent(TouchableOpacity);

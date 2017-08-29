@@ -39,7 +39,7 @@ import OptionView,{StaticOption} from './OptionView'
             // console.log('test:', StaticOption)
 
             const state = getState()
-            const user = state.login.data;
+            const user = state.user.data;
             const param = {
                 title,
                 cycle: 0,

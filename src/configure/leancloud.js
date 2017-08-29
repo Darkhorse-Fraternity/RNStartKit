@@ -5,15 +5,16 @@
 'use strict';
 
 
-let LeanCloud_APP_ID = 'cmwLjTYWoYfN4jCgPR49rsi6-gzGzoHsz';
-let LeanCloud_APP_KEY = 'S6wxWnhQfL9rBLo2ngEctK0u';
-if(__DEV__){
-     LeanCloud_APP_ID = 'q81jdsbi5qp679fi5o46i5nppjgycztgivwj30707xfvehzt';
-     LeanCloud_APP_KEY = 'y6ffzv6mq705pya2pd6kgl1ni1vwlppesis7f1qi19afg5nn';
-}
+const  id_dev = 'q81jdsbi5qp679fi5o46i5nppjgycztgivwj30707xfvehzt'
+const  key_dev = 'y6ffzv6mq705pya2pd6kgl1ni1vwlppesis7f1qi19afg5nn'
+
+const  id_pro = 'cmwLjTYWoYfN4jCgPR49rsi6'
+const  key_pro = 'S6wxWnhQfL9rBLo2ngEctK0u'
 
 
-module.exports = {
-    LeanCloud_APP_ID,
-    LeanCloud_APP_KEY
-};
+export const LeanCloud_APP_ID = __DEV__?id_dev:id_pro
+export const  LeanCloud_APP_KEY = __DEV__?key_dev:key_pro
+
+
+
+

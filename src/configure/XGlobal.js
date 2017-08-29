@@ -2,9 +2,9 @@
 'use strict';
 import {Linking,Alert,AsyncStorage} from 'react-native';
 import Storage from 'react-native-storage';
+import DefaultPreference from 'react-native-default-preference';
 
-
-var storage = new Storage({
+const storage = new Storage({
     // maximum capacity, default 1000
     size: 1000,
 
@@ -14,7 +14,7 @@ var storage = new Storage({
 
     // expire time, default 1 day(1000 * 3600 * 24 milliseconds).
     // can be null, which means never expire.
-    defaultExpires: 1000 * 3600 * 24,
+    defaultExpires: 36 * 1000 * 3600 * 24,
 
     // cache data in the memory. default is true.
     enableCache: true,
@@ -47,13 +47,7 @@ const Save_UserData_Key = 'saveUserData';
 const Save_FirstTime_Key = 'saveFirstTime';
 const Save_Account_Key = 'saveAccount';
 export function saveUserData(data:Object){
-    // userManager.userData.user_token =  data.user_token;
-
-
-    //从普通按钮中来的。
-    // RCTDeviceEventEmitter.emit("userIsLogin",
-    //   {"isLogin":userManager.isLogin,"isFromStorage":false});
-    global.storage.save({
+   storage.save({
         key: Save_UserData_Key,  //注意:请不要在key中使用_下划线符号!
         data: data,
     });
@@ -61,21 +55,21 @@ export function saveUserData(data:Object){
 
 export function saveFirstTime()
 {
-    global.storage.save({
+    storage.save({
         key: Save_FirstTime_Key,  //注意:请不要在key中使用_下划线符号!
         data: false,
     });
 }
 export function loadFirstJoin(){
 
-  return  global.storage.load({
+  return  storage.load({
         key: Save_FirstTime_Key,
     })
 }
 
 export function clearUserData() {
 
-    global.storage.remove({
+    storage.remove({
         key:Save_UserData_Key
     });
 }
@@ -88,7 +82,7 @@ export function loadUserData():Promise<Object>{
     // 这边sui
     //
 
-    return  global.storage.load({
+    return  storage.load({
         key: Save_UserData_Key,
 
         //autoSync(默认为true)意味着在没有找到数据或数据过期时自动调用相应的同步方法
@@ -105,7 +99,7 @@ export function loadUserData():Promise<Object>{
 
 //存储登录账号
 export function saveAccount(account:string){
-    global.storage.save({
+    storage.save({
         key: Save_Account_Key,  //注意:请不要在key中使用_下划线符号!
         data: account,
     });
@@ -113,7 +107,7 @@ export function saveAccount(account:string){
 
 //
 export  function loadAccount(callBack:Function){
-    global.storage.load({key: Save_Account_Key,}).then(ret =>{
+    storage.load({key: Save_Account_Key,}).then(ret =>{
         callBack(ret);
     }).catch(err =>{
         console.log('loadAccount:',err);

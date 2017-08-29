@@ -17,7 +17,7 @@ import {
     Alert
 } from 'react-native'
 import {connect} from 'react-redux'
-import {logout} from '../../redux/actions/login'
+import {logout} from '../../redux/actions/user'
 import {ICARD, IDO} from '../../redux/reqKeys'
 import {add, search, update,batch} from '../../redux/module/leancloud'
 import {classUpdate,classCreatNewOne} from '../../request/leanCloud'

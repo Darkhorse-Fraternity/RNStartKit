@@ -20,7 +20,7 @@ export function user(objectId) {
 
 export function selfUser() {
     const state = store.getState()
-    const id = state.login.data.objectId;
+    const id = state.user.data.objectId;
     return user(id)
 }
 

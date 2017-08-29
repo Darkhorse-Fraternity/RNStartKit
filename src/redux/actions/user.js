@@ -154,8 +154,8 @@ export function logout():Function {
 
         try {
             const state = getState()
-            if (!state.login.isLogin) return
-            // const parame = appLogout(state.login.data.appUserId||'');
+            if (!state.user.isLogin) return
+            // const parame = appLogout(state.user.data.appUserId||'');
             // const response = await send(parame)
             // if (response.isSuccess === '1') {
             //     //加入sessionToken
@@ -213,11 +213,7 @@ export  function getUserByObjectID(objectID:string,callBack:Function) :Function{
         return req(param, (response)=> {
 
             if (response) {
-                //加入sessionToken
                 dispatch(_loginSucceed(response));
-                // dispatch(navigatePush('TabView'));
-                dispatch(NavigationActions.back())
-                dispatch(NavigationActions.back())
             } else {
                 dispatch(_loginFailed(response));
             }
