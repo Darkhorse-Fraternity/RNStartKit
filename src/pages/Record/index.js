@@ -23,7 +23,6 @@ import {IRECORD, ICARD} from '../../redux/reqKeys'
 import {selfUser} from '../../request/LCModle'
 import Icon from 'react-native-vector-icons/Ionicons'
 import {addEntities} from '../../redux/module/normalizr'
-import {addNormalizrEntity} from '../../redux/actions/list'
 import {update, remove,search} from '../../redux/module/leancloud'
 import {SwipeAction} from 'antd-mobile'
 import {clear} from '../../redux/actions/list'
@@ -45,30 +44,7 @@ Animatable.initializeRegistryWithDefinitions({heightZoomIn})
         data:state.list.get(IRECORD)
     }),
     dispatch =>({
-        refresh: async(data) => {
-            const id = data.objectId
 
-
-            const isDone = data.time == data.period
-
-            const param = {
-                time: isDone ? 0 : data.time,
-                statu: 'start',
-                cycle: isDone ? data.cycle + 1 : data.cycle,
-            }
-
-            const res = await update(id, param, ICARD)
-            const entity = {
-                ...param,
-                ...res,
-            }
-            // dispatch(addEntities({
-            //     [ICARD]: {
-            //         [entity.objectId]: entity
-            //     }
-            // }))
-            dispatch(addNormalizrEntity(ICARD, entity))
-        },
         delete: async(rowId, objectId, callBack)=> {
             await remove(objectId, ICARD)
             dispatch(clear(IRECORD, rowId))
@@ -112,14 +88,7 @@ export default class Record extends Component {
         return !immutable.is(this.props, nextProps)||!immutable.is(this.state,nextState)
     }
 
-    __refresh = (data)=> {
-        const isDone = data.time == data.period
-        Alert.alert(
-            isDone ? '再来一组?' : '重新开启',
-            '',
-            [{text: '取消'}, {text: '确定', onPress: () => this.props.refresh(data)}]
-        )
-    }
+
 
     __delete = (index, objectId)=> {
         const self= this
@@ -167,9 +136,7 @@ export default class Record extends Component {
                     <TouchableOpacity
                         style={{flex:1}}
                         onPress={()=>{
-                    {/*if(reflesh){*/}
-                        {/*this.__refresh(item)*/}
-                    {/*}*/}
+
                     this.props.navigation.navigate('RecordDetail',{data:item})
             }}>
                         <View style={styles.row}>

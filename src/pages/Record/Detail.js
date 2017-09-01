@@ -12,7 +12,8 @@ import {
     StyleSheet,
     TouchableOpacity,
     Text,
-    Image
+    Image,
+    Alert
 } from 'react-native'
 import {IDO} from '../../redux/reqKeys'
 
@@ -23,14 +24,44 @@ import * as immutable from 'immutable';
 import LCList from '../../components/Base/LCList';
 import moment from 'moment'
 import Icon from 'react-native-vector-icons/Ionicons'
+import {update,} from '../../redux/module/leancloud'
+import {addNormalizrEntity} from '../../redux/actions/list'
+import {ICARD} from '../../redux/reqKeys'
+
+
 const listKey = IDO
 
 
 @connect(
-    state =>({
-        // data: state.list.get(listKey),
+    (state,props) =>({
+        data: state.normalizr.get(ICARD).get(props.navigation.state.params.data.objectId)
     }),
-    dispatch =>({})
+    dispatch =>({
+        refresh: async(data) => {
+            const id = data.objectId
+
+
+            const isDone = data.time == data.period
+
+            const param = {
+                time: isDone ? 0 : data.time,
+                statu: 'start',
+                cycle: isDone ? data.cycle + 1 : data.cycle,
+            }
+
+            const res = await update(id, param, ICARD)
+            const entity = {
+                ...param,
+                ...res,
+            }
+            // dispatch(addEntities({
+            //     [ICARD]: {
+            //         [entity.objectId]: entity
+            //     }
+            // }))
+            dispatch(addNormalizrEntity(ICARD, entity))
+        },
+    })
 )
 
 export default class Detail extends Component {
@@ -49,8 +80,19 @@ export default class Detail extends Component {
         const {navigation} = props;
         const {state} = navigation;
         const {params} = state;
+        const item = params.data
+        const reflesh = item.time == item.period || item.statu == 'stop'
         return {
             title: params.data.title,
+            headerRight: reflesh && (
+                <TouchableOpacity
+                    style={styles.headerBtn}
+                    onPress={()=>{
+                        params.refresh(item)
+
+                }}>
+                    <Icon style={styles.icon} name={reflesh?'ios-refresh':"ios-walk"} size={30}/>
+                </TouchableOpacity>)
         }
     };
 
@@ -58,6 +100,33 @@ export default class Detail extends Component {
         return !immutable.is(this.props, nextProps)
     }
 
+
+    __refresh = (data)=> {
+        const isDone = data.time == data.period
+        Alert.alert(
+            isDone ? '再来一组?' : '重新开启',
+            '',
+            [{text: '取消'}, {text: '确定', onPress: () => this.props.refresh(data)}]
+        )
+    }
+
+    componentDidMount() {
+        const {navigation} = this.props;
+        navigation.setParams({refresh:this.__refresh})
+    }
+
+    componentWillReceiveProps(nextProps) {
+        console.log('test:', nextProps);
+        const {navigation} = this.props;
+        const item = nextProps.data.toJS()
+        const data = this.props.data.toJS()
+        const reflesh = item.time !== data.time || item.statu !== data.statu
+        if(reflesh){
+
+            navigation.setParams({data:item})
+        }
+
+    }
 
     renderRow({item, index}: Object) {
 
@@ -153,13 +222,16 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 200,
     },
-    bottom:{
-        flexDirection:'row',
-        width:'100%',
-        justifyContent:'space-between',
-        alignItems:'center',
-        padding:15,
-    }
+    bottom: {
+        flexDirection: 'row',
+        width: '100%',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        padding: 15,
+    },
+    headerBtn: {
+        paddingHorizontal: 15,
+    },
 })
 
 

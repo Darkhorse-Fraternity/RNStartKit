@@ -16,7 +16,7 @@ import {
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux';
 import * as Animatable from 'react-native-animatable';
-export const Btn = Animatable.createAnimatableComponent(TouchableOpacity);
+export const Btn = Animatable.createAnimatableComponent(View);
 import Icon from 'react-native-vector-icons/Ionicons'
 //static displayName = BG
 @connect(

@@ -14,7 +14,8 @@ import {
     TouchableOpacity,
     Platform,
     findNodeHandle,
-    Text
+    Text,
+    TouchableWithoutFeedback
 } from 'react-native'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux';
@@ -25,7 +26,7 @@ import Pop from '../../components/Pop'
 import {logout} from '../../redux/actions/user'
 import * as Animatable from 'react-native-animatable';
 import { NavigationActions } from 'react-navigation';
-export const Btn = Animatable.createAnimatableComponent(TouchableOpacity);
+export const Btn = Animatable.createAnimatableComponent(View);
 // function makeScaleInTranslation(translationType, fromValue) {
 //     return {
 //         from: {
@@ -119,9 +120,13 @@ export  default  class Menu extends Component {
                         easing="ease-in-out"
                         animation="bounceIn"
                         style={styles.close}
-                        onPress={()=>{
+                        onStartShouldSetResponder={()=>true}
+                        onResponderGrant={()=>{
                             Pop.hide()
                            push('Record')
+                        }}
+                        onPress={()=>{
+
                         }}>
                         <Icon name="md-done-all" size={50}/>
                         <Text>我的记录</Text>
@@ -133,9 +138,13 @@ export  default  class Menu extends Component {
                         easing="ease-in-out"
                         animation="bounceIn"
                         style={styles.close}
-                        onPress={()=>{
+                        onStartShouldSetResponder={()=>true}
+                        onResponderGrant={()=>{
                             Pop.hide()
                             this.props.logOut()
+                        }}
+                        onPress={()=>{
+
                         }}>
                         <Icon name="md-log-out" size={50}/>
                         <Text>退出</Text>
@@ -148,7 +157,11 @@ export  default  class Menu extends Component {
                     easing="ease-in-out"
                     animation="bounceIn"
                     style={styles.close}
-                    onPress={()=>{Pop.hide()}}>
+                    onStartShouldSetResponder={()=>true}
+                    onResponderGrant={()=>{
+                            Pop.hide()
+                        }}
+                    onPress={()=>{}}>
                     <Icon name="md-close" size={50}/>
                 </Btn>
             </View>

@@ -306,7 +306,9 @@ export  default  class Home extends Component {
         // console.log('test:',typeof View());
         const statu = this.props.data.get('loadStatu')
 
-        if (statu === 'LIST_NO_DATA') {
+        const data = this.props.data.toJS().listData
+
+        if ((statu === 'LIST_NO_DATA' ||statu == 'LIST_LOAD_NO_MORE') && data.length == 0) {
             return (
                 <View style={{flex:1,alignItems:'center',justifyContent:'center',marginTop:-100}}>
                     <TouchableOpacity
@@ -321,7 +323,6 @@ export  default  class Home extends Component {
             )
         }
 
-        const data = this.props.data.toJS().listData
         return (
             <List
                 onScroll={this.props.onScroll}
