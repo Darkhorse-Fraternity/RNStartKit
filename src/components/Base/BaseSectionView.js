@@ -156,14 +156,14 @@ export default class BaseSectionView extends Component {
                 <ExceptionView
                     renderHeader={this.props.renderHeader}
                     exceptionType={ExceptionType.Loading}
-                    style={this.props.style}
+                    style={[styles.list,this.props.style]}
                 />
             );
         } else if (this.props.loadStatu === LIST_NO_DATA) {
             return (
 
                 <ExceptionView
-                    style={this.props.style}
+                    style={[styles.list,this.props.style]}
                     renderHeader={this.props.renderHeader}
                     exceptionType={ExceptionType.NoData}
                     image={this.props.noDataImg}

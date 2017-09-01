@@ -34,9 +34,7 @@ import OptionView,{StaticOption} from './OptionView'
         //...bindActionCreators({},dispatch),
         add: (title,option = StaticOption)=> dispatch(async(dispatch, getState)=> {
 
-            console.log('test:', option);
             // console.log('test:', option);
-            // console.log('test:', StaticOption)
 
             const state = getState()
             const user = state.user.data;
@@ -172,7 +170,7 @@ export  default  class Creat extends Component {
                         disabled={this.state.title.length === 0 }
                         onPress={this.__nextStep}
                         style={[styles.doneBtn,{backgroundColor:this.state.title.length === 0?"rgb(220,200,200)":"#ff768e"}]}>
-                        <Icon name="ios-done-all" size={30} color="white"/>
+                        <Icon name="md-checkmark" size={30} color="white"/>
                     </TouchableOpacity>
                 </View>
             </View>

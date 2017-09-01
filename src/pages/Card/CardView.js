@@ -26,7 +26,7 @@ import {addNormalizrEntity} from '../../redux/actions/list'
 import {addEntities} from '../../redux/module/normalizr'
 import {clear} from '../../redux/actions/list'
 import Pop from '../../components/Pop'
-import Menu from '../Home/Menu'
+import Do from './Do'
 import moment from 'moment'
 import Icon from 'react-native-vector-icons/Ionicons'
 import BounceBtn from '../../components/Button/BounceBtn'
@@ -79,11 +79,18 @@ Animatable.initializeRegistryWithDefinitions({cloudMoveLeft})
                 statu: time == data.period ? "stop" : "start"
             }
 
+            
+            if(data.record.length >0){
+                Pop.show(<Do data={data}/>,{maskStyle:{backgroundColor:'transparent'}})
+                return
+            }
+            
             const iCardP = classUpdate(ICARD,id,param)
             const iDoP = classCreatNewOne(IDO,{
                 ...selfUser(),
                 ...iCard(id)
             })
+            
             const res = await batch([iCardP,iDoP])
             // const res = await update(id, param, ICARD)
 

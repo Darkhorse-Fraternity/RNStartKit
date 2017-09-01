@@ -15,7 +15,7 @@ import React, {
     BackHandler,
     NetInfo
 } from 'react-native';
-import {loginSucceed} from './actions/user'
+import {loginSucceed,_loginFailed} from './actions/user'
 // import {navigatePush} from './actions/nav'
 import pushConfig from '../configure/push'
 import {dataStorage} from '../redux/actions/util'
@@ -108,6 +108,7 @@ export function preConfig():Function {
         loadUserData().then((response)=>{
             dispatch(loginSucceed(response))
         }).catch((error)=>{
+            dispatch(_loginFailed())
             console.log('loadUserDataError:',error.message)
         });
 

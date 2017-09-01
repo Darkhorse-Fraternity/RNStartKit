@@ -10,12 +10,10 @@
 import * as immutable from 'immutable';
  import { Platform } from 'react-native';
  import * as reducers from './reducers'
-import {reducer as form} from 'redux-form';
 
 
  const reducer = combineReducers({
      ...reducers,
-     form
  });
 
 

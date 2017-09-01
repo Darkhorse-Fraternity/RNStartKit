@@ -38,6 +38,7 @@ export default class ImageSelectView extends Component {
     };
     static defaultProps = {
         maxImage: 8,
+        files:[]
     };
 
     _selectImage = ()=> {

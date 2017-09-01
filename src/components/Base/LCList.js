@@ -73,6 +73,11 @@ export  default  class ReqListView extends Component {
     loadData:Function
     render(): ReactElement<any> {
 
+        if(!this.props.data.get('listData')){
+            return (<View/>)
+        }
+
+
         const loadStatu = this.props.data.get('loadStatu')
         let listDataKey = this.props.data.get('listData').toJS()
         // listData = listData && listData.toJS()

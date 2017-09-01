@@ -91,6 +91,9 @@ Animatable.initializeRegistryWithDefinitions({heightZoomIn})
 export default class Record extends Component {
     constructor(props: Object) {
         super(props);
+        this.state = {
+            scrollEnabled:true
+        }
     }
 
     static propTypes = {};
@@ -105,8 +108,8 @@ export default class Record extends Component {
         }
     };
 
-    shouldComponentUpdate(nextProps: Object) {
-        return !immutable.is(this.props, nextProps)
+    shouldComponentUpdate(nextProps: Object,nextState:Object) {
+        return !immutable.is(this.props, nextProps)||!immutable.is(this.state,nextState)
     }
 
     __refresh = (data)=> {
@@ -164,9 +167,10 @@ export default class Record extends Component {
                     <TouchableOpacity
                         style={{flex:1}}
                         onPress={()=>{
-                    if(reflesh){
-                        this.__refresh(item)
-                    }
+                    {/*if(reflesh){*/}
+                        {/*this.__refresh(item)*/}
+                    {/*}*/}
+                    this.props.navigation.navigate('RecordDetail',{data:item})
             }}>
                         <View style={styles.row}>
                             <View style={styles.subRow}>
