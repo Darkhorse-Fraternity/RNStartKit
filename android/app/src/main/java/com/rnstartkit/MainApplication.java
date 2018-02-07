@@ -6,6 +6,8 @@ import com.aakashns.reactnativedialogs.ReactNativeDialogsPackage;
 import com.avos.avoscloud.AVOSCloud;
 import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
 import com.facebook.react.ReactApplication;
+import com.github.yamill.orientation.OrientationPackage;
+import com.oblador.vectoricons.VectorIconsPackage;
 import com.cmcewen.blurview.BlurViewPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -13,7 +15,6 @@ import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.imagepicker.ImagePickerPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
-import com.oblador.vectoricons.VectorIconsPackage;
 import com.theweflex.react.WeChatPackage;
 
 import java.util.Arrays;
@@ -33,6 +34,8 @@ public class MainApplication extends Application implements ReactApplication {
         protected List<ReactPackage> getPackages() {
             return Arrays.<ReactPackage>asList(
                     new MainReactPackage(),
+            new OrientationPackage(),
+            new VectorIconsPackage(),
             new BlurViewPackage(),
                     new WeChatPackage(),
 //                    new QQPackage(),

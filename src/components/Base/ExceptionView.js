@@ -12,7 +12,6 @@ import {
 import PropTypes from 'prop-types';
 
 import * as Animatable from 'react-native-animatable';
-import Icon from 'react-native-vector-icons/Ionicons'
 const AniView = Animatable.createAnimatableComponent(Image);
 
 export const ExceptionType = {
