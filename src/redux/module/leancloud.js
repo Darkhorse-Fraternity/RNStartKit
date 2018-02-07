@@ -32,11 +32,16 @@ export function remove(objectId: string, key: string, option: Object = {}) {
     return req(lParams, key, option)
 }
 
-export function search(more: bool, params: Object, key: string, option: Object, pageSize: number = 40) {
+export function search(more: bool,
+                       params: Object,
+                       key: string,
+                       option: Object,
+                       callPath:string ,
+                       pageSize: number = 40) {
 
     return (dispatch, getState) => {
         const page = !more ? 0 : getState().list.getIn([key, 'page']) + 1;
-        const lParams = limitSearch(key, page, pageSize, params)
+        const lParams = limitSearch(key, page, pageSize, params,callPath)
         return dispatch(listReq(key, lParams, more, option))
     }
 }

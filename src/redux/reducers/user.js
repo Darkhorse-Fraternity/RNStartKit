@@ -21,8 +21,8 @@ const initialLoginState = {
     loaded: false,
     isLogin: false,
     localLoad:false,
-    accountText: __DEV__ ? "13588833404" : '',
-    passwordText: __DEV__ ? "007342" : '',
+    accountText: __DEV__ ? "13696981385" : '',
+    passwordText: __DEV__ ? "980678" : '',
     data: {},
 }
 

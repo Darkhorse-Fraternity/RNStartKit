@@ -6,7 +6,7 @@
 
 import * as immutable from 'immutable';
 import {normalize} from 'normalizr';
-import {schemas} from '../scemes'
+import {schemas,code} from '../scemes'
 import {registerNormalizrKeys} from '../reqKeys'
 const registerKeys = (keys = [])=>{
     const newKyes = {}
@@ -23,12 +23,16 @@ export const ADD_NORMALIZR = 'ADD_NORMALIZR'
 
 
 export function addNormalizrEntity(key,data) {
-     const nData =  normalize(data, schemas[key])
-    return {
-        type: ADD_NORMALIZR,
-        payload: nData,
-    }
+    return dispatch => dispatch(addNormalizrEntities(key,{[code]:[data]}))
 }
+
+
+export function addNormalizrEntities(key,data) {
+    if(!key ||!data){return}
+     const nData =  normalize(data, schemas[key])
+    return dispatch => dispatch(addEntities(nData.entities))
+}
+
 
 export function addEntities(data: Object): Object {
     return {
@@ -51,7 +55,6 @@ export default function itemState(state: immutable.Map<string,any> = initialStat
 
             return   state.mergeDeep(action.payload)
         }
-
         default:
             return state
     }

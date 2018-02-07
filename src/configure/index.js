@@ -2,10 +2,10 @@
 'use strict'
 // import DeviceInfo from 'react-native-device-info'
 
-import {LeanCloud_APP_ID,LeanCloud_APP_KEY} from './leancloud'
+import {LeanCloud_APP_ID,LeanCloud_APP_SIGN} from './leancloud'
 const defaultHost = !__DEV__ ?
-    /*release*/   'api.leancloud.cn/1.1' :
-    /*debug*/     'api.leancloud.cn/1.1'
+    /*release*/   'cmwljtyw.api.lncld.net/1.1' :
+    /*debug*/     'q81jdsbi.api.lncld.net/1.1'
 
 
 let LeanCloud_APP_Session = '';
@@ -20,7 +20,7 @@ function httpHeaders(needSession:bool):Object{
 
    let header = {
      "Content-Type": "application/json",
-     "X-LC-Key": LeanCloud_APP_KEY,
+     "X-LC-Sign": LeanCloud_APP_SIGN,
      "X-LC-Id": LeanCloud_APP_ID,
    }
 
@@ -39,8 +39,8 @@ function httpHeaders(needSession:bool):Object{
 
 //主题色彩
 const themeColorConfig = {
-    mainColor: '#009af8', //主色彩，用于navbar 按钮颜色等、
-    backViewColor: '#F5FCFF',
+    mainColor: '#f1bd49', //主色彩，用于navbar 按钮颜色等、
+    backViewColor: 'white',
     lightMainColor: '#c18379', //主色彩，用于navbar 按钮颜色等、
     containingColor: '#ffffff', //内含主色彩
     lightContainingColor: '#d2d6d6', //内含主色彩

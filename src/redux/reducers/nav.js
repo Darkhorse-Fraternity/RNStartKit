@@ -6,7 +6,7 @@
 import { AppNavigator } from '../../components/Nav/navigators/AppNavigator';
 import { NavigationActions } from 'react-navigation';
 
-const firstAction = AppNavigator.router.getActionForPathAndParams('Home');
+const firstAction = AppNavigator.router.getActionForPathAndParams('Tab');
 const tempNavState = AppNavigator.router.getStateForAction(firstAction);
 const StacksOverTabs = AppNavigator.router.getActionForPathAndParams('StacksOverTabs')
 const initialNavState = AppNavigator.router.getStateForAction(

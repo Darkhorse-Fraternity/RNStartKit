@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "postinstall": "rndebugger-open",
+    "postinstall": "rm ./node_modules/react-native/local-cli/core/__fixtures__/files/package.json",
     "test": "jest"
   },
   "dependencies": {
@@ -17,7 +17,7 @@
     "react": "16.2.0",
     "react-dom": "^16.1.1",
     "react-immutable-render-mixin": "^0.9.7",
-    "react-native": "0.53.0",
+    "react-native": "0.52.0",
     "react-native-animatable": "^1.2.4",
     "react-native-blur": "^3.2.2",
     "react-native-button": "^2.2.0",
@@ -26,6 +26,7 @@
     "react-native-device-info": "^0.12.1",
     "react-native-dialogs": "0.0.20",
     "react-native-image-picker": "0.26.7",
+    "react-native-md5": "^1.0.0",
     "react-native-orientation": "^3.1.3",
     "react-native-push-notification": "^3.0.1",
     "react-native-qq": "^2.0.5",
@@ -37,7 +38,7 @@
     "react-native-uuid": "^1.4.9",
     "react-native-vector-icons": "^4.5.0",
     "react-native-wechat": "^1.9.9",
-    "react-navigation": "^1.0.0-beta.19",
+    "react-navigation": "^1.0.0",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "redux-api-middleware": "^2.0.0-beta.3",
@@ -57,7 +58,7 @@
     "jest": "20.0.4",
     "jest-react-native": "18.0.0",
     "react-native-debugger-open": "^0.3.12",
-    "react-test-renderer": "^15.6.1"
+    "react-test-renderer": "^16.2.0"
   },
   "jest": {
     "preset": "react-native"

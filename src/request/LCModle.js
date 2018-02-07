@@ -28,3 +28,11 @@ export function iCard(id) {
     return pointModel('iCard',id)
 }
 
+export function iUse(id) {
+    return pointModel('iUse',id)
+}
+
+export function iDo(id) {
+    return pointModel('iDo',id)
+}
+

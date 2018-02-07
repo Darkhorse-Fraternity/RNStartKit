@@ -2,7 +2,7 @@
 'use strict'
 
 import { methodType, cacheType } from './'
-
+// import {LeanCloud_APP_ID,LeanCloud_APP_KEY} from '../configure/leancloud'
 
 export function requestSmsCode(mobilePhoneNumber) {
     return {
@@ -204,11 +204,11 @@ export function classNormalSearch(className:string,id:string = ''):Object{
 }
 
 export function limitSearch(className:string,page:Number = 0,
-                            limit:Number = 40,other:Object = {}):Object{
+                            limit:Number = 40,other:Object = {},callPath:string):Object{
     const skip = page * limit;
     return {
-      path:'/classes/' + className,
-      method:methodType.get,
+      path:!callPath?'/classes/' + className:'/call/' + callPath,
+      method:!callPath?methodType.get:methodType.post,
       params:{
         skip:skip +'',
         limit:limit + '',
@@ -217,6 +217,20 @@ export function limitSearch(className:string,page:Number = 0,
       }
     }
 }
+
+export function existSearch(className:string,other:Object = {}) {
+
+    return {
+        path:'/classes/' + className,
+        method:methodType.get,
+        params:{
+            count:1,
+            limit:0,
+            ...other
+        }
+    }
+}
+
 /**
  * 增加
  * @param  {[type]} className:string 类名
@@ -277,27 +291,41 @@ export function classBatch(requests:[Object]):Object{
   }
 }
 
-export function pushInstallation(OS:String,token:string,userObjectId:string = '') {
+export function pushInstallation(OS:String,token:string) {
     let installationId = OS == 'ios' ? { "deviceToken": token}:{ "installationId": token}
-    const LeanCloud_APP_ID = 'q81jdsbi5qp679fi5o46i5nppjgycztgivwj30707xfvehzt';
-    const LeanCloud_APP_KEY = 'y6ffzv6mq705pya2pd6kgl1ni1vwlppesis7f1qi19afg5nn';
+    // const LeanCloud_APP_ID = 'q81jdsbi5qp679fi5o46i5nppjgycztgivwj30707xfvehzt';
+    // const LeanCloud_APP_KEY = 'y6ffzv6mq705pya2pd6kgl1ni1vwlppesis7f1qi19afg5nn';
     return {
         scheme:'https',
         host:'leancloud.cn/1.1',
         path:'/installations',
         method:methodType.post,
-        head:{
-            "Content-Type": "application/json",
-            "X-LC-Key": LeanCloud_APP_KEY,
-            "X-LC-Id": LeanCloud_APP_ID,
-        },
+        // head:{
+        //     "Content-Type": "application/json",
+        //     "X-LC-Key": LeanCloud_APP_KEY,
+        //     "X-LC-Id": LeanCloud_APP_ID,
+        // },
         params:{
             "deviceType": OS,
             ...installationId,
             "channels": [
                 "public", "protected", "private"
             ],
-            userObjectId,
         },
+    }
+}
+
+export function updateInstallation(id:String,params) {
+    return {
+        scheme:'https',
+        host:'leancloud.cn/1.1',
+        path:'/installations/'+ id,
+        method:methodType.put,
+        // head:{
+        //     "Content-Type": "application/json",
+        //     "X-LC-Key": LeanCloud_APP_KEY,
+        //     "X-LC-Id": LeanCloud_APP_ID,
+        // },
+        params
     }
 }

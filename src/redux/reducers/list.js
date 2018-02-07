@@ -61,13 +61,14 @@ export default function listState(state: immutable.Map<string,any> = initialStat
             // state.deleteIn([action.key,'listData'])
             // console.log(action.key, action.rowID);
             // console.log('test:', state);
-            return state.deleteIn([action.key,'listData',action.rowID])
+            return state.deleteIn([action.key,'listData',action.rowID]).
+            setIn([action.key,"loadStatu"],action.loadStatu)
         }
         case LIST_ADD:{
             return   state.updateIn([action.key],(oldObj)=>{
                 const oldData = oldObj.get("listData") || {}
                 const listData = {
-                    loadStatu:oldObj.get("loadStatu"),
+                    loadStatu:action.loadStatu,
                     page:oldObj.get("page"),
                     listData:[...new Set([action.data,...oldData])],//做排序去重
                 }

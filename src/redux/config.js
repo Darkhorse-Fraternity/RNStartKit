@@ -21,7 +21,8 @@ import pushConfig from '../configure/push'
 import {dataStorage} from '../redux/actions/util'
 export const PRE_CONFIG_STATU = 'PRE_CONFIG_STATU'
 import { NavigationActions } from 'react-navigation';
-
+import Orientation from 'react-native-orientation';
+import DeviceInfo from 'react-native-device-info'
 import {pop} from './nav'
 
 
@@ -46,16 +47,23 @@ function _preConfig() {
     //配置友盟信息
     // umeng.configure();
 
-    if (Platform.OS != 'ios') {
+    if (Platform.OS !== 'ios') {
         UIManager.setLayoutAnimationEnabledExperimental &&
         UIManager.setLayoutAnimationEnabledExperimental(true);
     }
 
-    // Platform.OS=='ios'&& StatusBar.setBarStyle('light-content', true);
+    // Platform.OS !=='ios'&& StatusBar.setBackgroundColor('white', true);
+    //
+    // if()
 
     pushConfig()
+    // Orientation.lockToPortrait()
 
-
+    if (DeviceInfo.isTablet()) {
+        Orientation.lockToLandscape();
+    } else {
+        Orientation.lockToPortrait()
+    }
 
 
     // dayNotification()
@@ -72,7 +80,7 @@ function _backAnroid (getState) {
         const state = getState().nav;
         const index = state.index;
         //idnex 前两个分别是登录和tabview
-        if (index > 0) {
+        if (index > 1) {
             pop();
             return true;
         }
@@ -90,7 +98,7 @@ function _backAnroid (getState) {
 
 function _isConnected(dispatch) {
     NetInfo.isConnected.addEventListener(
-        'NetInfo_IsConnected',
+        'connectionChange',
         (isConnected)=>{
            // console.log('isConnected:', isConnected);
             dispatch(dataStorage('isConnected',isConnected))
@@ -103,10 +111,11 @@ export function preConfig():Function {
     _preConfig();
 
     return (dispatch,getState) =>{
-        Platform.OS != 'ios' && _backAnroid(getState)
+        Platform.OS !== 'ios' && _backAnroid(getState)
         _isConnected(dispatch)
         loadUserData().then((response)=>{
             dispatch(loginSucceed(response))
+            dispatch(NavigationActions.navigate({routeName: 'Tab', params: {transition: 'forVertical'}}))
         }).catch((error)=>{
             dispatch(_loginFailed())
             console.log('loadUserDataError:',error.message)

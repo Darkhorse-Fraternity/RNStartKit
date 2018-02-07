@@ -140,6 +140,25 @@ export  default  class Menu extends Component {
                         style={styles.close}
                         onStartShouldSetResponder={()=>true}
                         onResponderGrant={()=>{
+
+                            Pop.hide()
+                             push('Publish')
+                        }}
+                        onPress={()=>{
+
+                        }}>
+                        <Icon name="ios-brush" size={50}/>
+                        <Text>我的卡片</Text>
+                    </Btn>
+                    <Btn
+                        delay={200}
+                        useNativeDriver
+                        duration={2000}
+                        easing="ease-in-out"
+                        animation="bounceIn"
+                        style={styles.close}
+                        onStartShouldSetResponder={()=>true}
+                        onResponderGrant={()=>{
                             Pop.hide()
                             this.props.logOut()
                         }}
@@ -191,6 +210,9 @@ const styles = StyleSheet.create({
         margin:20,
     },
     menu:{
-        flexDirection:'row'
+        flexDirection:'row',
+        flexWrap:'wrap',
+        alignItems:'center',
+        justifyContent:'center'
     }
 })
