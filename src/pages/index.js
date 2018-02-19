@@ -1,20 +1,30 @@
-// import Setting from './Setting'
 import Home from './Home'
-// import LoginView from './Setting/LoginView'
-import PersonCenter from './PersonInfo/PersonCenter'
-import PersonInfo from './PersonInfo'
-
+import PersonCenter from './PersonInfo'
+import Order from './Order'
+import theme from '../Theme'
+import Vote from './Vote'
+import Withdraw from './Withdraw'
+import Record from './Withdraw/Record'
+import Discounts from  './Discounts'
 
 export const route = {
     // Login: {screen: LoginView},
     Home: {screen: Home},
+    Order: {screen: Order},
     PersonCenter: {screen: PersonCenter},
-    PersonInfo: {screen: PersonInfo},
+    Vote: {screen: Vote},
+    Withdraw: {screen: Withdraw},
+    Record: {screen: Record},
+    Discounts: {screen: Discounts}
 }
 
 export const tabRoute = {
     Home: {
         screen: Home,
+        path: '',
+    },
+    Order: {
+        screen: Order,
         path: '',
     },
     PersonCenter: {
@@ -30,15 +40,24 @@ export const initialRouteName = {
 export const tabiCon = {
     Home: {
         label: "Home",
-        color: '#F3AC41',
-        activityColor: '#F0C98B',
-        icon: 'md-sunny'
+        color: theme.mainColor,
+        activityColor: 'rgb(200,200,200)',
+        icon: 'ios-home',
+        name: '首页'
+    },
+    Order: {
+        label: "Order",
+        color: theme.mainColor,
+        activityColor: 'rgb(200,200,200)',
+        icon: "md-list-box",
+        name: '订单'
     },
     PersonCenter: {
         label: "Setting",
-        color: '#F3AC41',
-        activityColor: '#F0C98B',
-        icon: "ios-happy"
+        color: theme.mainColor,
+        activityColor: 'rgb(200,200,200)',
+        icon: "md-person",
+        name: '我的'
     },
 
 }

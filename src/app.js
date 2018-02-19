@@ -40,7 +40,7 @@ class App extends Component {
                             <StatusBar
                                 translucent={true}
                                 backgroundColor="transparent"
-                                barStyle="dark-content"
+                                // barStyle="dark-content"
                             />
                         )}
                         <AppWithNavigationState/>

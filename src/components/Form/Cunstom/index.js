@@ -4,8 +4,10 @@ import { Field } from 'redux-form/immutable'
 
 const {
     AutoGrowingInput,
+    TextInput
 } = createInputs(createInputCreator(Field))
 
 export {
+    TextInput,
     AutoGrowingInput,
 }

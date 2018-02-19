@@ -1,5 +1,5 @@
 /**
- * Created by lintong on 2018/2/13.
+ * Created by lintong on 2018/1/16.
  * @flow
  */
 'use strict';
@@ -7,38 +7,31 @@
 import React, {Component} from 'react';
 import {
     View,
+    Clipboard
 } from 'react-native'
 import {connect} from 'react-redux'
-const placehold = 'http://yikaxi.com/blog/wp-content/uploads/2015/04/placeholder_5.jpg'
-
+import {
+    orderDiscrib,
+    wechatServe,
+    buyDiscrib,
+    answer
+} from '../../../source/text'
 
 import {
     StyledContent,
     StyledAccountInfo,
     StyledAcountText,
-    StyledAvatar,
-    StyledTouch,
-    StyledTouchText,
-    StyledGetRow
-} from './style'
-
-import {
     StyledBodyRow,
     StyledBodyText,
     StyledBodyLowText,
-} from '../Order/style'
+    StyledTouch,
+} from './style'
 
 import Tip from '../../components/Reuse/Tip'
 
-
-import {
-    orderDiscrib,
-    wechatServe,
-    answer
-} from '../../../source/text'
-
 import {shouldComponentUpdate} from 'react-immutable-render-mixin';
-
+import {Button} from 'react-native-clean-form'
+import OrderItem from './Item'
 
 @connect(
     state => ({}),
@@ -46,10 +39,13 @@ import {shouldComponentUpdate} from 'react-immutable-render-mixin';
 )
 
 
-export default class PersonInfo extends Component {
+export default class Order extends Component {
     constructor(props: Object) {
         super(props);
         this.shouldComponentUpdate = shouldComponentUpdate.bind(this);
+        this.state= {
+            open:false
+        }
     }
 
     static propTypes = {};
@@ -59,17 +55,20 @@ export default class PersonInfo extends Component {
         // const {state} = navigation;
         // const {params} = state;
         return {
-            title: '我的',
+            title: '订单',
         }
     };
+
 
     __renderAccount = () => {
 
         return (
             <StyledAccountInfo>
-                <StyledAvatar source={{uri: placehold}}/>
                 <StyledAcountText>
                     会员号：xxx
+                </StyledAcountText>
+                <StyledAcountText>
+                    账户余额：100 元
                 </StyledAcountText>
             </StyledAccountInfo>
         )
@@ -86,10 +85,10 @@ export default class PersonInfo extends Component {
                     </StyledBodyText>
                     <StyledBodyLowText
                         selectable={true}
-                        //     onLongPress={()=>[
-                        //         // Clipboard.setString(item.answer)
-                        // ]}>
-                    >
+                    //     onLongPress={()=>[
+                    //         // Clipboard.setString(item.answer)
+                    // ]}>
+                        >
                         {item.answer}
                     </StyledBodyLowText>
                 </View>
@@ -106,28 +105,19 @@ export default class PersonInfo extends Component {
 
     }
 
-
     render(): ReactElement<any> {
 
 
         return (
             <StyledContent>
                 {this.__renderAccount()}
-                <StyledGetRow >
-                    <StyledBodyText>
-                        账户余额：
-                        <StyledBodyText style={{color:'red'}}>
-                            50.0 元
-                        </StyledBodyText>
-                    </StyledBodyText>
-                    <StyledTouch onPress={()=>{
+                <View style={{padding: 10, width:"100%",height:80}}>
+                    <Button onPress={()=>{
                         this.props.navigation.navigate('Withdraw')
                     }}>
-                        <StyledTouchText>
-                            提现
-                        </StyledTouchText>
-                    </StyledTouch>
-                </StyledGetRow>
+                        提现
+                    </Button>
+                </View>
                 <StyledBodyRow>
                     <StyledBodyText>
                         {orderDiscrib}
@@ -137,8 +127,21 @@ export default class PersonInfo extends Component {
                     <StyledBodyText fontSize={20}>
                         {wechatServe}
                     </StyledBodyText>
+                    <OrderItem/>
                 </StyledBodyRow>
-                {this.__renderAnswer()}
+                <StyledBodyRow>
+                    <StyledBodyText>
+                        {buyDiscrib}
+                    </StyledBodyText>
+                </StyledBodyRow>
+                <StyledTouch onPress={()=>{
+                    this.setState({open:!this.state.open})
+                }}>
+                    <StyledBodyText>
+                        更多常见问题
+                    </StyledBodyText>
+                </StyledTouch>
+                {this.state.open ? this.__renderAnswer():<View style={{height:200}}/>}
             </StyledContent>
         );
     }

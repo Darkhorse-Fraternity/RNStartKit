@@ -6,30 +6,32 @@ import {TransitionConfiguration} from './TransitionConfiguration'
 import Tab from '../components/Tab'
 import {route} from '../../../pages'
 import {Platform} from 'react-native'
+import theme from '../../../Theme'
 export const AppNavigator = StackNavigator({
-    ...route,
     Tab: {screen: Tab},
+    ...route,
+
 }, {
     // initialRouteName:'Home',
     navigationOptions: {
         headerStyle:{
-            backgroundColor:'white',
+            backgroundColor:theme.mainColor,
             shadowColor: 'red',
             shadowOpacity: 0.1,
             shadowRadius: 0,
             shadowOffset: {
                 height: 0,
             },
-            borderBottomColor:'#F5FCFF',
+            borderBottomColor:theme.mainColor,
             elevation:0,
             paddingTop: (Platform.OS === "ios"  ||  Platform.Version < 20)  ? 0 : 25,
             //headerBackTitle:' '
         },
-        headerTintColor:'black',
+        headerTintColor:'white',
         headerTitleStyle:{
-            color: 'black',
+            color: 'white',
             alignItems:'center',
-            fontSize:13,
+            fontSize:15,
         },
         headerBackTitle:null,
 

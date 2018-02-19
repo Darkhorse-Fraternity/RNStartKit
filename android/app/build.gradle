@@ -16,7 +16,7 @@ import com.android.build.OutputFile
  *   bundleAssetName: "index.android.bundle",
  *
  *   // the entry file for bundle generation
- *   entryFile: "index.android.js",
+ *   entryFile: "index.androidstyle.js",
  *
  *   // whether to bundle JS and assets in debug mode
  *   bundleInDebug: false,
@@ -33,7 +33,7 @@ import com.android.build.OutputFile
  *   // bundleInPaidRelease: true,
  *   // bundleInBeta: true,
  *
- *   // the root of your project, i.e. where "package.json" lives
+ *   // the root of your project, i.e. where "packagestyle.json" lives
  *   root: "../../",
  *
  *   // where to put the JS bundle asset in debug mode

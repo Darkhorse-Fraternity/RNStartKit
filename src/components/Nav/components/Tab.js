@@ -10,6 +10,7 @@ import {
     Image,
     Dimensions,
     Platform,
+    Text
 } from 'react-native';
 import {
     createNavigator,
@@ -56,7 +57,7 @@ class CustomTabView extends Component {
                 >
                     {/*<Image style={{width:20,height:20}} source={icon}/>*/}
                     <AniView
-                        ref={node=> refs[tabInfo.label] =node}
+                        ref={node => refs[tabInfo.label] = node}
                         name={tabInfo.icon}
                         size={30}
                         color={color}
@@ -66,7 +67,10 @@ class CustomTabView extends Component {
                         style={styles.icon}/>
 
 
-                    {/*<Text style={[styles.tabLinkText,{color:focused?"#0093cb":'rgb(150,150,150)'}]}>{tabInfo.label}</Text>*/}
+                    <Text style={[styles.tabLinkText,
+                        {color: color}]}>
+                        {tabInfo.name}
+                    </Text>
                 </TouchableOpacity>
             )
         })
@@ -103,6 +107,9 @@ class CustomTabView extends Component {
     }
     _renderPager = props => <TabViewPagerPan {...props} />;
 
+
+
+
     render() {
         const {navigation,} = this.props;
 
@@ -124,9 +131,9 @@ class CustomTabView extends Component {
         return (
             <View style={styles.container}>
                 <this.CustomTabBar navigation={navigation}/>
-                <TabViewAnimated {...props} onIndexChange={()=>{
+                <TabViewAnimated {...props} onIndexChange={() => {
 
-                }} />
+                }}/>
             </View>
         );
     }
@@ -148,7 +155,9 @@ const styles = StyleSheet.create({
     tabContainer: {
         backgroundColor: 'white',
         flexDirection: 'row',
-        height: Platform.OS == 'android' ? 50 : 60,
+        height: Platform.OS === 'android' ? 50 : 60,
+        borderTopColor: 'rgb(230,230,230)',
+        borderTopWidth:1
     },
     tab: {
         flex: 1,

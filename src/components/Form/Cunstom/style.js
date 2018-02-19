@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components/native";
 import {AutoGrowingTextInput} from 'react-native-autogrow-textinput';
 
@@ -14,4 +13,11 @@ export const StyleAutoGrowingTextInput = styled(AutoGrowingTextInput)`
     border-width:  ${props => props.theme.hairlineWidth};
     border-color: ${props => props.theme.hairlineColor};;
     border-radius: 18px;
+`
+
+export const StyleTextInput = styled.TextInput`
+    flex: 1;
+    font-size: 19px;
+    background: white;
+    height:50px;
 `
