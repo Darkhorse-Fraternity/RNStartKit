@@ -6,6 +6,7 @@ import Vote from './Vote'
 import Withdraw from './Withdraw'
 import Record from './Withdraw/Record'
 import Discounts from  './Discounts'
+import Explain from './Discounts/Explain'
 
 export const route = {
     // Login: {screen: LoginView},
@@ -15,7 +16,8 @@ export const route = {
     Vote: {screen: Vote},
     Withdraw: {screen: Withdraw},
     Record: {screen: Record},
-    Discounts: {screen: Discounts}
+    Discounts: {screen: Discounts},
+    Explain:{screen:Explain}
 }
 
 export const tabRoute = {

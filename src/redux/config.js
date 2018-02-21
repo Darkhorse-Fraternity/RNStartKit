@@ -60,11 +60,11 @@ function _preConfig() {
     pushConfig()
     // Orientation.lockToPortrait()
 
-    if (DeviceInfo.isTablet()) {
-        Orientation.lockToLandscape();
-    } else {
-        Orientation.lockToPortrait()
-    }
+    // if (DeviceInfo.isTablet()) {
+    //     Orientation.lockToLandscape();
+    // } else {
+    //     Orientation.lockToPortrait()
+    // }
 
 
     // dayNotification()

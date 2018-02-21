@@ -55,4 +55,4 @@ fastlane/screenshots
 .update
 *.apk
 
-
+/Pods

@@ -107,7 +107,9 @@ export default class VoteForm extends Component {
         const {submitting, invalid} = rest
         return (
             <Form>
-                <InnerView>
+                <InnerView
+                    keyboardDismissMode='on-drag'
+                    keyboardShouldPersistTaps='handled'>
                     <Tip text='填写内容' size={18}
                          style={{marginBottom: 15, marginLeft: 15}}/>
                     <Line/>

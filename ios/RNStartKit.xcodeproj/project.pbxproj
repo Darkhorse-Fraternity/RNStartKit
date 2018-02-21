@@ -37,6 +37,7 @@
 		C762FD746F93AA3B36AE96CF /* libPods-RNStartKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 80C22219815181E16F163146 /* libPods-RNStartKit.a */; };
 		C9FEBDB009DC43FDBADBA674 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D0D4ED0F97FF4D3D90A775CA /* Foundation.ttf */; };
 		CC0242A51DF69FAB0045A14A /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC02428F1DF69F4C0045A14A /* libRCTAnimation.a */; };
+		CC38844A203C84DC00126181 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC8BCAC7202ACF1000949A55 /* libRNVectorIcons.a */; };
 		CC3E39A61E2622570019B85F /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CC3E39A51E2622570019B85F /* libiconv.tbd */; };
 		CC3E39A81E2622610019B85F /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CC3E39A71E2622610019B85F /* libsqlite3.tbd */; };
 		CC3E39AA1E2622690019B85F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CC3E39A91E2622690019B85F /* libz.tbd */; };
@@ -274,20 +275,6 @@
 			remoteGlobalIDString = 3DBE0D0D1F3B181C0099AA32;
 			remoteInfo = "fishhook-tvOS";
 		};
-		CC8BC9FF202AA71000949A55 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = EBF21BDC1FC498900052F4D5;
-			remoteInfo = jsinspector;
-		};
-		CC8BCA01202AA71000949A55 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = EBF21BFA1FC4989A0052F4D5;
-			remoteInfo = "jsinspector-tvOS";
-		};
 		CC8BCA03202AA71000949A55 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
@@ -482,8 +469,10 @@
 				CC3E39AA1E2622690019B85F /* libz.tbd in Frameworks */,
 				CC3E39AC1E2622730019B85F /* libc++.tbd in Frameworks */,
 				CC3E39B21E26234D0019B85F /* libsqlite3.0.tbd in Frameworks */,
+				CC38844A203C84DC00126181 /* libRNVectorIcons.a in Frameworks */,
 				CC3E39B01E2623400019B85F /* CoreTelephony.framework in Frameworks */,
 				CC3E39AE1E2623360019B85F /* SystemConfiguration.framework in Frameworks */,
+				CC8BCAC1202ACEB600949A55 /* libRCTOrientation.a in Frameworks */,
 				CC3E39A81E2622610019B85F /* libsqlite3.tbd in Frameworks */,
 				CC3E39A61E2622570019B85F /* libiconv.tbd in Frameworks */,
 				CC7959CA1E02A6B500FAA8EB /* libRCTPushNotification.a in Frameworks */,
@@ -500,7 +489,6 @@
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				CC8BCAC0202ACEA500949A55 /* libLRDRCTSimpleToast.a in Frameworks */,
-				CC8BCAC1202ACEB600949A55 /* libRCTOrientation.a in Frameworks */,
 				B083C8D2978F494C9DD36A04 /* libRNDeviceInfo.a in Frameworks */,
 				D71CAA7614784130A59C55F9 /* libRNImagePicker.a in Frameworks */,
 				41EE95D575E14C79BCE3B581 /* libRCTWeChat.a in Frameworks */,
@@ -635,8 +623,6 @@
 				CCAC9ED91E38E6E2004BB455 /* libcxxreact.a */,
 				CCAC9EDB1E38E6E2004BB455 /* libjschelpers.a */,
 				CCAC9EDD1E38E6E2004BB455 /* libjschelpers.a */,
-				CC8BCA00202AA71000949A55 /* libjsinspector.a */,
-				CC8BCA02202AA71000949A55 /* libjsinspector-tvOS.a */,
 				CC5C64761F171D1E004BECB9 /* libthird-party.a */,
 				CCC926841F453387008CD87F /* libthird-party.a */,
 				CC5C64781F171D1E004BECB9 /* libdouble-conversion.a */,
@@ -1221,20 +1207,6 @@
 			remoteRef = CC8BC9EB202AA71000949A55 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		CC8BCA00202AA71000949A55 /* libjsinspector.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libjsinspector.a;
-			remoteRef = CC8BC9FF202AA71000949A55 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		CC8BCA02202AA71000949A55 /* libjsinspector-tvOS.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libjsinspector-tvOS.a";
-			remoteRef = CC8BCA01202AA71000949A55 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		CC8BCA04202AA71000949A55 /* libprivatedata.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1571,7 +1543,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rn.startkit;
 				PRODUCT_NAME = RNStartKit;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1622,7 +1594,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rn.startkit;
 				PRODUCT_NAME = RNStartKit;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
