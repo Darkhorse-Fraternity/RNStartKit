@@ -76,7 +76,6 @@
             android:exported="true"
             android:label="@string/app_name"/>
         <activity android:name="com.facebook.react.devsupport.DevSettingsActivity"/>
-        <activity android:name="io.liaoyuan.reactnative.leancloudpush.LeanCloudPushClickHandlerActivity" />
         <receiver
             android:name="com.google.android.gms.gcm.GcmReceiver"
             android:exported="true"
@@ -90,13 +89,25 @@
         <!-- 实时通信模块、推送（均需要加入以下声明） START -->
         <!-- 实时通信模块、推送都要使用 PushService -->
         <service android:name="com.avos.avoscloud.PushService"/>
-        <receiver android:name="com.avos.avoscloud.AVBroadcastReceiver">
+        <!--<receiver android:name="com.avos.avoscloud.AVBroadcastReceiver">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.BOOT_COMPLETED"/>-->
+                <!--<action android:name="android.intent.action.USER_PRESENT"/>-->
+                <!--<action android:name="android.net.conn.CONNECTIVITY_CHANGE" />-->
+            <!--</intent-filter>-->
+        <!--</receiver>-->
+
+        <activity android:name="io.liaoyuan.reactnative.leancloudpush.LeanCloudPushClickHandlerActivity" />
+        <receiver android:name="io.liaoyuan.reactnative.leancloudpush.MyCustomReceiver" android:exported="false">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
-                <action android:name="android.intent.action.USER_PRESENT"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.USER_PRESENT" />
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="com.avos.UPDATE_STATUS" />
+                <action android:name="com.action.isForeground" />
             </intent-filter>
         </receiver>
+
         <!-- 实时通信模块、推送 END -->
 
         <receiver android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationPublisher"/>
