@@ -93,5 +93,6 @@ export const StyledArrow = styled.View`
   width: 10px;
   height: 10px;
   margin-left: 5px;
+  margin-right: 5px;
 `
 

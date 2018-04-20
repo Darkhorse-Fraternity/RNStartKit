@@ -24,6 +24,7 @@ import { NavigationActions } from 'react-navigation';
 import Orientation from 'react-native-orientation';
 import DeviceInfo from 'react-native-device-info'
 import {pop} from './nav'
+import {epUpdate} from '../request/EPUpdate'
 
 
 //前置配置 在一进程序的时候就会
@@ -31,7 +32,7 @@ import {pop} from './nav'
  * 用于系统前置配置。
  */
 function _preConfig() {
-
+    epUpdate()
     // StatusBar.backgroundColor = 'white'
     //加载是否是第一次进入。
     // loadFirstJoin()
