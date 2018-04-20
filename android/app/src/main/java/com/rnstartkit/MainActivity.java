@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.facebook.react.ReactActivity;
+import com.rnstartkit.util.LightStatusBarUtil;
 
 public class MainActivity extends ReactActivity {
 

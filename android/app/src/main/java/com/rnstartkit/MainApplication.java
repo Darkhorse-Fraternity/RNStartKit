@@ -11,8 +11,6 @@ import com.avos.avoscloud.AVOSCloud;
 import com.cmcewen.blurview.BlurViewPackage;
 import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
 import com.facebook.react.ReactApplication;
-import com.learnium.RNDeviceInfo.RNDeviceInfo;
-import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -38,19 +36,17 @@ public class MainApplication extends Application implements ReactApplication {
             return BuildConfig.DEBUG;
         }
 
-    @Override
-    protected String getJSMainModuleName() {
-        return "index";
-    }
+        @Override
+        protected String getJSMainModuleName() {
+            return "index";
+        }
 
         @Override
         protected List<ReactPackage> getPackages() {
             return Arrays.<ReactPackage>asList(
                     new MainReactPackage(),
-            new RNDeviceInfo(),
-            new RNDeviceInfo(),
-            new OrientationPackage(),
-            new BlurViewPackage(),
+                    new OrientationPackage(),
+                    new BlurViewPackage(),
                     new WeChatPackage(),
 //                    new QQPackage(),
                     new LeanCloudPushPackage(),
@@ -75,7 +71,8 @@ public class MainApplication extends Application implements ReactApplication {
         // 初始化参数依次为 this, AppId, AppKey
         AVOSCloud.initialize(this, "q81jdsbi5qp679fi5o46i5nppjgycztgivwj30707xfvehzt",
                 "y6ffzv6mq705pya2pd6kgl1ni1vwlppesis7f1qi19afg5nn");
-        ActivityLifecycleCallbacks()
+        // 用于推送判断前后台
+        ActivityLifecycleCallbacks();
     }
 
 
