@@ -25,6 +25,7 @@ public class MainActivity extends ReactActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        LightStatusBarUtil.MIUISetStatusBarLightMode(this, true);
         initView();
     }
 

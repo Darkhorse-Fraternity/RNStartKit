@@ -4,14 +4,15 @@
  */
 'use strict';
 
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
     View,
 } from 'react-native'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
+
 const placehold = 'http://yikaxi.com/blog/wp-content/uploads/2015/04/placeholder_5.jpg'
 
-
+import DeviceInfo from 'react-native-device-info'
 import {
     StyledContent,
     StyledAccountInfo,
@@ -19,25 +20,19 @@ import {
     StyledAvatar,
     StyledTouch,
     StyledTouchText,
-    StyledGetRow
+    StyledTouchImg,
+    StyledTouchInner,
+    StyledArrow,
+    StyledRow,
+    StyledSwitch,
+    StyledBottonText,
+    StyledBanner,
+    StyledBannerImage,
+    StyledBannerText
 } from './style'
 
-import {
-    StyledBodyRow,
-    StyledBodyText,
-    StyledBodyLowText,
-} from '../Order/style'
 
-import Tip from '../../components/Reuse/Tip'
-
-
-import {
-    orderDiscrib,
-    wechatServe,
-    answer
-} from '../../../source/text'
-
-import {shouldComponentUpdate} from 'react-immutable-render-mixin';
+import { shouldComponentUpdate } from 'react-immutable-render-mixin';
 
 
 @connect(
@@ -67,43 +62,46 @@ export default class PersonInfo extends Component {
 
         return (
             <StyledAccountInfo>
-                <StyledAvatar source={{uri: placehold}}/>
+                <StyledAvatar source={{ uri: placehold }}/>
                 <StyledAcountText>
-                    会员号：xxx
+                    xxxxxxx
                 </StyledAcountText>
             </StyledAccountInfo>
         )
     }
 
 
-    __renderAnswer = () => {
-
-        const answerItmes = answer.map((item,index) => {
-            return (
-                <View key={index+""}>
-                    <StyledBodyText>
-                        {item.question}
-                    </StyledBodyText>
-                    <StyledBodyLowText
-                        selectable={true}
-                        //     onLongPress={()=>[
-                        //         // Clipboard.setString(item.answer)
-                        // ]}>
-                    >
-                        {item.answer}
-                    </StyledBodyLowText>
-                </View>
-            )
-        })
-
+    __renderTouchRow = (title) => {
         return (
-            <StyledBodyRow>
-                <Tip text='常见问题'/>
-                <View style={{height:10}}/>
-                {answerItmes}
-            </StyledBodyRow>
+            <StyledTouch innerView>
+                <StyledTouchInner>
+                    <StyledTouchImg source={{ uri: placehold }}/>
+                    <StyledTouchText>
+                        {title}
+                    </StyledTouchText>
+                </StyledTouchInner>
+                <StyledArrow/>
+            </StyledTouch>
         )
+    }
 
+    __renderRow = (title, dis) => {
+        return (
+            <StyledRow>
+                <StyledTouchInner style={{ padding: 15 }}>
+                    <StyledTouchInner>
+                        <StyledTouchImg source={{ uri: placehold }}/>
+                        <StyledTouchText>
+                            {title}
+                        </StyledTouchText>
+                    </StyledTouchInner>
+                    <StyledSwitch/>
+                </StyledTouchInner>
+                <StyledBottonText>
+                    {dis}
+                </StyledBottonText>
+            </StyledRow>
+        )
     }
 
 
@@ -113,32 +111,17 @@ export default class PersonInfo extends Component {
         return (
             <StyledContent>
                 {this.__renderAccount()}
-                <StyledGetRow >
-                    <StyledBodyText>
-                        账户余额：
-                        <StyledBodyText style={{color:'red'}}>
-                            50.0 元
-                        </StyledBodyText>
-                    </StyledBodyText>
-                    <StyledTouch onPress={()=>{
-                        this.props.navigation.navigate('Withdraw')
-                    }}>
-                        <StyledTouchText>
-                            提现
-                        </StyledTouchText>
-                    </StyledTouch>
-                </StyledGetRow>
-                <StyledBodyRow>
-                    <StyledBodyText>
-                        {orderDiscrib}
-                    </StyledBodyText>
-                </StyledBodyRow>
-                <StyledBodyRow>
-                    <StyledBodyText fontSize={20}>
-                        {wechatServe}
-                    </StyledBodyText>
-                </StyledBodyRow>
-                {this.__renderAnswer()}
+                {this.__renderTouchRow('购买记录')}
+                {this.__renderRow('是否推送', '关闭后，将无法收到推送消息')}
+                {this.__renderRow('夜间勿扰', '开启后，0:00-8:00间的消息会在晨间推送')}
+                {this.__renderTouchRow('退出登录')}
+                <StyledBanner>
+                    <StyledBannerImage source={{ uri: placehold }}/>
+                    <StyledBannerText>
+                        Bitui V{DeviceInfo.getVersion()}
+                    </StyledBannerText>
+                </StyledBanner>
+
             </StyledContent>
         );
     }

@@ -1,19 +1,10 @@
 import  store from './configureStore'
-import { addNavigationHelpers, StackNavigator } from 'react-navigation'
-export function push(key) {
-    const state = store.getState()
-    const  navigation= addNavigationHelpers({ dispatch: store.dispatch, state: state.nav })
+import { NavigationActions } from 'react-navigation'
 
-    navigation.navigate(key)
+export function push(key,params) {
+    store.dispatch( NavigationActions.navigate(key,params))
 }
 
 export function pop() {
-    const state = store.getState()
-    const  navigation= addNavigationHelpers({dispatch: store.dispatch, state: state.nav })
-    navigation.goBack()
-    // store.dispatch(nav.navigatePop(key))
-}
-export function navigation() {
-    const state = store.getState()
-    return addNavigationHelpers({  dispatch:store.dispatch, state: state.nav })
+    store.dispatch( NavigationActions.back())
 }

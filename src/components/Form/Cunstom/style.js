@@ -1,8 +1,8 @@
 import styled from "styled-components/native";
-import {AutoGrowingTextInput} from 'react-native-autogrow-textinput';
+// import {AutoGrowingTextInput} from 'react-native-autogrow-textinput';
 
 
-export const StyleAutoGrowingTextInput = styled(AutoGrowingTextInput)`
+export const StyleAutoGrowingTextInput = styled.TextInput`
     flex: 1;
     margin: 10px 10px 10px 0px;
     padding-top: 5px;

@@ -4,34 +4,32 @@
  */
 'use strict';
 
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
     View,
     Clipboard
 } from 'react-native'
-import {connect} from 'react-redux'
-import {
-    orderDiscrib,
-    wechatServe,
-    buyDiscrib,
-    answer
-} from '../../../source/text'
+import { connect } from 'react-redux'
+
 
 import {
+    StyledItem,
     StyledContent,
-    StyledAccountInfo,
-    StyledAcountText,
-    StyledBodyRow,
-    StyledBodyText,
-    StyledBodyLowText,
-    StyledTouch,
+    StyledBottom,
+    StyledItemTitle,
+    StyledItemDiscrib,
+    StyledBottomText,
+    StyledArrow,
+    StyledItemButton1,
+    StyledItemButton2,
+    StyledItemButtonText,
+    StyledTopView,
+    StyledItemButtonText2
 } from './style'
 
-import Tip from '../../components/Reuse/Tip'
 
-import {shouldComponentUpdate} from 'react-immutable-render-mixin';
-import {Button} from 'react-native-clean-form'
-import OrderItem from './Item'
+import { shouldComponentUpdate } from 'react-immutable-render-mixin';
+
 
 @connect(
     state => ({}),
@@ -43,8 +41,8 @@ export default class Order extends Component {
     constructor(props: Object) {
         super(props);
         this.shouldComponentUpdate = shouldComponentUpdate.bind(this);
-        this.state= {
-            open:false
+        this.state = {
+            open: false
         }
     }
 
@@ -55,54 +53,72 @@ export default class Order extends Component {
         // const {state} = navigation;
         // const {params} = state;
         return {
-            title: '订单',
+            title: '消息包管理',
         }
     };
 
 
-    __renderAccount = () => {
 
-        return (
-            <StyledAccountInfo>
-                <StyledAcountText>
-                    会员号：xxx
-                </StyledAcountText>
-                <StyledAcountText>
-                    账户余额：100 元
-                </StyledAcountText>
-            </StyledAccountInfo>
-        )
+    _renderButton = (subscription = true)=> {
+        if(subscription){
+            return (
+                <StyledItemButton1 innerView>
+                    <StyledItemButtonText>
+                        1分钱体验
+                    </StyledItemButtonText>
+                    <StyledItemButtonText
+                        style={{color:'rgba(255,255,255,0.5)',paddingHorizontal:5}}>
+                        |
+                    </StyledItemButtonText>
+                    <StyledItemButtonText>
+                        订阅
+                    </StyledItemButtonText>
+                </StyledItemButton1>
+            )
+        }else {
+            return (
+                <StyledItemButton2 innerView>
+                    <StyledItemButtonText2>
+                        剩7天
+                    </StyledItemButtonText2>
+                    <StyledItemButtonText2
+                        style={{color:'rgba(0,0,0,0.3)',paddingHorizontal:5}}>
+                        |
+                    </StyledItemButtonText2>
+                    <StyledItemButtonText2>
+                        续费
+                    </StyledItemButtonText2>
+                </StyledItemButton2>
+            )
+        }
+
     }
 
-
-    __renderAnswer = () => {
-
-        const answerItmes = answer.map((item,index) => {
-            return (
-                <View key={index+""}>
-                    <StyledBodyText>
-                        {item.question}
-                    </StyledBodyText>
-                    <StyledBodyLowText
-                        selectable={true}
-                    //     onLongPress={()=>[
-                    //         // Clipboard.setString(item.answer)
-                    // ]}>
-                        >
-                        {item.answer}
-                    </StyledBodyLowText>
-                </View>
-            )
-        })
+    __render = (subscription) => {
 
         return (
-            <StyledBodyRow>
-                <Tip text='常见问题'/>
-                <View style={{height:10}}/>
-                {answerItmes}
-            </StyledBodyRow>
-        )
+            <StyledItem
+                onPress={() => {
+                    this.props.navigation.navigate('Vote')
+                }}>
+                <StyledTopView>
+                    <StyledItemTitle numberOfLines={1} color="blue">
+                        交易所公告包
+                    </StyledItemTitle>
+                    {this._renderButton(subscription)}
+                </StyledTopView>
 
+                <StyledItemDiscrib numberOfLines={2}>
+                    智能爬取并翻译[币安、火币、Bitfinex...]等国内外20余个交易所最新公告。
+                </StyledItemDiscrib>
+                <StyledBottom>
+                    <StyledBottomText>
+                        进入查看所有渠道
+                    </StyledBottomText>
+                    <StyledArrow/>
+                </StyledBottom>
+            </StyledItem>
+        )
     }
 
     render(): ReactElement<any> {
@@ -110,38 +126,10 @@ export default class Order extends Component {
 
         return (
             <StyledContent>
-                {this.__renderAccount()}
-                <View style={{padding: 10, width:"100%",height:80}}>
-                    <Button onPress={()=>{
-                        this.props.navigation.navigate('Withdraw')
-                    }}>
-                        提现
-                    </Button>
-                </View>
-                <StyledBodyRow>
-                    <StyledBodyText>
-                        {orderDiscrib}
-                    </StyledBodyText>
-                </StyledBodyRow>
-                <StyledBodyRow>
-                    <StyledBodyText fontSize={20}>
-                        {wechatServe}
-                    </StyledBodyText>
-                    <OrderItem/>
-                </StyledBodyRow>
-                <StyledBodyRow>
-                    <StyledBodyText>
-                        {buyDiscrib}
-                    </StyledBodyText>
-                </StyledBodyRow>
-                <StyledTouch onPress={()=>{
-                    this.setState({open:!this.state.open})
-                }}>
-                    <StyledBodyText>
-                        更多常见问题
-                    </StyledBodyText>
-                </StyledTouch>
-                {this.state.open ? this.__renderAnswer():<View style={{height:200}}/>}
+                {this.__render()}
+                {this.__render(false)}
+                {this.__render()}
+                {this.__render()}
             </StyledContent>
         );
     }

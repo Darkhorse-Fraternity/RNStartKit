@@ -1,6 +1,6 @@
 /*@flow*/
 'use strict';
-import Button from 'react-native-button';
+import Button from '../Button/InButton';
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import ReactNative, {
@@ -56,7 +56,7 @@ export default class WBButton extends Component {
 
         var disabled = this.props.disabled;
         var containerStyle = this.props.containerStyle;
-        if (this.props.containerStyleDisabled != null) {
+        if (this.props.containerStyleDisabled !== null) {
             containerStyle = disabled ? this.props.containerStyleDisabled
                 : this.props.containerStyle;
         }

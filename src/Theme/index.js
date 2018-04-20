@@ -5,10 +5,13 @@ export default {
     ...FormTheme,
     hairlineWidth: StyleSheet.hairlineWidth,
     hairlineColor: 'rgb(200,200,200)',
+    buttonBorderColor: 'rgb(50,50,50)',
     contentColor: '#ececec',
     screenWidth: Dimensions.get('window').width,
     screenHeight: Dimensions.get('window').height,
-    mainColor: '#fd8d87',
+    mainColor: '#6dd000',
+    tabColor: 'black',
+    titleColor: 'black',
     normalBtn: {
         color: 'black',
         disabledColor: 'rgb(150,150,150)',
@@ -17,7 +20,7 @@ export default {
     },
     Button: {
         ...FormTheme.Button,
-        backgroundColor: '#19b605',
+        backgroundColor: '#6dd000',
         fontSize: 19,
         disabledBackgroundColor: 'rgb(200,200,200)',
         fontWeight: '500',

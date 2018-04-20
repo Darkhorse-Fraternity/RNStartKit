@@ -6,32 +6,40 @@ import {TransitionConfiguration} from './TransitionConfiguration'
 import Tab from '../components/Tab'
 import {route} from '../../../pages'
 import {Platform} from 'react-native'
-import theme from '../../../Theme'
+import WebView from '../../Base/BaseWebView'
+
+
+import {
+    createReduxBoundAddListener,
+} from 'react-navigation-redux-helpers'
+
+
 export const AppNavigator = StackNavigator({
     Tab: {screen: Tab},
     ...route,
 
+    WebView: {screen: WebView}
 }, {
     // initialRouteName:'Home',
     navigationOptions: {
         headerStyle:{
-            backgroundColor:theme.mainColor,
+            backgroundColor:'white',
             shadowColor: 'red',
             shadowOpacity: 0.1,
             shadowRadius: 0,
             shadowOffset: {
                 height: 0,
             },
-            borderBottomColor:theme.mainColor,
+            borderBottomColor:'#F5FCFF',
             elevation:0,
             paddingTop: (Platform.OS === "ios"  ||  Platform.Version < 20)  ? 0 : 25,
             //headerBackTitle:' '
         },
-        headerTintColor:'white',
+        headerTintColor:'black',
         headerTitleStyle:{
-            color: 'white',
+            color: 'black',
             alignItems:'center',
-            fontSize:15,
+            fontSize:13,
         },
         headerBackTitle:null,
 
@@ -45,9 +53,10 @@ export const AppNavigator = StackNavigator({
     transitionConfig: TransitionConfiguration,
 });
 
-const AppWithNavigationState = ({dispatch, nav}) => (
-    <AppNavigator navigation={addNavigationHelpers({ dispatch, state: nav })}/>
-);
+const AppWithNavigationState = ({dispatch, nav}) => {
+    const addListener = createReduxBoundAddListener("root");
+    return (<AppNavigator navigation={addNavigationHelpers({ dispatch, state: nav,addListener })}/>)
+};
 
 AppWithNavigationState.propTypes = {
     dispatch: PropTypes.func.isRequired,

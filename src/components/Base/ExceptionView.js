@@ -140,6 +140,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: 'black',
         alignSelf: 'center',
+        marginTop:20,
     },
     otherTips: {
         marginTop: 27,

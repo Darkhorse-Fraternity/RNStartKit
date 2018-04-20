@@ -4,14 +4,14 @@
  */
 'use strict';
 
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
     View,
     ScrollView,
     TouchableOpacity,
 
 } from 'react-native'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 
 
 import {
@@ -21,12 +21,13 @@ import {
     StyledItemsView,
     StyledItem,
     StyledLeftImage,
-    StyledRight,
+    StyledBottom,
     StyledItemTitle,
-    StyledItemDiscrib
+    StyledItemDiscrib,
+    StyledBottomText
 } from './style'
 
-import {shouldComponentUpdate} from 'react-immutable-render-mixin';
+import { shouldComponentUpdate } from 'react-immutable-render-mixin';
 
 
 const placehold = 'http://yikaxi.com/blog/wp-content/uploads/2015/04/placeholder_5.jpg'
@@ -49,28 +50,33 @@ export default class Home extends Component {
         // const {state} = navigation;
         // const {params} = state;
         return {
-            title: '首页',
+            title: '消息',
         }
     };
 
 
-    __render = (insert) => {
+    __render = () => {
 
         return (
             <StyledItem
                 onPress={() => {
-                    this.props.navigation.navigate('Vote')
-                }}
-                insert={insert}>
-                <StyledLeftImage source={{uri: placehold}}/>
-                <StyledRight>
-                    <StyledItemTitle color="blue">
-                        测试
-                    </StyledItemTitle>
-                    <StyledItemDiscrib>
-                        disssss
-                    </StyledItemDiscrib>
-                </StyledRight>
+
+                }}>
+                <StyledItemTitle numberOfLines={2} color="blue">
+                    加速全球布局，公信宝的大航海时代来
+                </StyledItemTitle>
+                <StyledItemDiscrib numberOfLines={2}>
+                    据金色财经合作媒体,据金色财经合作媒体据金色财经合作媒体据金色财经合作媒体据金色财经合作媒体据金色财经合作媒体
+                    据金色财经合作媒体据金色财经合作媒体据金色财经合作媒体据金色财经合作媒体据金色财经合作媒体
+                </StyledItemDiscrib>
+                <StyledBottom>
+                    <StyledBottomText>
+                        EOS(EOS)
+                    </StyledBottomText>
+                    <StyledBottomText>
+                        2016-04-17
+                    </StyledBottomText>
+                </StyledBottom>
             </StyledItem>
         )
     }
@@ -78,16 +84,10 @@ export default class Home extends Component {
     render(): ReactElement<any> {
         return (
             <StyledContent>
-                <StyledBanner source={{uri: placehold}}/>
-                <TouchableOpacity onPress={()=>{
-                    this.props.navigation.navigate('Discounts')
-                }}>
-                    <StyledSmallBanner source={{uri: placehold}}/>
-                </TouchableOpacity>
                 <StyledItemsView>
-                    {this.__render(true)}
                     {this.__render()}
-                    {this.__render(true)}
+                    {this.__render()}
+                    {this.__render()}
                     {this.__render()}
                 </StyledItemsView>
             </StyledContent>

@@ -22,22 +22,14 @@ import InfoBar from './components/InfoBar'
 import AppWithNavigationState from './components/Nav/navigators/AppNavigator';
 import {ThemeProvider} from 'styled-components'
 import theme from './Theme'
+import LightStatuBar from './Theme/LightStatuBar'
+
 // import Form from './components/Form/Form'
 //启动初始配置
 configureStore.dispatch(preConfig())
 // const createStoreWithMiddleware = applyMiddleware(thunk)(createStore)
 // const store = configureStore()
 
-const X_WIDTH = 375;
-const X_HEIGHT = 812;
-const { height: D_HEIGHT, width: D_WIDTH } = Dimensions.get('window');
-const isIPhoneX = (() => {
-    return (
-        Platform.OS === 'ios' &&
-        ((D_HEIGHT === X_HEIGHT && D_WIDTH === X_WIDTH) ||
-            (D_HEIGHT === X_WIDTH && D_WIDTH === X_HEIGHT))
-    );
-})();
 
 
 // import App from './components/js/App'
@@ -51,19 +43,10 @@ class App extends Component {
                 {/*<Route/>*/}
                 <ThemeProvider theme={theme} >
                     <View style={{flex: 1}}>
-                        {Platform.OS !== 'ios' && Platform.Version >= 20 && (
-                            <StatusBar
-                                translucent={true}
-                                backgroundColor="transparent"
-                                // barStyle="dark-content"
-                            />
-                        )}
+                        <LightStatuBar/>
                         <AppWithNavigationState/>
                         <InfoBar/>
-                        {/*<Form/>*/}
-                        {isIPhoneX &&(<View style={{height:20,backgroundColor:'white'}}/>)}
                     </View>
-
                 </ThemeProvider>
             </Provider>
         );

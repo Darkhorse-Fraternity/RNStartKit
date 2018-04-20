@@ -2,23 +2,24 @@
 'use strict';
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import ReactNative, {
+import  {
     StyleSheet,
     Text,
     View,
     ScrollView,
     WebView,
-    TouchableOpacity,
     Image,
     Platform,
-    Linking
+    Linking,
+    Dimensions
 } from 'react-native';
+import Button from '../Button'
 
-import {navbarHeight, screenHeight} from '../../util';
+const  navbarHeight = 0
+const screenHeight = Dimensions.get('window').height
 
 import ExceptionView, {ExceptionType} from './ExceptionView';
 import {connect} from 'react-redux';
-
 
 
 
@@ -58,7 +59,7 @@ class BaseWebView extends Component {
         return {
             title: params && params.title || '加载中。。',
             headerLeft: (
-                <TouchableOpacity style={styles.buttonContainer} onPress={()=>{
+                <Button style={styles.buttonContainer} onPress={()=>{
                     if(params.canGoBack){
                         params.webView && params.webView.goBack()
                     }else {
@@ -66,7 +67,7 @@ class BaseWebView extends Component {
                     }
                 }}>
                     <View style={styles.arrowView}/>
-                </TouchableOpacity>)
+                </Button>)
         }
     };
 
@@ -225,7 +226,7 @@ const styles = StyleSheet.create({
     arrowView: {
         borderBottomWidth: StyleSheet.hairlineWidth * 5,
         borderRightWidth: StyleSheet.hairlineWidth * 5,
-        borderColor: '#0093cb',
+        borderColor: 'black',
         transform: [{rotate: '135deg'}],
         marginLeft: 15,
         width: 13,

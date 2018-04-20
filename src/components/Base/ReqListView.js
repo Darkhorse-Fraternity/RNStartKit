@@ -57,7 +57,7 @@ export  default  class ReqListView extends Component {
     componentWillReceiveProps(nextProps: Object) {
 
         //只进行值比较
-        if (JSON.stringify(nextProps.reqParam) != JSON.stringify(this.props.reqParam)) {
+        if (JSON.stringify(nextProps.reqParam) !== JSON.stringify(this.props.reqParam)) {
             this.loadData(nextProps.reqParam)
         }
 
@@ -65,7 +65,7 @@ export  default  class ReqListView extends Component {
 
 
     __renderItem({item, index}: {item: Item, index: number}): ReactElement<any> {
-        const data = typeof item == 'object' ? item :
+        const data = typeof item === 'object' ? item :
             this.props.normalizrData.get(item + '').toJS()
         return this.props.renderItem({item: data, index})
     }

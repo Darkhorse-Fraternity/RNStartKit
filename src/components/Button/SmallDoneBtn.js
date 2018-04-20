@@ -4,7 +4,7 @@
  */
 'use strict';
 
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
     View,
@@ -16,19 +16,7 @@ import {
 
 import * as Animatable from 'react-native-animatable';
 
-export const Btn = Animatable.createAnimatableComponent(TouchableWithoutFeedback);
-// function makeSlideInTranslation(translationType, fromValue) {
-//     return {
-//         from: {
-//             [translationType]: 0,
-//         },
-//         to: {
-//             [translationType]: fromValue,
-//         },
-//     };
-// }
-// const slideOutDownBig = makeSlideInTranslation('translateY', 10);
-// Animatable.initializeRegistryWithDefinitions({slideOutDownBig})
+
 
 function makeScaleInTranslation(translationType, fromValue) {
     return {
@@ -42,7 +30,7 @@ function makeScaleInTranslation(translationType, fromValue) {
 }
 
 const scaleSpring = makeScaleInTranslation('scale', 1);
-Animatable.initializeRegistryWithDefinitions({scaleSpring})
+Animatable.initializeRegistryWithDefinitions({ scaleSpring })
 
 export default class SmallDoneBtn extends Component {
     constructor(props: Object) {
@@ -59,15 +47,6 @@ export default class SmallDoneBtn extends Component {
         radius: 20,
         load: false
     };
-    static
-    navigationOptions = props => {
-        // const {navigation} = props;
-        // const {state} = navigation;
-        // const {params} = state;
-        return {
-            title: '主页',
-        }
-    };
 
 
     __renderdot = () => {
@@ -80,12 +59,12 @@ export default class SmallDoneBtn extends Component {
     }
 
     render() {
-        const {title, radius} = this.props
+        const { title, radius } = this.props
         // console.log('radius:', radius);
         return (
             <TouchableWithoutFeedback
                 disabled={this.props.load}
-                hitSlop={{top: 50, left: 100, bottom: 50, right: 100}}
+                hitSlop={{ top: 20, left: 20, bottom: 20, right: 20 }}
                 onPress={this.props.onPress}>
                 {!this.props.load ? (<View style={styles.background}>
                     {this.__renderdot()}
@@ -111,24 +90,24 @@ const styles = StyleSheet.create({
     },
 
     title: {
-        color: 'white',
+        color: 'black',
         textAlign: 'center',
         fontSize: 20,
         fontWeight: 'bold',
-        marginLeft:5,
+        marginLeft: 5,
     },
     dot1: {
-        width:25,
-        height:25,
-        borderRadius:12.5,
+        width: 25,
+        height: 25,
+        borderRadius: 12.5,
         backgroundColor: 'rgba(150,150,150,0.3)',
         alignItems: 'center',
         justifyContent: 'center',
     },
     dot2: {
-        width:12.5,
-        height:12.5,
-        borderRadius:12.5/2,
-        backgroundColor:'white',
+        width: 12.5,
+        height: 12.5,
+        borderRadius: 12.5 / 2,
+        backgroundColor: 'white',
     }
 })

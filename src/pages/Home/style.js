@@ -5,6 +5,7 @@
 'use strict';
 
 import styled from "styled-components/native";
+import Button from '../../components/Button'
 
 export const StyledContent = styled.ScrollView`
     flex: 1;
@@ -31,15 +32,13 @@ export const StyledItemsView = styled.View`
   align-items: center;
 `
 
-export const StyledItem = styled.TouchableOpacity`
-  width: 48%;
-  padding: 30px 0px ;
-  flex-direction: row;
+export const StyledItem = styled(Button)`
+  padding: 15px  ;
+  margin: 15px;
+  border-radius: 5px;
   background-color: white;
-  align-items: center;
   justify-content: center;
   margin-bottom: 5px;
-  margin-right: ${props => props.insert ? '2%' : '0%'};  
 `
 
 
@@ -50,17 +49,30 @@ export const StyledLeftImage = styled.Image`
   margin-right: 15px;
 `
 
-export const StyledRight = styled.View`
-  width: 50%;
-`
+
 
 export const StyledItemTitle = styled.Text`
-  color: ${props => props.color || 'red'};
-  font-size:19px;
+  color: ${props => props.theme.titleColor || 'red'};
+  font-size:17px;
+  font-weight: 500;
+  line-height: 25px;
 `
 
 export const StyledItemDiscrib = styled.Text`
   color: #9ea1a1;
-  font-size: 15px;
-  margin-top: 5px;
+  font-size: 14px;
+  margin-top: 10px;
+  line-height: 20px;
+  letter-spacing: 1px;
+`
+
+export const StyledBottom = styled.View`
+    margin-top: 20px;
+    flex-direction: row;
+    justify-content: space-between;
+`
+export const StyledBottomText = styled.Text`
+  color: #9ea1a1;
+  font-size: 12px;
+
 `

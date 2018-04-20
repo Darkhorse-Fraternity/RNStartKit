@@ -53,7 +53,7 @@ function _preConfig() {
     }
 
     // Platform.OS !=='ios'&& StatusBar.setBackgroundColor('white', true);
-    Platform.OS ==='ios' && StatusBar.setBarStyle('light-content', true);
+    // Platform.OS ==='ios' && StatusBar.setBarStyle('light-content', true);
     //barStyle
     // if()
 

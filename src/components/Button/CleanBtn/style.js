@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components/native";
-
+import Button from '../'
 
 export const StyleBtnText = styled.Text`
     font-size: ${props => props.theme.normalBtn.fontSize};
@@ -10,7 +10,7 @@ export const StyleBtnText = styled.Text`
     }};
 `
 
-export const StyledBtn = styled.TouchableOpacity`
+export const StyledBtn = styled(Button)`
     padding: 10px 10px 10px 10px;
     align-items: center;
     justify-content: center;    
