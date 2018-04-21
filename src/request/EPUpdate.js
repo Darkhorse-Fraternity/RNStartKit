@@ -82,13 +82,13 @@ export const epUpdate = async () => {
         const res = await sendBack(bundleId)
         // console.log('update:', res);
         const callback = () => {
-            // try{
-            //     const services = 'itms-services://?action=download-manifest&url='
-            //     const url = services + res.installUrl
-            //     Linking.openURL(url);
-            // }catch(e){
-            //     Toash.show(e.message)
-            // }
+            try{
+                const services = 'itms-services://?action=download-manifest&url='
+                const url = services + res.installUrl
+                Linking.openURL(url);
+            }catch(e){
+                Toash.show(e.message)
+            }
             goWebView(res.update_url)
         }
         checkUpdate(res, callback)
@@ -96,7 +96,8 @@ export const epUpdate = async () => {
         const res = await sendBack(bundleId)
         const callback = () => {
             // Linking.openURL(services);
-            goWebView(res.update_url)
+            Linking.openURL(res.installUrl);
+            Linking.openURL(res.update_url);
         }
         //Android 识别当前测试版本号 来检测更新
         checkUpdate(res, callback)
@@ -106,4 +107,4 @@ export const epUpdate = async () => {
 function sendBack(bundleId) {
     const params = firUpdate(bundleId, api_token, Platform.OS)
     return send(params).then(res => res.json())
-}
+}3

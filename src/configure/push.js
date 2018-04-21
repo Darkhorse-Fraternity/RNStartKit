@@ -18,7 +18,7 @@ import {user} from '../request/LCModle'
 export default function pushConfig() {
 
 
-    Platform.OS == 'ios' && PushNotification.setApplicationIconBadgeNumber(0)
+    Platform.OS === 'ios' && PushNotification.setApplicationIconBadgeNumber(0)
 
 
     PushNotification.configure({

@@ -877,6 +877,7 @@
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				D930B211DA61A6E9DDD1CF98 /* [CP] Embed Pods Frameworks */,
 				22FD1BBA514C509E325496DC /* [CP] Copy Pods Resources */,
+				CC5EB769208A4CDF00A1622D /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1413,6 +1414,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RNStartKit/Pods-RNStartKit-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		CC5EB769208A4CDF00A1622D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "xcrun agvtool next-version -all";
 		};
 		D930B211DA61A6E9DDD1CF98 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
